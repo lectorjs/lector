@@ -1,0 +1,22 @@
+{
+	"name": "@lector/playground",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@lector/primitives": "workspace:*",
+		"@lector/mode-rsvp": "workspace:*",
+		"@lector/mode-bionic": "workspace:*",
+		"@lector/parser-txt": "workspace:*",
+		"dompurify": "^3.1.6"
+	},
+	"devDependencies": {
+		"@types/dompurify": "^3.0.5",
+		"typescript": "^5.5.4",
+		"vite": "^5.4.3"
+	}
+}

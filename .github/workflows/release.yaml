@@ -38,5 +38,5 @@ jobs:
 
       # TODO: Workaround for https://github.com/changesets/changesets/issues/1318
       - name: Publish to JSR
-        if: steps.changesets.outputs.published == 'true'
+        if: steps.changesets.outputs.hasChangesets == 'false'
         run: bunx jsr publish

@@ -2,7 +2,7 @@
 	"name": "@lector/monorepo",
 	"type": "module",
 	"private": true,
-	"workspaces": ["packages/*"],
+	"workspaces": ["packages/*", "playground"],
 	"scripts": {
 		"dev:play": "bun run --filter @lector/playground dev",
 		"dev:browser": "bun run --filter @lector/browser-ext dev",
@@ -10,7 +10,7 @@
 		"test:watch": "bun test --watch .",
 		"lint": "biome lint --write .",
 		"format": "biome format --write .",
-		"ci:version": "changeset version && bun run ./scripts/sync-jsr.ts && git add -A",
+		"ci:version": "changeset version && bun run ./scripts/sync-jsr.ts && bun run format && git add -A",
 		"ci:release": "changeset tag",
 		"taze": "taze -Ir"
 	},
@@ -24,6 +24,6 @@
 	"peerDependencies": {
 		"typescript": "^5.6.2"
 	},
-	"packageManager": "bun@1.1.27",
-	"trustedDependencies": ["@biomejs/biome", "lefthook"]
+	"trustedDependencies": ["@biomejs/biome", "lefthook"],
+	"packageManager": "bun@1.1.27"
 }
