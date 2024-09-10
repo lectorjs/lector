@@ -11,7 +11,7 @@
 		"lint": "biome lint --write .",
 		"format": "biome format --write .",
 		"ci:version": "changeset version && bun run ./scripts/sync-jsr.ts",
-		"ci:release": "changeset publish",
+		"ci:release": "changeset tag",
 		"taze": "taze -Ir"
 	},
 	"devDependencies": {
