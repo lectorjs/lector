@@ -1,8 +1,8 @@
 {
-	"name": "@lector/mode-rsvp",
-	"version": "0.0.1",
-	"description": "Rapid serial visual presentation (RSVP) reading mode for Lector, providing commands for controlling text flow, pacing, and navigation.",
-	"exports": {
-		".": "./src/mod.ts"
-	}
+  "name": "@lector/mode-rsvp",
+  "version": "0.0.2",
+  "description": "Rapid serial visual presentation (RSVP) reading mode for Lector, providing commands for controlling text flow, pacing, and navigation.",
+  "exports": {
+    ".": "./src/mod.ts"
+  }
 }

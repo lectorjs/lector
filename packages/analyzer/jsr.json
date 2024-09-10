@@ -1,8 +1,8 @@
 {
-	"name": "@lector/analyzer",
-	"version": "0.0.0",
-	"description": "Analyzer helpers for examining and extracting insights from text.",
-	"exports": {
-		".": "./src/mod.ts"
-	}
+  "name": "@lector/analyzer",
+  "version": "0.0.1",
+  "description": "Analyzer helpers for examining and extracting insights from text.",
+  "exports": {
+    ".": "./src/mod.ts"
+  }
 }

@@ -1,8 +1,8 @@
 {
-	"name": "@lector/primitives",
-	"version": "0.0.1",
-	"description": "Primitives for building and extending readers, including definitions for context, parsers, modes, commands, plugins, and more.",
-	"exports": {
-		".": "./src/mod.ts"
-	}
+  "name": "@lector/primitives",
+  "version": "0.0.2",
+  "description": "Primitives for building and extending readers, including definitions for context, parsers, modes, commands, plugins, and more.",
+  "exports": {
+    ".": "./src/mod.ts"
+  }
 }
