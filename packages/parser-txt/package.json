@@ -4,5 +4,9 @@
 	"description": "Plain text parser that allows readers to extract and process words from plain text or `.txt` files.",
 	"exports": {
 		".": "./src/mod.ts"
+	},
+	"dependencies": {
+		"@lector/analyzer": "workspace:*",
+		"@lector/primitives": "workspace:*"
 	}
 }

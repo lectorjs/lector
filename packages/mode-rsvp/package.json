@@ -4,5 +4,8 @@
 	"description": "Rapid serial visual presentation (RSVP) reading mode for Lector, providing commands for controlling text flow, pacing, and navigation.",
 	"exports": {
 		".": "./src/mod.ts"
+	},
+	"dependencies": {
+		"@lector/primitives": "workspace:*"
 	}
 }

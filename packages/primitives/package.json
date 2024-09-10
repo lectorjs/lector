@@ -4,5 +4,8 @@
 	"description": "Primitives for building and extending readers, including definitions for context, parsers, modes, commands, plugins, and more.",
 	"exports": {
 		".": "./src/mod.ts"
+	},
+	"dependencies": {
+		"defu": "^6.1.4"
 	}
 }

@@ -4,4 +4,4 @@
  * @module
  */
 
-export const foo = 'bar';
+export { default } from './parser.ts';
