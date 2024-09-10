@@ -6,12 +6,13 @@
 
 ## Packages
 
-| Package                                     | Changelog                                                                               |
-| ------------------------------------------- | --------------------------------------------------------------------------------------- |
-| [@lector/primitives](packages/primitives)   | [![JSR](https://jsr.io/badges/@lector/primitives)](https://jsr.io/@lector/primitives)   |
-| [@lector/mode-rsvp](packages/mode-rsvp)     | [![JSR](https://jsr.io/badges/@lector/mode-rsvp)](https://jsr.io/@lector/mode-rsvp)     |
-| [@lector/mode-bionic](packages/mode-bionic) | [![JSR](https://jsr.io/badges/@lector/mode-bionic)](https://jsr.io/@lector/mode-bionic) |
-| [@lector/parser-txt](packages/parser-txt)   | [![JSR](https://jsr.io/badges/@lector/parser-txt)](https://jsr.io/@lector/parser-txt)   |
+| Package                                                   | Changelog                                                                               |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [@lector/primitives](https://jsr.io/@lector/primitives)   | [![JSR](https://jsr.io/badges/@lector/primitives)](https://jsr.io/@lector/primitives)   |
+| [@lector/analyzer](https://jsr.io/@lector/analyzer)       | [![JSR](https://jsr.io/badges/@lector/analyzer)](https://jsr.io/@lector/analyzer)       |
+| [@lector/mode-rsvp](https://jsr.io/@lector/mode-rsvp)     | [![JSR](https://jsr.io/badges/@lector/mode-rsvp)](https://jsr.io/@lector/mode-rsvp)     |
+| [@lector/mode-bionic](https://jsr.io/@lector/mode-bionic) | [![JSR](https://jsr.io/badges/@lector/mode-bionic)](https://jsr.io/@lector/mode-bionic) |
+| [@lector/parser-txt](https://jsr.io/@lector/parser-txt)   | [![JSR](https://jsr.io/badges/@lector/parser-txt)](https://jsr.io/@lector/parser-txt)   |
 
 ## Use Lector
 
@@ -35,6 +36,8 @@ more information.
   - `bun run dev:play` to start the development server of the web playground.
   - `bun run dev:browser` to start the development server of the browser extension.
   - `bun run test` to run the unit tests.
+  - `bun run lint` to run the linter.
+  - `bun run format` to run the formatter.
 
 </details>
 
