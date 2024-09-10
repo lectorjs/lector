@@ -21,6 +21,7 @@
 			},
 			"nursery": {
 				"all": true,
+				"noConsole": "off",
 				"useImportRestrictions": "off",
 				"noUndeclaredDependencies": "off" // TODO: no support for monorepos yet (https://github.com/biomejs/biome/issues/2475)
 			},
@@ -39,7 +40,7 @@
 		"indentStyle": "tab",
 		"indentWidth": 4,
 		"lineEnding": "lf",
-		"lineWidth": 100,
+		"lineWidth": 120,
 		"attributePosition": "multiline"
 	},
 	"javascript": {
