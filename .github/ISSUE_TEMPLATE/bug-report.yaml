@@ -24,8 +24,8 @@ body:
     attributes:
       label: Do you want to work on this?
       options:
-        - Yes
-        - No
+        - 'Yes'
+        - 'No'
     validations:
       required: true
 
