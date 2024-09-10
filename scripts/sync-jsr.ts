@@ -11,7 +11,7 @@ await Promise.all(
 
 		try {
 			await $`jq '{ name, version, exports }' ${packageJsonPath} > ${jsrJsonPath}`;
-			console.log(`✅ Synced ${jsrJsonPath}`);
+			console.info(`✅ Synced ${jsrJsonPath}`);
 		} catch (error) {
 			console.error(`❌ Failed to sync ${jsrJsonPath}:`, error);
 		}

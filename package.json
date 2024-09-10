@@ -10,7 +10,7 @@
 		"test:watch": "bun test --watch .",
 		"lint": "biome lint --write .",
 		"format": "biome format --write .",
-		"ci:version": "changeset version && bun run ./scripts/sync-jsr.ts",
+		"ci:version": "changeset version && bun run ./scripts/sync-jsr.ts && git add -A",
 		"ci:release": "changeset tag",
 		"taze": "taze -Ir"
 	},

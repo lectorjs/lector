@@ -6,17 +6,9 @@ Before you start, consider taking a look at the [documentation](https://lector.p
 
 This project encourages contributions from the community. You can contribute in the following areas:
 
-### Feedback
-
-Help make the project better by sharing your ideas. Start a conversation by opening a [feedback discussion](https://github.com/ju4n97/lector/discussions). Once discussed and accepted, an issue will be created, allowing you to work on it or leave it for others to work on.
-
-### Documentation
-
-Help improve the project’s documentation. Small changes like fixing typos or broken links can be submitted directly as a PR. For bigger changes, start a conversation by opening a [feedback discussion](https://github.com/ju4n97/lector/discussions).
-
-### Bug discovery
-
-Help improve the project’s stability by identifying and reporting bugs. Before flagging an issue, [ensure it hasn't already been addressed](https://github.com/ju4n97/lector/issues). If no one else has reported it, you can either fix it yourself or leave it for others to fix.
+- **Feedback**: Help make the project better by sharing your ideas. Start a conversation by opening a [feedback discussion](https://github.com/ju4n97/lector/discussions). Once discussed and accepted, an issue will be created, allowing you to work on it or leave it for others to work on.
+- **Documentation**: Help improve the project’s documentation. Small changes like fixing typos or broken links can be submitted directly as a PR. For bigger changes, start a conversation by opening a [feedback discussion](https://github.com/ju4n97/lector/discussions).
+- **Bug discovery**: Help improve the project’s stability by identifying and reporting bugs. Before flagging an issue, [ensure it hasn't already been addressed](https://github.com/ju4n97/lector/issues). If no one else has reported it, you can either fix it yourself or leave it for others to fix.
 
 ## Contribution workflow
 
@@ -36,15 +28,15 @@ Help improve the project’s stability by identifying and reporting bugs. Before
 
 ## Good first issues
 
-If you’re new to the codebase, consider starting with issues labeled as [good first issue](https://github.com/ju4n97/lector/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+-label%3A%22blocked+by+upstream%22). These issues are relatively straightforward to work on. Before you start, make sure there’s no existing PR for the issue and that it hasn’t been assigned to anyone yet. Once you’ve found an issue you’d like to work on, notify the maintainers by commenting on the issue. This ensures proper coordination and prevents duplicate efforts.
+If you’re new to the codebase, consider starting with issues labeled as [good first issue](https://github.com/ju4n97/lector/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+-label%3A%22blocked+by+upstream%22). These issues are relatively straightforward to work on. Before you start, make sure there’s no existing PR for the issue and that it hasn’t been assigned to anyone yet. Once you’ve found an issue you’d like to work on, notify the maintainers by commenting on the issue. This ensures proper coordination and prevents overlapping.
 
 ## Coding style
 
-To maintain consistency and quality in the codebase, please adhere to the project's coding style, which is enforced through [Biome](https://biomejs.dev/) for linting and formatting.
+To maintain consistency and quality in the codebase, please adhere to the project's coding style, which is enforced through [Biome](https://biomejs.dev/) for linting and formatting. You can see the enabled rules in [biome.jsonc](biome.jsonc).
 
 ## JSDoc
 
-The packages of this project are published on [JSR](https://jsr.io/), which utilizes [JSDoc](https://jsdoc.app/) to automatically generate documentation. Furthermore, JSDoc comments serve as a metric to improves the [JSR score](https://jsr.io/docs/scoring) of the package. To ensure high-quality documentation, please adhere to the following guidelines:
+The packages of this project are published on [JSR](https://jsr.io/), which uses [JSDoc](https://jsdoc.app/) to automatically generate documentation. Furthermore, JSDoc comments serve as a metric to improves the [JSR score](https://jsr.io/docs/scoring) of the package. To ensure high-quality documentation, please adhere to the following guidelines:
 
 - Document modules, functions, classes, types, and interfaces using JSDoc comments.
 - Keep your documentation current with code changes.
@@ -52,6 +44,43 @@ The packages of this project are published on [JSR](https://jsr.io/), which util
 Learn more [here](https://jsr.io/docs/writing-docs).
 
 For reference, you can explore the existing [packages](./packages/) for examples of documented code.
+
+## Git workflow
+
+The git branching model used in this project aligns with [trunk-based development](https://trunkbaseddevelopment.com/).
+
+1. **Development**: Developers work on temporary branches to add new features or fix errors. Changes should be frequently integrated with the main branch (`master`) to minimize merge conflicts.
+2. **Code review**: Once changes are complete, a pull request should be created to merge the temporary branch with `master`. The PR should be reviewed and approved by at least one maintainer before merging.
+3. **Merge and release**: The pull request is merged into `master`, triggering an automatic release workflow.
+
+```mermaid
+gitGraph
+    commit
+    commit
+    branch feature/branch1
+    checkout feature/branch1
+    commit
+    commit
+    checkout main
+    merge feature/branch1
+    commit
+    commit
+```
+
+## Changesets workflow
+
+This project uses [Changesets](https://github.com/changesets/changesets) for streamlined package versioning, automated changelog generation, and automated GitHub releases.
+
+1. **Implement changes**: Make all necessary adjustments to the feature you're working on.
+2. **Generate changeset**: Run `bun changeset` to generate a new changeset and follow the prompts. Remember to maintain [SemVer](https://semver.org/) compliance.
+   - `patch`: for bug fixes.
+   - `minor`: for new features.
+   - `major`: for breaking changes.
+3. **Commit changes**: Commit your changes along with the newly generated changeset.
+4. **Submit a pull request**: Submit a pull request to integrate your changes. Once your pull request is merged and the packages are released, you'll see your descriptive changes in the changelog of the affected packages.
+
+> [!NOTE]
+> No need to generate a changeset if you're not working directly on a workspace package.
 
 ## License
 

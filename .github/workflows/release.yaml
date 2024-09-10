@@ -5,14 +5,15 @@ on:
     branches: [master]      
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # To create a Github release
+      contents: write
+      pull-requests: write
       id-token: write # To publish on JSR
     steps:
       - name: Checkout
@@ -25,17 +26,17 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Create release pull-request
-        id: changesets
         uses: changesets/action@v1
+        id: changesets
         with:
           version: bun run ci:version
           publish: bun run ci:release
-          title: "ci: release 📦"
-          commit: "ci: release 📦"
+          title: '[ci] Release 📦'
+          commit: '[ci] Release 📦'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # TODO: https://github.com/changesets/changesets/issues/1318
+      # TODO: Workaround for https://github.com/changesets/changesets/issues/1318
       - name: Publish to JSR
-        if: steps.changesets.outputs.hasChangesets == 'false'
+        if: steps.changesets.outputs.published == 'true'
         run: bunx jsr publish

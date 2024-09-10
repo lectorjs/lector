@@ -2,6 +2,10 @@
 
 Closes: #0
 
+## Changesets
+
+- [ ] If this PR includes modifications that should be reflected in the `CHANGELOG.md` of one or more packages, generate a changeset by running `bun changeset` and follow the instructions. Learn more [here](../CONTRIBUTING.md#changesets-workflow).
+
 ## Before submitting, ensure
 
 - [ ] You have read and followed the [contributing guidelines](../CONTRIBUTING.md).
