@@ -10,7 +10,7 @@ await Promise.all(
 		const jsrJsonPath = packageJsonPath.replace('package.json', 'jsr.json');
 
 		try {
-			await $`jq '{ name, version, exports }' ${packageJsonPath} > ${jsrJsonPath}`;
+			await $`jq '{ name, version, description, exports }' ${packageJsonPath} > ${jsrJsonPath}`;
 			console.info(`✅ Synced ${jsrJsonPath}`);
 		} catch (error) {
 			console.error(`❌ Failed to sync ${jsrJsonPath}:`, error);

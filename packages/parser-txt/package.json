@@ -1,6 +1,7 @@
 {
 	"name": "@lector/parser-txt",
 	"version": "0.0.0",
+	"description": "Plain text parser that allows readers to extract and process words from plain text or `.txt` files.",
 	"exports": {
 		".": "./src/mod.ts"
 	}

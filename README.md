@@ -6,11 +6,12 @@
 
 ## Packages
 
-| Package                                   | Changelog                                                                             |
-| ----------------------------------------- | ------------------------------------------------------------------------------------- |
-| [@lector/primitives](packages/primitives) | [![JSR](https://jsr.io/badges/@lector/primitives)](https://jsr.io/@lector/primitives) |
-| [@lector/rsvp](packages/rsvp)             | [![JSR](https://jsr.io/badges/@lector/rsvp)](https://jsr.io/@lector/rsvp)             |
-| [@lector/bionic](packages/bionic)         | [![JSR](https://jsr.io/badges/@lector/bionic)](https://jsr.io/@lector/bionic)         |
+| Package                                     | Changelog                                                                               |
+| ------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [@lector/primitives](packages/primitives)   | [![JSR](https://jsr.io/badges/@lector/primitives)](https://jsr.io/@lector/primitives)   |
+| [@lector/mode-rsvp](packages/mode-rsvp)     | [![JSR](https://jsr.io/badges/@lector/mode-rsvp)](https://jsr.io/@lector/mode-rsvp)     |
+| [@lector/mode-bionic](packages/mode-bionic) | [![JSR](https://jsr.io/badges/@lector/mode-bionic)](https://jsr.io/@lector/mode-bionic) |
+| [@lector/parser-txt](packages/parser-txt)   | [![JSR](https://jsr.io/badges/@lector/parser-txt)](https://jsr.io/@lector/parser-txt)   |
 
 ## Use Lector
 
