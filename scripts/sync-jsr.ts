@@ -1,14 +1,19 @@
 // Workaround for https://github.com/jsr-io/jsr/issues/544
 
-const glob = new Bun.Glob('packages/*/package.json');
+import { $, Glob } from 'bun';
+
+const glob = new Glob('packages/*/package.json');
 const scannedFiles = await Array.fromAsync(glob.scan({ cwd: '.' }));
 
-for (const file of scannedFiles) {
-	const packageJson = await Bun.file(file).json();
-	const { version } = packageJson;
+await Promise.all(
+	scannedFiles.map(async (packageJsonPath) => {
+		const jsrJsonPath = packageJsonPath.replace('package.json', 'jsr.json');
 
-	const jsrJsonFilePath = file.replace('package.json', 'jsr.json');
-	const jsrJson = await Bun.file(jsrJsonFilePath).json();
-
-	await Bun.write(jsrJsonFilePath, JSON.stringify({ ...jsrJson, version }, null, 4));
-}
+		try {
+			await $`jq '{ name, version, exports }' ${packageJsonPath} > ${jsrJsonPath}`;
+			console.log(`✅ Synced ${jsrJsonPath}`);
+		} catch (error) {
+			console.error(`❌ Failed to sync ${jsrJsonPath}:`, error);
+		}
+	}),
+);

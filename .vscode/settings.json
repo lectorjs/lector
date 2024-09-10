@@ -12,5 +12,8 @@
 	},
 	"[markdown]": {
 		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[shellscript]": {
+		"editor.defaultFormatter": "foxundermoon.shell-format"
 	}
 }
