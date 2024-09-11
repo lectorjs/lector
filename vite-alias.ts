@@ -1,5 +1,3 @@
-// TODO: Workaround for https://github.com/unjs/unbuild/issues/121 and https://github.com/unjs/jiti/issues/150
-
 import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 

@@ -1,11 +1,10 @@
 # @librereader/primitives
 
-[![npm package](https://nodei.co/npm/@librereader/primitives.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/@librereader/primitives)
+[![npm package](https://nodei.co/npm/@librereader/primitives.png?downloads=true&downloadRank=true&stars=true&compact=true)](https://www.npmjs.com/package/@librereader/primitives)
 
 Primitives for building and extending readers, including definitions for context, parsers, modes, commands, plugins, and more.
 
-[![NPM version](https://img.shields.io/npm/v/@librereader/primitives.svg?style=flat)](https://npmjs.org/package/@librereader/primitives)
-[![NPM Downloads](https://img.shields.io/npm/dm/@librereader/primitives.svg?style=flat)](https://npmjs.org/package/@librereader/primitives)
+![NPM Version](https://img.shields.io/npm/v/@librereader/primitives?style=flat-square&color=yellow)
 
 ## Installation
 

@@ -9,7 +9,7 @@
 		"build": "bun run build",
 		"build:play": "bun run --filter @librereader/playground build",
 		"build:browser": "bun run --filter @librereader/browser build",
-		"build:packages": "bun run --filter './packages/**' build",
+		"build:packages": "turbo build --filter \"./packages/*\"",
 		"test": "bun test .",
 		"test:watch": "bun test --watch .",
 		"lint": "biome lint --write .",
@@ -24,7 +24,8 @@
 		"@types/bun": "latest",
 		"lefthook": "^1.7.15",
 		"taze": "^0.16.7",
-		"tsup": "^8.2.4"
+		"tsup": "^8.2.4",
+		"turbo": "^2.1.1"
 	},
 	"peerDependencies": {
 		"typescript": "^5.6.2"

@@ -2,16 +2,16 @@
 > This project is currently in a very early stage of development. As such,
 > features and documentation are subject to change.
 
-[![ci](https://github.com/ju4n97/librereader/actions/workflows/ci.yaml/badge.svg)](https://github.com/ju4n97/librereader/actions/workflows/ci.yaml)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ju4n97/librereader/ci.yaml?style=flat-square)
 
 ## Packages
 
-| Package                                                                            | Changelog                                                                                                                                  |
-| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| [@librereader/primitives](https://www.npmjs.com/package/@librereader/primitives)   | [![NPM version](https://img.shields.io/npm/v/@librereader/primitives.svg?style=flat)](https://npmjs.org/package/@librereader/primitives)   |
-| [@librereader/mode-rsvp](https://www.npmjs.com/package/@librereader/mode-rsvp)     | [![NPM version](https://img.shields.io/npm/v/@librereader/mode-rsvp.svg?style=flat)](https://npmjs.org/package/@librereader/mode-rsvp)     |
-| [@librereader/mode-bionic](https://www.npmjs.com/package/@librereader/mode-bionic) | [![NPM version](https://img.shields.io/npm/v/@librereader/mode-bionic.svg?style=flat)](https://npmjs.org/package/@librereader/mode-bionic) |
-| [@librereader/parser-txt](https://www.npmjs.com/package/@librereader/parser-txt)   | [![NPM version](https://img.shields.io/npm/v/@librereader/parser-txt.svg?style=flat)](https://npmjs.org/package/@librereader/parser-txt)   |
+| Package                                                                            | Changelog                                                                                            |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [@librereader/primitives](https://www.npmjs.com/package/@librereader/primitives)   | ![NPM Version](https://img.shields.io/npm/v/@librereader/primitives?style=flat-square&color=yellow)  |
+| [@librereader/mode-rsvp](https://www.npmjs.com/package/@librereader/mode-rsvp)     | ![NPM Version](https://img.shields.io/npm/v/@librereader/mode-rsvp?style=flat-square&color=yellow)   |
+| [@librereader/mode-bionic](https://www.npmjs.com/package/@librereader/mode-bionic) | ![NPM Version](https://img.shields.io/npm/v/@librereader/mode-bionic?style=flat-square&color=yellow) |
+| [@librereader/parser-txt](https://www.npmjs.com/package/@librereader/parser-txt)   | ![NPM Version](https://img.shields.io/npm/v/@librereader/parser-txt?style=flat-square&color=yellow)  |
 
 ## Use LibreReader
 

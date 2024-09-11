@@ -1,11 +1,10 @@
 # @librereader/parser-txt
 
-[![npm package](https://nodei.co/npm/@librereader/parser-txt.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/@librereader/parser-txt)
+[![npm package](https://nodei.co/npm/@librereader/parser-txt.png?downloads=true&downloadRank=true&stars=true&compact=true)](https://www.npmjs.com/package/@librereader/parser-txt)
 
 Plain text parser that allows readers to extract and process words from plain text or `.txt` files.
 
-[![NPM version](https://img.shields.io/npm/v/@librereader/parser-txt.svg?style=flat)](https://npmjs.org/package/@librereader/parser-txt)
-[![NPM Downloads](https://img.shields.io/npm/dm/@librereader/parser-txt.svg?style=flat)](https://npmjs.org/package/@librereader/parser-txt)
+![NPM Version](https://img.shields.io/npm/v/@librereader/parser-txt?style=flat-square&color=yellow)
 
 ## Installation
 
