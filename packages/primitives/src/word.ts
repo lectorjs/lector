@@ -1,8 +1,29 @@
-export type Word<T = Record<string, unknown>> = Readonly<{
-	value: string;
-	insights: T;
-}>;
+import { type WordDifficultyLevel, assessWordDifficulty } from './analyzer/assess-word-difficulty.ts';
 
-export function defineWord<T extends Word>(def: T): T {
-	return def;
+export interface Word {
+	readonly value: string;
+}
+
+export interface WordWithInsights extends Word {
+	readonly insights: WordInsights;
+}
+
+export type WordInsights = {
+	difficulty: WordDifficultyLevel;
+};
+
+/**
+ * Create a `WordWithInsights` instance from a given configuration object and automatically populates the word insights.
+ *
+ * @param config An object containing the word properties.
+ *
+ * @returns A defined `WordWithInsights` instance.
+ */
+export function defineWord(config: Word): WordWithInsights {
+	return {
+		...config,
+		insights: {
+			difficulty: assessWordDifficulty(config.value),
+		},
+	};
 }

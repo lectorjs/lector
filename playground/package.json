@@ -1,5 +1,5 @@
 {
-	"name": "@lector/playground",
+	"name": "@librereader/playground",
 	"private": true,
 	"type": "module",
 	"scripts": {
@@ -8,10 +8,10 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@lector/primitives": "workspace:*",
-		"@lector/mode-rsvp": "workspace:*",
-		"@lector/mode-bionic": "workspace:*",
-		"@lector/parser-txt": "workspace:*",
+		"@librereader/primitives": "workspace:*",
+		"@librereader/mode-rsvp": "workspace:*",
+		"@librereader/mode-bionic": "workspace:*",
+		"@librereader/parser-txt": "workspace:*",
 		"dompurify": "^3.1.6"
 	},
 	"devDependencies": {

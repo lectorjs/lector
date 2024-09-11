@@ -1,9 +1,8 @@
 ---
-"@lector/mode-bionic": patch
-"@lector/parser-txt": patch
-"@lector/primitives": patch
-"@lector/mode-rsvp": patch
-"@lector/analyzer": patch
+"@librereader/mode-bionic": patch
+"@librereader/parser-txt": patch
+"@librereader/primitives": patch
+"@librereader/mode-rsvp": patch
 ---
 
 Scaffold previous local progress

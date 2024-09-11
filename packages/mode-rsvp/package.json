@@ -1,11 +1,48 @@
 {
-	"name": "@lector/mode-rsvp",
-	"version": "0.0.1",
-	"description": "Rapid serial visual presentation (RSVP) reading mode for Lector, providing commands for controlling text flow, pacing, and navigation.",
-	"exports": {
-		".": "./src/mod.ts"
+	"name": "@librereader/mode-rsvp",
+	"version": "0.0.0",
+	"description": "Rapid serial visual presentation (RSVP) reading mode for LibreReader, providing commands for controlling text flow, pacing, and navigation.",
+	"keywords": [
+		"librereader",
+		"reader",
+		"speed-reader",
+		"text-to-speech",
+		"RSVP",
+		"bionic",
+		"pdf",
+		"epub",
+		"mobi",
+		"docx"
+	],
+	"homepage": "https://github.com/jm2097/librereader/tree/main/packages/mode-rsvp#readme",
+	"bugs": {
+		"url": "https://github.com/jm2097/librereader/issues"
 	},
-	"dependencies": {
-		"@lector/primitives": "workspace:*"
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jm2097/librereader",
+		"directory": "packages/mode-rsvp"
+	},
+	"license": "MIT",
+	"author": "Juan Mesa <juanmesa2097@proton.me>",
+	"sideEffects": false,
+	"type": "module",
+	"module": "./dist/index.js",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"default": "./src/index.ts"
+		}
+	},
+	"types": "./dist/index.d.ts",
+	"files": ["dist"],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch"
+	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
 	}
 }

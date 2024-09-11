@@ -1,4 +1,4 @@
-import { type CommandExecutionContext, defineCommand, getContext, updateContext } from '@lector/primitives';
+import { type CommandExecutionContext, defineCommand, getContext, updateContext } from '@librereader/primitives';
 import { RSVP_CONTEXT_KEY, type RsvpContext } from '../context.ts';
 import nextCommand from './next.ts';
 
@@ -17,7 +17,10 @@ export default defineCommand(() => {
 	};
 
 	const stopPlayback = () => {
-		updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({ isPlaying: false }));
+		updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
+			isPlaying: false,
+		}));
+
 		interval && clearInterval(interval);
 	};
 

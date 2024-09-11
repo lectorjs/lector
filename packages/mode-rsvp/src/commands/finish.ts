@@ -1,4 +1,4 @@
-import { defineCommand, updateContext } from '@lector/primitives';
+import { defineCommand, updateContext } from '@librereader/primitives';
 import { RSVP_CONTEXT_KEY, type RsvpContext } from '../context.ts';
 
 export default defineCommand(() => ({

@@ -1,44 +1,41 @@
-# @lector/mode-rsvp
+# @librereader/mode-rsvp
 
-[![JSR](https://jsr.io/badges/@lector/mode-rsvp)](https://jsr.io/@lector/mode-rsvp) [![JSR Score](https://jsr.io/badges/@lector/mode-rsvp/score)](https://jsr.io/@lector/mode-rsvp)
+[![npm package](https://nodei.co/npm/@librereader/mode-rsvp.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/@librereader/mode-rsvp)
 
-Rapid serial visual presentation (RSVP) reading mode for Lector, providing commands for controlling text flow, pacing, and navigation.
+Rapid serial visual presentation (RSVP) reading mode for LibreReader, providing commands for controlling text flow, pacing, and navigation.
+
+[![NPM version](https://img.shields.io/npm/v/@librereader/mode-rsvp.svg?style=flat)](https://npmjs.org/package/@librereader/mode-rsvp)
+[![NPM Downloads](https://img.shields.io/npm/dm/@librereader/mode-rsvp.svg?style=flat)](https://npmjs.org/package/@librereader/mode-rsvp)
 
 ## Installation
-
-With Deno
-
-```sh
-deno add @lector/mode-rsvp
-```
 
 With Bun
 
 ```sh
-bunx jsr add @lector/mode-rsvp
+bun add @librereader/mode-rsvp
 ```
 
 With npm
 
 ```sh
-npx jsr add @lector/mode-rsvp
+npm install @librereader/mode-rsvp
 ```
 
 With Yarn
 
 ```sh
-yarn dlx jsr add @lector/mode-rsvp
+yarn add @librereader/mode-rsvp
 ```
 
 With pnpm
 
 ```sh
-pnpm dlx jsr add @lector/mode-rsvp
+pnpm add @librereader/mode-rsvp
 ```
 
 ## Documentation
 
-[RSVP mode](https://lector.pages.dev/docs/modes/rsvp)
+[RSVP mode](https://librereader.pages.dev/docs/modes/rsvp)
 
 ## Changelog
 

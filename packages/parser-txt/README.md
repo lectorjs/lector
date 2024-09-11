@@ -1,46 +1,43 @@
-# @lector/parser-txt
+# @librereader/parser-txt
 
-[![JSR](https://jsr.io/badges/@lector/parser-txt)](https://jsr.io/@lector/parser-txt)
-[![JSR Score](https://jsr.io/badges/@lector/parser-txt/score)](https://jsr.io/@lector/parser-txt)
+[![npm package](https://nodei.co/npm/@librereader/parser-txt.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/@librereader/parser-txt)
 
-Plain text parser that allows readers to extract and process words from plain
-text or `.txt` files.
+Plain text parser that allows readers to extract and process words from plain text or `.txt` files.
+
+[![NPM version](https://img.shields.io/npm/v/@librereader/parser-txt.svg?style=flat)](https://npmjs.org/package/@librereader/parser-txt)
+[![NPM Downloads](https://img.shields.io/npm/dm/@librereader/parser-txt.svg?style=flat)](https://npmjs.org/package/@librereader/parser-txt)
 
 ## Installation
 
 With Deno
 
-```sh
-deno add @lector/parser-txt
-```
-
 With Bun
 
 ```sh
-bunx jsr add @lector/parser-txt
+bun add @librereader/parser-txt
 ```
 
 With npm
 
 ```sh
-npx jsr add @lector/parser-txt
+npm install @librereader/parser-txt
 ```
 
 With Yarn
 
 ```sh
-yarn dlx jsr add @lector/parser-txt
+yarn add @librereader/parser-txt
 ```
 
 With pnpm
 
 ```sh
-pnpm dlx jsr add @lector/parser-txt
+pnpm add @librereader/parser-txt
 ```
 
 ## Documentation
 
-[`Plain text parser`](https://lector.pages.dev/docs/primitives)
+[`Plain text parser`](https://librereader.pages.dev/docs/primitives)
 
 ## Changelog
 

@@ -10,5 +10,4 @@ Closes: #0
 
 - [ ] I have followed the [contributing guidelines](../CONTRIBUTING.md).
 - [ ] I have added sufficient unit tests to verify the code's functionality.
-- [ ] I have documented the code with [JSDoc](https://jsdoc.app/) - [learn why](https://jsr.io/docs/writing-docs).
-- [ ] I have updated the documentation at <https://lector.pages.dev> (if necessary).
+- [ ] I have updated the documentation at <https://librereader.pages.dev> (if necessary).

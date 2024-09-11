@@ -1,28 +1,15 @@
-import { assessWordDifficulty } from '@lector/analyzer';
-import { type ParsedMetadata, defineParser, defineWord, tokenize } from '@lector/primitives';
+import { defineParser, defineWord, tokenize } from '@librereader/primitives';
 
 export default defineParser<string>((input) => {
-	const metadata: ParsedMetadata = {
-		readingTimeInMs: 0,
-	};
+	const words = tokenize(input);
+	const metadata = {};
 
 	return {
 		*getWord() {
-			const words = tokenize(input);
-
-			for (const [_, word] of words.entries()) {
-				metadata.readingTimeInMs += 1;
-
-				yield defineWord({
-					value: word,
-					insights: {
-						difficulty: assessWordDifficulty(word),
-					},
-				});
+			for (const word of words) {
+				yield defineWord({ value: word });
 			}
 		},
-		getMetadata() {
-			return metadata;
-		},
+		getMetadata: () => metadata,
 	};
 });

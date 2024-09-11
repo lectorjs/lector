@@ -1,14 +1,14 @@
 # Contributor's guide
 
-Before you start, consider taking a look at the [documentation](https://lector.pages.dev/). It will give you a good understanding of the project and can help you understand the context of your contributions.
+Before you start, consider taking a look at the [documentation](https://librereader.pages.dev/). It will give you a good understanding of the project and can help you understand the context of your contributions.
 
 ## How to contribute
 
 This project encourages contributions from the community. You can contribute in the following areas:
 
-- **Feedback**: Help make the project better by sharing your ideas. Start a conversation by opening a [feedback discussion](https://github.com/ju4n97/lector/discussions). Once discussed and accepted, an issue will be created, allowing you to work on it or leave it for others to work on.
-- **Documentation**: Help improve the project’s documentation. Small changes like fixing typos or broken links can be submitted directly as a PR. For bigger changes, start a conversation by opening a [feedback discussion](https://github.com/ju4n97/lector/discussions).
-- **Bug discovery**: Help improve the project’s stability by identifying and reporting bugs. Before flagging an issue, [ensure it hasn't already been addressed](https://github.com/ju4n97/lector/issues). If no one else has reported it, you can either fix it yourself or leave it for others to fix.
+- **Feedback**: Help make the project better by sharing your ideas. Start a conversation by opening a [feedback discussion](https://github.com/ju4n97/librereader/discussions). Once discussed and accepted, an issue will be created, allowing you to work on it or leave it for others to work on.
+- **Documentation**: Help improve the project’s documentation. Small changes like fixing typos or broken links can be submitted directly as a PR. For bigger changes, start a conversation by opening a [feedback discussion](https://github.com/ju4n97/librereader/discussions).
+- **Bug discovery**: Help improve the project’s stability by identifying and reporting bugs. Before flagging an issue, [ensure it hasn't already been addressed](https://github.com/ju4n97/librereader/issues). If no one else has reported it, you can either fix it yourself or leave it for others to fix.
 
 ## Contribution workflow
 
@@ -28,22 +28,11 @@ This project encourages contributions from the community. You can contribute in 
 
 ## Good first issues
 
-If you’re new to the codebase, consider starting with issues labeled as [good first issue](https://github.com/ju4n97/lector/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+-label%3A%22blocked+by+upstream%22). These issues are relatively straightforward to work on. Before you start, make sure there’s no existing PR for the issue and that it hasn’t been assigned to anyone yet. Once you’ve found an issue you’d like to work on, notify the maintainers by commenting on the issue. This ensures proper coordination and prevents overlapping.
+If you’re new to the codebase, consider starting with issues labeled as [good first issue](https://github.com/ju4n97/librereader/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+-label%3A%22blocked+by+upstream%22). These issues are relatively straightforward to work on. Before you start, make sure there’s no existing PR for the issue and that it hasn’t been assigned to anyone yet. Once you’ve found an issue you’d like to work on, notify the maintainers by commenting on the issue. This ensures proper coordination and prevents overlapping.
 
 ## Coding style
 
-To maintain consistency and quality in the codebase, please adhere to the project's coding style, which is enforced through [Biome](https://biomejs.dev/) for linting and formatting. You can see the enabled rules in [biome.jsonc](biome.jsonc).
-
-## JSDoc
-
-The packages of this project are published on [JSR](https://jsr.io/), which uses [JSDoc](https://jsdoc.app/) to automatically generate documentation. Furthermore, JSDoc comments serve as a metric to improves the [JSR score](https://jsr.io/docs/scoring) of the package. To ensure high-quality documentation, please adhere to the following guidelines:
-
-- Document modules, functions, classes, types, and interfaces using JSDoc comments.
-- Keep your documentation current with code changes.
-
-Learn more [here](https://jsr.io/docs/writing-docs).
-
-For reference, you can explore the existing [packages](./packages/) for examples of documented code.
+This project uses [Biome](https://biomejs.dev/) for linting and formatting. You can see the enabled rules in [biome.jsonc](biome.jsonc).
 
 ## Git workflow
 

@@ -1,9 +1,7 @@
+import rsvp from '@librereader/mode-rsvp';
+import parseTxt from '@librereader/parser-txt';
+import { createReader } from '@librereader/primitives';
 import './style.css';
-
-import bionic from '@lector/mode-bionic';
-import rsvp from '@lector/mode-rsvp';
-import parseTxt from '@lector/parser-txt';
-import { createReader } from '@lector/primitives';
 
 const restart = document.querySelector('#restart') as HTMLButtonElement;
 const finish = document.querySelector('#finish') as HTMLButtonElement;
@@ -12,51 +10,39 @@ const next = document.querySelector('#next') as HTMLButtonElement;
 const resume = document.querySelector('#resume') as HTMLButtonElement;
 const pause = document.querySelector('#pause') as HTMLButtonElement;
 const toggle = document.querySelector('#toggle') as HTMLButtonElement;
-const readingModeToggler = document.querySelector('#toggle-reading-mode') as HTMLButtonElement;
 
 const reader = createReader({
 	parser: parseTxt('This is a dummy text to test the txt parser. 😾'),
-	modes: {
-		rsvp,
-		bionic,
-	},
+	mode: rsvp(),
 	renderTo: document.querySelector('#display') as HTMLElement,
 });
 
 reader.render();
 
 restart.addEventListener('click', async () => {
-	await reader.executeCommand('rsvp', 'restart');
+	await reader.executeCommand('restart');
 });
 
 finish.addEventListener('click', async () => {
-	await reader.executeCommand('rsvp', 'finish');
+	await reader.executeCommand('finish');
 });
 
 prev.addEventListener('click', async () => {
-	await reader.executeCommand('rsvp', 'previous');
+	await reader.executeCommand('prev');
 });
 
 next.addEventListener('click', async () => {
-	await reader.executeCommand('rsvp', 'next');
+	await reader.executeCommand('next');
 });
 
 resume.addEventListener('click', async () => {
-	await reader.executeCommand('rsvp', 'resumePlayback');
+	await reader.executeCommand('resume');
 });
 
 pause.addEventListener('click', async () => {
-	await reader.executeCommand('rsvp', 'pausePlayback');
+	await reader.executeCommand('pause');
 });
 
 toggle.addEventListener('click', async () => {
-	await reader.executeCommand('rsvp', 'togglePlayback');
-});
-
-readingModeToggler.addEventListener('click', () => {
-	if (reader.mode === 'bionic') {
-		reader.switchMode('rsvp');
-	} else {
-		reader.switchMode('bionic');
-	}
+	await reader.executeCommand('toggle');
 });

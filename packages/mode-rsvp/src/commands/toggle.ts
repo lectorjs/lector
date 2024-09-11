@@ -1,7 +1,7 @@
-import { defineCommand, getContext } from '@lector/primitives';
+import { defineCommand, getContext } from '@librereader/primitives';
 import { RSVP_CONTEXT_KEY, type RsvpContext } from '../context.ts';
-import pausePlaybackCommand from './pause-playback.ts';
-import resumePlaybackCommand from './resume-playback.ts';
+import pausePlaybackCommand from './pause.ts';
+import resumePlaybackCommand from './resume.ts';
 
 export default defineCommand(() => {
 	const resume = resumePlaybackCommand();

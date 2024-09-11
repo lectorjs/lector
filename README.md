@@ -2,26 +2,25 @@
 > This project is currently in a very early stage of development. As such,
 > features and documentation are subject to change.
 
-[![ci](https://github.com/ju4n97/lector/actions/workflows/ci.yaml/badge.svg)](https://github.com/ju4n97/lector/actions/workflows/ci.yaml)
+[![ci](https://github.com/ju4n97/librereader/actions/workflows/ci.yaml/badge.svg)](https://github.com/ju4n97/librereader/actions/workflows/ci.yaml)
 
 ## Packages
 
-| Package                                                   | Changelog                                                                               |
-| --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| [@lector/primitives](https://jsr.io/@lector/primitives)   | [![JSR](https://jsr.io/badges/@lector/primitives)](https://jsr.io/@lector/primitives)   |
-| [@lector/analyzer](https://jsr.io/@lector/analyzer)       | [![JSR](https://jsr.io/badges/@lector/analyzer)](https://jsr.io/@lector/analyzer)       |
-| [@lector/mode-rsvp](https://jsr.io/@lector/mode-rsvp)     | [![JSR](https://jsr.io/badges/@lector/mode-rsvp)](https://jsr.io/@lector/mode-rsvp)     |
-| [@lector/mode-bionic](https://jsr.io/@lector/mode-bionic) | [![JSR](https://jsr.io/badges/@lector/mode-bionic)](https://jsr.io/@lector/mode-bionic) |
-| [@lector/parser-txt](https://jsr.io/@lector/parser-txt)   | [![JSR](https://jsr.io/badges/@lector/parser-txt)](https://jsr.io/@lector/parser-txt)   |
+| Package                                                                            | Changelog                                                                                                                                  |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| [@librereader/primitives](https://www.npmjs.com/package/@librereader/primitives)   | [![NPM version](https://img.shields.io/npm/v/@librereader/primitives.svg?style=flat)](https://npmjs.org/package/@librereader/primitives)   |
+| [@librereader/mode-rsvp](https://www.npmjs.com/package/@librereader/mode-rsvp)     | [![NPM version](https://img.shields.io/npm/v/@librereader/mode-rsvp.svg?style=flat)](https://npmjs.org/package/@librereader/mode-rsvp)     |
+| [@librereader/mode-bionic](https://www.npmjs.com/package/@librereader/mode-bionic) | [![NPM version](https://img.shields.io/npm/v/@librereader/mode-bionic.svg?style=flat)](https://npmjs.org/package/@librereader/mode-bionic) |
+| [@librereader/parser-txt](https://www.npmjs.com/package/@librereader/parser-txt)   | [![NPM version](https://img.shields.io/npm/v/@librereader/parser-txt.svg?style=flat)](https://npmjs.org/package/@librereader/parser-txt)   |
 
-## Use Lector
+## Use LibreReader
 
-Refer to the [user's guide](https://lector.pages.dev/docs/users) for more
+Refer to the [user's guide](https://librereader.pages.dev/docs/users) for more
 information.
 
-## Build with Lector
+## Build with LibreReader
 
-Refer to the [developer's guide](https://lector.pages.dev/docs/developers) for
+Refer to the [developer's guide](https://librereader.pages.dev/docs/developers) for
 more information.
 
 ## Contributing

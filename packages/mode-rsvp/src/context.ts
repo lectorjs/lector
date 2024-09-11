@@ -1,14 +1,10 @@
-import { type LectorContext, defaultLectorContext } from '@lector/primitives';
+import { type Context, initializeContext } from '@librereader/primitives';
 
 export const RSVP_CONTEXT_KEY = Symbol('rsvp');
 
-export type RsvpContext = LectorContext<{
+export type RsvpContext = Context<{
 	checkpoint: number;
 	isPlaying: boolean;
 }>;
 
-export const defaultContext = (): RsvpContext =>
-	defaultLectorContext({
-		isPlaying: false,
-		checkpoint: 0,
-	});
+export const defaultContext = (): RsvpContext => initializeContext({ checkpoint: 0, isPlaying: false });

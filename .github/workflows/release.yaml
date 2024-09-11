@@ -20,7 +20,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      id-token: write # To publish on JSR
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,8 +40,4 @@ jobs:
           commit: "[ci] Release 📦"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # TODO: Workaround for https://github.com/changesets/changesets/issues/1318
-      - name: Publish to JSR
-        if: steps.changesets.outputs.hasChangesets == 'false'
-        run: bunx jsr publish
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

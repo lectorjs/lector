@@ -1,44 +1,41 @@
-# @lector/primitives
+# @librereader/primitives
 
-[![JSR](https://jsr.io/badges/@lector/primitives)](https://jsr.io/@lector/primitives) [![JSR Score](https://jsr.io/badges/@lector/primitives/score)](https://jsr.io/@lector/primitives)
+[![npm package](https://nodei.co/npm/@librereader/primitives.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/@librereader/primitives)
 
 Primitives for building and extending readers, including definitions for context, parsers, modes, commands, plugins, and more.
 
+[![NPM version](https://img.shields.io/npm/v/@librereader/primitives.svg?style=flat)](https://npmjs.org/package/@librereader/primitives)
+[![NPM Downloads](https://img.shields.io/npm/dm/@librereader/primitives.svg?style=flat)](https://npmjs.org/package/@librereader/primitives)
+
 ## Installation
-
-With Deno
-
-```sh
-deno add @lector/primitives
-```
 
 With Bun
 
 ```sh
-bunx jsr add @lector/primitives
+bun add @librereader/primitives
 ```
 
 With npm
 
 ```sh
-npx jsr add @lector/primitives
+npm install @librereader/primitives
 ```
 
 With Yarn
 
 ```sh
-yarn dlx jsr add @lector/primitives
+yarn add @librereader/primitives
 ```
 
 With pnpm
 
 ```sh
-pnpm dlx jsr add @lector/primitives
+pnpm add @librereader/primitives
 ```
 
 ## Documentation
 
-[Primitives](https://lector.pages.dev/docs/primitives)
+[Primitives](https://librereader.pages.dev/docs/primitives)
 
 ## Changelog
 

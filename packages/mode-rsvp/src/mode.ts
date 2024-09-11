@@ -1,46 +1,47 @@
-import { createContext, defineMode, getContext, updateContext } from '@lector/primitives';
+import { createContext, defineMode, getContext, updateContext } from '@librereader/primitives';
 import finish from './commands/finish.ts';
 import next from './commands/next.ts';
-import pausePlayback from './commands/pause-playback.ts';
-import previous from './commands/previous.ts';
+import pause from './commands/pause.ts';
+import prev from './commands/prev.ts';
 import restart from './commands/restart.ts';
-import resumePlayback from './commands/resume-playback.ts';
-import togglePlayback from './commands/toggle-playback.ts';
+import resume from './commands/resume.ts';
+import toggle from './commands/toggle.ts';
 import { RSVP_CONTEXT_KEY, type RsvpContext, defaultContext } from './context.ts';
 
-export default defineMode({
-	commands: {
-		previous: previous(),
-		next: next(),
-		restart: restart(),
-		finish: finish(),
-		pausePlayback: pausePlayback(),
-		resumePlayback: resumePlayback(),
-		togglePlayback: togglePlayback(),
-	},
-	setup() {
-		createContext<RsvpContext>(RSVP_CONTEXT_KEY, defaultContext);
-	},
-	onWordParsed(data) {
-		updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
-			parser: { data },
-		}));
-	},
-	onParsingFinished(metadata) {
-		updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
-			parser: {
-				metadata,
-				isComplete: true,
-			},
-		}));
-	},
-	render() {
-		const ctx = getContext<RsvpContext>(RSVP_CONTEXT_KEY);
-		const word = ctx.parser.data.get(ctx.checkpoint);
-		if (!word) {
-			return '';
-		}
+export default defineMode(() => {
+	createContext<RsvpContext>(RSVP_CONTEXT_KEY, defaultContext());
 
-		return `<span>${word?.value}</span>`;
-	},
+	return {
+		commands: {
+			prev: prev(),
+			next: next(),
+			restart: restart(),
+			finish: finish(),
+			pause: pause(),
+			resume: resume(),
+			toggle: toggle(),
+		},
+		render() {
+			const ctx = getContext<RsvpContext>(RSVP_CONTEXT_KEY);
+			const word = ctx.parser.data.get(ctx.checkpoint);
+			if (!word) {
+				return '';
+			}
+
+			return `<span>${word?.value}</span>`;
+		},
+		onParse(data) {
+			updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
+				parser: { data },
+			}));
+		},
+		onFinish(metadata) {
+			updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
+				parser: {
+					metadata,
+					isComplete: true,
+				},
+			}));
+		},
+	};
 });

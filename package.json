@@ -1,17 +1,21 @@
 {
-	"name": "@lector/monorepo",
+	"name": "@librereader/monorepo",
 	"type": "module",
 	"private": true,
 	"workspaces": ["packages/*", "playground"],
 	"scripts": {
-		"dev:play": "bun run --filter @lector/playground dev",
-		"dev:browser": "bun run --filter @lector/browser-ext dev",
+		"dev:play": "bun run --filter @librereader/playground dev",
+		"dev:browser": "bun run --filter @librereader/browser dev",
+		"build": "bun run build",
+		"build:play": "bun run --filter @librereader/playground build",
+		"build:browser": "bun run --filter @librereader/browser build",
+		"build:packages": "bun run --filter './packages/**' build",
 		"test": "bun test .",
 		"test:watch": "bun test --watch .",
 		"lint": "biome lint --write .",
 		"format": "biome format --write .",
-		"ci:version": "changeset version && bun run ./scripts/sync-jsr.ts && bun run format && git add -A",
-		"ci:release": "changeset tag",
+		"ci:version": "changeset version",
+		"ci:release": "changeset publish",
 		"taze": "taze -Ir"
 	},
 	"devDependencies": {
@@ -19,7 +23,8 @@
 		"@changesets/cli": "^2.27.8",
 		"@types/bun": "latest",
 		"lefthook": "^1.7.15",
-		"taze": "^0.16.7"
+		"taze": "^0.16.7",
+		"tsup": "^8.2.4"
 	},
 	"peerDependencies": {
 		"typescript": "^5.6.2"

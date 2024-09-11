@@ -1,12 +1,51 @@
 {
-	"name": "@lector/parser-txt",
-	"version": "0.0.1",
+	"name": "@librereader/parser-txt",
+	"version": "0.0.0",
 	"description": "Plain text parser that allows readers to extract and process words from plain text or `.txt` files.",
+	"keywords": [
+		"librereader",
+		"reader",
+		"speed-reader",
+		"text-to-speech",
+		"RSVP",
+		"bionic",
+		"pdf",
+		"epub",
+		"mobi",
+		"docx"
+	],
+	"homepage": "https://github.com/jm2097/librereader/tree/main/packages/parser-txt#readme",
+	"bugs": {
+		"url": "https://github.com/jm2097/librereader/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jm2097/librereader",
+		"directory": "packages/parser-txt"
+	},
+	"license": "MIT",
+	"author": "Juan Mesa <juanmesa2097@proton.me>",
+	"sideEffects": false,
+	"type": "module",
+	"module": "./dist/index.js",
 	"exports": {
-		".": "./src/mod.ts"
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"default": "./src/index.ts"
+		}
+	},
+	"types": "./dist/index.d.ts",
+	"files": ["dist"],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch"
+	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
 	},
 	"dependencies": {
-		"@lector/analyzer": "workspace:*",
-		"@lector/primitives": "workspace:*"
+		"@librereader/primitives": "workspace:*"
 	}
 }
