@@ -1,6 +1,6 @@
 {
 	"name": "@librereader/mode-rsvp",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Rapid serial visual presentation (RSVP) reading mode for LibreReader, providing commands for controlling text flow, pacing, and navigation.",
 	"keywords": [
 		"librereader",
@@ -36,7 +36,9 @@
 		}
 	},
 	"types": "./dist/index.d.ts",
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsup",
 		"dev": "tsup --watch"
