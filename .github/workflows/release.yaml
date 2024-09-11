@@ -1,8 +1,13 @@
 name: release
 
 on:
-  push:
-    branches: [master]      
+  workflow_run:
+    workflows:
+      - ci
+    types:
+      - completed
+    branches:
+      - master
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -10,6 +15,7 @@ concurrency:
 
 jobs:
   release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -31,8 +37,8 @@ jobs:
         with:
           version: bun run ci:version
           publish: bun run ci:release
-          title: '[ci] Release 📦'
-          commit: '[ci] Release 📦'
+          title: "[ci] Release 📦"
+          commit: "[ci] Release 📦"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
