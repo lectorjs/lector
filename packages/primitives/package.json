@@ -1,6 +1,6 @@
 {
 	"name": "@librereader/primitives",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"author": "Juan Mesa <juanmesa2097@proton.me>",
 	"repository": {
 		"type": "git",
@@ -19,7 +19,9 @@
 		"url": "https://github.com/jm2097/librereader/issues"
 	},
 	"description": "Primitives for building and extending readers, including definitions for context, parsers, modes, commands, plugins, and more.",
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"homepage": "https://github.com/jm2097/librereader/tree/main/packages/primitives#readme",
 	"keywords": [
 		"librereader",
