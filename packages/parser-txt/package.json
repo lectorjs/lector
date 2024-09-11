@@ -1,6 +1,6 @@
 {
 	"name": "@librereader/parser-txt",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Plain text parser that allows readers to extract and process words from plain text or `.txt` files.",
 	"keywords": [
 		"librereader",
@@ -36,7 +36,9 @@
 		}
 	},
 	"types": "./dist/index.d.ts",
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsup",
 		"dev": "tsup --watch"
