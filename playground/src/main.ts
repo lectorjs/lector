@@ -1,7 +1,8 @@
-import rsvp from '@librereader/mode-rsvp';
-import parseTxt from '@librereader/parser-txt';
-import { createReader } from '@librereader/primitives';
 import './style.css';
+
+import rsvp from '@librereader/mode-rsvp';
+import parser from '@librereader/parser-txt';
+import { createReader } from '@librereader/primitives';
 
 const restart = document.querySelector('#restart') as HTMLButtonElement;
 const finish = document.querySelector('#finish') as HTMLButtonElement;
@@ -12,7 +13,7 @@ const pause = document.querySelector('#pause') as HTMLButtonElement;
 const toggle = document.querySelector('#toggle') as HTMLButtonElement;
 
 const reader = createReader({
-	parser: parseTxt('This is a dummy text to test the txt parser. 😾'),
+	parser: parser('This is a dummy text to test the txt parser. 😾'),
 	mode: rsvp(),
 	renderTo: document.querySelector('#display') as HTMLElement,
 });

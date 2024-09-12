@@ -1,6 +1,6 @@
 import { createDefu } from 'defu';
-import type { ParsedData, ParsedMetadata } from './parser.ts';
-import type { DeepPartial } from './types.ts';
+import type { ParsedData, ParsedMetadata } from '../parser.ts';
+import type { DeepPartial } from '../types.ts';
 
 declare global {
 	var __librereader: {
@@ -112,9 +112,9 @@ export function updateContext<T>(key: symbol, updater: (context: T) => DeepParti
 	const updatedContext = updater(context);
 
 	if (updatedContext && typeof updatedContext === 'object') {
-		globalThis.__librereader.context.set(key, mergeContext(updatedContext, context));
+		getOrInitContext().set(key, mergeContext(updatedContext, context));
 	} else {
-		globalThis.__librereader.context.set(key, updatedContext);
+		getOrInitContext().set(key, updatedContext);
 	}
 }
 

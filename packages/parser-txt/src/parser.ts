@@ -1,15 +1,22 @@
-import { defineParser, defineWord, tokenize } from '@librereader/primitives';
+import { type Parser, tokenize } from '@librereader/primitives';
 
-export default defineParser<string>((input) => {
+function parser(input: string): Parser {
 	const words = tokenize(input);
 	const metadata = {};
 
 	return {
 		*getWord() {
 			for (const word of words) {
-				yield defineWord({ value: word });
+				yield {
+					value: word,
+					insights: {
+						difficulty: 1,
+					},
+				};
 			}
 		},
 		getMetadata: () => metadata,
 	};
-});
+}
+
+export default parser;

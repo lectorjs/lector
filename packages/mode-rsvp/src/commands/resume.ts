@@ -1,8 +1,8 @@
-import { type CommandExecutionContext, defineCommand, getContext, updateContext } from '@librereader/primitives';
+import { type Command, type CommandExecutionContext, getContext, updateContext } from '@librereader/primitives';
 import { RSVP_CONTEXT_KEY, type RsvpContext } from '../context.ts';
 import nextCommand from './next.ts';
 
-export default defineCommand(() => {
+function command(): Command {
 	const next = nextCommand();
 
 	const playNextWord = (execCtx: CommandExecutionContext) => {
@@ -47,4 +47,6 @@ export default defineCommand(() => {
 			startPlayback(execCtx);
 		},
 	};
-});
+}
+
+export default command;

@@ -28,21 +28,3 @@ export type ParsedData = Map<number, Word>;
  * @template T The type of the metadata object.
  */
 export type ParsedMetadata<T = Record<string, unknown>> = T;
-
-export type ParserConfigFactory<T> = (input: T) => Parser;
-export type ParserConfigFactoryAsync<T> = (input: T) => Promise<Parser>;
-export type ParserConfigInput<T> = ParserConfigFactory<T> | ParserConfigFactoryAsync<T>;
-
-/**
- * Create a `Parser` instance from a given configuration factory.
- *
- * @template T The input type that the parser will process.
- * @param config A factory function that takes an input of type `T` and returns a `Parser` instance.
- *
- * @returns A defined `Parser` instance.
- */
-export function defineParser<T>(config: ParserConfigFactory<T>): ParserConfigFactory<T>;
-export function defineParser<T>(config: ParserConfigFactoryAsync<T>): ParserConfigFactoryAsync<T>;
-export function defineParser<T>(config: ParserConfigInput<T>) {
-	return config;
-}

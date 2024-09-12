@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'bun:test';
+import { beforeEach, describe, expect, it } from 'vitest';
 import {
 	createContext,
 	destroyAllContexts,
@@ -7,7 +7,7 @@ import {
 	getContext,
 	hasContext,
 	updateContext,
-} from '../src/context.ts';
+} from '../src/runtime/context.ts';
 
 describe('context', () => {
 	beforeEach(() => {

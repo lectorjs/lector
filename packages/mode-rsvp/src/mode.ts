@@ -8,7 +8,7 @@ import resume from './commands/resume.ts';
 import toggle from './commands/toggle.ts';
 import { RSVP_CONTEXT_KEY, type RsvpContext, defaultContext } from './context.ts';
 
-export default defineMode(() => {
+const mode = defineMode(() => {
 	createContext<RsvpContext>(RSVP_CONTEXT_KEY, defaultContext());
 
 	return {
@@ -30,10 +30,15 @@ export default defineMode(() => {
 
 			return `<span>${word?.value}</span>`;
 		},
-		onParse(data) {
+		onParse({ data, render }) {
 			updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
 				parser: { data },
 			}));
+
+			// Trigger a re-render on first available word.
+			if (data.size === 1) {
+				render();
+			}
 		},
 		onFinish(metadata) {
 			updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
@@ -45,3 +50,5 @@ export default defineMode(() => {
 		},
 	};
 });
+
+export default mode;
