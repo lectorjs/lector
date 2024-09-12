@@ -1,6 +1,6 @@
-import { type Mode, defineMode } from '@librereader/primitives';
+import { defineMode } from '@librereader/primitives';
 
-const mode = defineMode(() => {
+const bionic = defineMode(() => {
 	return {
 		render() {
 			const dummyText = 'This is some dummy text to test the early version of the bionic reading mode.';
@@ -17,7 +17,7 @@ const mode = defineMode(() => {
 
 			return formattedText;
 		},
-	} satisfies Mode;
+	};
 });
 
-export default mode;
+export default bionic;
