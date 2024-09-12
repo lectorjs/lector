@@ -1,6 +1,6 @@
 import { createDefu } from 'defu';
+import type { DeepPartial } from '../internal/types.ts';
 import type { ParsedData, ParsedMetadata } from '../parser.ts';
-import type { DeepPartial } from '../types.ts';
 
 declare global {
 	var __librereader: {

@@ -5,11 +5,11 @@ import type { Word } from './word.ts';
 export interface Mode {
 	commands?: Record<string, Command>;
 	render?(): string;
-	onWordParsed?: (context: ModeHookOnParsedWordContext) => void;
+	onWordParsed?: (context: ModeHookOnWordParsedContext) => void;
 	onParsedFinish?: (context: ModeHookOnParsedFinishContext) => void;
 }
 
-export type ModeHookOnParsedWordContext = {
+export type ModeHookOnWordParsedContext = {
 	data: ParsedData;
 	word: Word;
 	render: () => void;

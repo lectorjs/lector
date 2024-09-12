@@ -14,13 +14,13 @@
 		"mobi",
 		"docx"
 	],
-	"homepage": "https://github.com/jm2097/librereader/tree/main/packages/parser-txt#readme",
+	"homepage": "https://github.com/ju4n97/librereader/tree/main/packages/parser-txt#readme",
 	"bugs": {
-		"url": "https://github.com/jm2097/librereader/issues"
+		"url": "https://github.com/ju4n97/librereader/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/jm2097/librereader",
+		"url": "https://github.com/ju4n97/librereader",
 		"directory": "packages/parser-txt"
 	},
 	"license": "MIT",

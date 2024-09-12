@@ -53,5 +53,8 @@
 			"bracketSameLine": false,
 			"quoteStyle": "single"
 		}
+	},
+	"organizeImports": {
+		"enabled": true
 	}
 }
