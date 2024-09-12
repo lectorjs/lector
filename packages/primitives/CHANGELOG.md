@@ -1,5 +1,11 @@
 # @librereader/primitives
 
+## 0.0.3
+
+### Patch Changes
+
+- d90e914: Improve reliability and simplify primitives
+
 ## 0.0.2
 
 ### Patch Changes
