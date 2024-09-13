@@ -1,17 +1,11 @@
-export interface Command {
-    execute(context: CommandExecutionContext): void | Promise<void>;
-}
+/**
+ * Represents a command that can be executed by the reader.
+ */
+export type Command = (context: CommandExecutionContext) => void | Promise<void>;
 
+/**
+ * Execution context of a command that provides a subset of domain-specific manipulation logic for the reader.
+ */
 export type CommandExecutionContext = {
     render: () => void;
 };
-
-export type CommandConfigFactory<T extends Command> = () => T;
-export type CommandConfigFactoryAsync<T extends Command> = (input: T) => Promise<T>;
-export type CommandConfigInput<T extends Command> = CommandConfigFactory<T> | CommandConfigFactoryAsync<T>;
-
-export function defineCommand<T extends Command>(config: CommandConfigFactory<T>): CommandConfigFactory<T>;
-export function defineCommand<T extends Command>(config: CommandConfigFactoryAsync<T>): CommandConfigFactoryAsync<T>;
-export function defineCommand<T extends Command>(config: CommandConfigInput<T>) {
-    return config;
-}

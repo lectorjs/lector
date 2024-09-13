@@ -1,9 +1,9 @@
-import { type CommandExecutionContext, defineCommand, getContext, updateContext } from '@lectorjs/primitives';
+import { type Command, type CommandExecutionContext, getContext, updateContext } from '@lectorjs/primitives';
 import { RSVP_CONTEXT_KEY, type RsvpContext } from '../context.ts';
-import { next } from './next.ts';
+import nextCommand from './next.ts';
 
-export const resume = defineCommand(() => {
-    const nextCommand = next();
+export default function (): Command {
+    const next = nextCommand();
 
     const playNextWord = (execCtx: CommandExecutionContext) => {
         const ctx = getContext<RsvpContext>(RSVP_CONTEXT_KEY);
@@ -21,7 +21,7 @@ export const resume = defineCommand(() => {
             return;
         }
 
-        nextCommand.execute(execCtx);
+        next(execCtx);
     };
 
     const stopPlayback = () => {
@@ -45,14 +45,12 @@ export const resume = defineCommand(() => {
 
     let interval: NodeJS.Timer | null = null;
 
-    return {
-        execute(execCtx) {
-            const ctx = getContext<RsvpContext>(RSVP_CONTEXT_KEY);
-            if (ctx.isPlaying) {
-                return;
-            }
+    return (execCtx) => {
+        const ctx = getContext<RsvpContext>(RSVP_CONTEXT_KEY);
+        if (ctx.isPlaying) {
+            return;
+        }
 
-            startPlayback(execCtx);
-        },
+        startPlayback(execCtx);
     };
-});
+}

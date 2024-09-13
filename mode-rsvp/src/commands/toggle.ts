@@ -1,17 +1,15 @@
-import { defineCommand, getContext } from '@lectorjs/primitives';
+import { type Command, getContext } from '@lectorjs/primitives';
 import { RSVP_CONTEXT_KEY, type RsvpContext } from '../context.ts';
-import { pause } from './pause.ts';
-import { resume } from './resume.ts';
+import pauseCommand from './pause.ts';
+import resumeCommand from './resume.ts';
 
-export const toggle = defineCommand(() => {
-    const resumeCommand = resume();
-    const pauseCommand = pause();
+export default function (): Command {
+    const pause = pauseCommand();
+    const resume = resumeCommand();
 
-    return {
-        execute(execCtx) {
-            const ctx = getContext<RsvpContext>(RSVP_CONTEXT_KEY);
+    return (execCtx) => {
+        const ctx = getContext<RsvpContext>(RSVP_CONTEXT_KEY);
 
-            ctx.isPlaying ? pauseCommand.execute(execCtx) : resumeCommand.execute(execCtx);
-        },
+        ctx.isPlaying ? pause(execCtx) : resume(execCtx);
     };
-});
+}
