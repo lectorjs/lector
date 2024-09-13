@@ -41,7 +41,11 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Run unit tests
-        run: bun run test
+        run: bun run test:coverage
+
+      - name: Report coverage      
+        if: always() # to also generate the report if tests fail
+        uses: davelosert/vitest-coverage-report-action@v2
 
   dry-publish:
     runs-on: ubuntu-latest
