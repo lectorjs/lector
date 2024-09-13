@@ -1,5 +1,11 @@
 # @lectorjs/mode-bionic
 
+## 0.0.2
+
+### Patch Changes
+
+- 9d43792: Update package module
+
 ## 0.0.1
 
 ### Patch Changes
