@@ -1,5 +1,11 @@
 # @lectorjs/mode-rsvp
 
+## 0.0.4
+
+### Patch Changes
+
+- 0474329: Create context during initialization
+
 ## 0.0.3
 
 ### Patch Changes
