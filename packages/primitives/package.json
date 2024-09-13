@@ -1,0 +1,40 @@
+{
+	"name": "@lectorjs/primitives",
+	"version": "0.0.0",
+	"author": "Juan Mesa <juanmesa2097@proton.me>",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ju4n97/lector",
+		"directory": "packages/primitives"
+	},
+	"module": "./dist/index.js",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"default": "./src/index.ts"
+		}
+	},
+	"bugs": {
+		"url": "https://github.com/ju4n97/lector/issues"
+	},
+	"description": "Primitives for building and extending readers, including definitions for context, parsers, modes, commands, plugins, and more.",
+	"files": ["dist"],
+	"homepage": "https://github.com/ju4n97/lector/tree/main/packages/primitives#readme",
+	"keywords": ["lector", "reader", "speed-reader", "text-to-speech", "RSVP", "bionic", "pdf", "epub", "mobi", "docx"],
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch"
+	},
+	"sideEffects": false,
+	"type": "module",
+	"types": "./dist/index.d.ts",
+	"dependencies": {
+		"defu": "^6.1.4"
+	}
+}
