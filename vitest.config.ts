@@ -5,6 +5,7 @@ export default defineConfig({
 		watch: false,
 		environment: 'happy-dom',
 		coverage: {
+			provider: 'v8',
 			reporter: ['json-summary'],
 			reportOnFailure: true,
 		},
