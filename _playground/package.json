@@ -1,6 +1,7 @@
 {
     "name": "@lectorjs/playground",
     "private": true,
+    "version": "0.0.0",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -11,12 +12,10 @@
         "@lectorjs/primitives": "workspace:*",
         "@lectorjs/mode-rsvp": "workspace:*",
         "@lectorjs/mode-bionic": "workspace:*",
-        "@lectorjs/parser-text": "workspace:*",
-        "dompurify": "^3.1.6"
+        "@lectorjs/parser-text": "workspace:*"
     },
     "devDependencies": {
-        "@types/dompurify": "^3.0.5",
-        "typescript": "^5.5.4",
-        "vite": "^5.4.3"
+        "typescript": "^5.2.2",
+        "vite": "^5.3.4"
     }
 }

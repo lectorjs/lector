@@ -2,10 +2,9 @@
     "name": "@lectorjs/monorepo",
     "type": "module",
     "private": true,
-    "workspaces": ["primitives", "mode-rsvp", "mode-bionic", "parser-text", "_playground"],
+    "workspaces": ["_playground", "primitives", "mode-rsvp", "mode-bionic", "parser-text"],
     "scripts": {
-        "dev:play": "bun run --filter @lectorjs/playground dev",
-        "dev:browser": "bun run --filter @lectorjs/browser dev",
+        "play": "bun run --filter @lectorjs/playground dev",
         "test": "vitest .",
         "test:watch": "vitest --watch .",
         "test:ui": "vitest --ui --watch .",

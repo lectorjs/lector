@@ -17,10 +17,9 @@ This project encourages contributions from the community. You can contribute in 
    - `duplicate`: Issues that duplicate another and require consolidation.
    - `blocked`: Issues impeded by dependencies or external factors.
    - `needs owner`: Issues ready for work, awaiting volunteer contribution.
-   - `needs revision`: Issues lacking necessary information or clarity.
-   - `under review`: Issues pending further discussion or decision-making.
+   - `needs refinement`: Issues lacking necessary information or clarity.
    - `wontfix`: Issues falling outside the project's scope and not planned for resolution.
-   - `breaking change`: Issues that introduce significant alterations to the project's codebase or functionality, potentially breaking backward compatibility or requiring substantial reworking of existing implementations.
+   - `BREAKING`: Issues that introduce significant alterations to the project's codebase or functionality, potentially breaking backward compatibility or requiring substantial reworking of existing implementations.
 3. **Volunteer**: You or other volunteers can express interest in resolving issues by offering solutions or volunteering for ownership.
 4. **Assignment**: The maintainers assign issues to volunteers, making them the issue’s "owner".
 5. **Pull request submission**: The issue owner submits a pull request with the proposed changes to resolve the issue.

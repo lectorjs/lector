@@ -7,8 +7,16 @@ export const resume = defineCommand(() => {
 
     const playNextWord = (execCtx: CommandExecutionContext) => {
         const ctx = getContext<RsvpContext>(RSVP_CONTEXT_KEY);
-        const shouldStop = ctx.checkpoint === ctx.parser.data.size - 1 || !ctx.isPlaying;
-        if (shouldStop) {
+        const isPaused = !ctx.isPlaying;
+        const isFinished = ctx.checkpoint === ctx.parser.data.size - 1;
+
+        if (isFinished) {
+            updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
+                isFinished: true,
+            }));
+        }
+
+        if (isPaused || isFinished) {
             stopPlayback();
             return;
         }
