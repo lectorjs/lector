@@ -19,22 +19,9 @@
 		"url": "https://github.com/ju4n97/lector/issues"
 	},
 	"description": "Primitives for building and extending readers, including definitions for context, parsers, modes, commands, plugins, and more.",
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"homepage": "https://github.com/ju4n97/lector/tree/main/packages/primitives#readme",
-	"keywords": [
-		"lector",
-		"reader",
-		"speed-reader",
-		"text-to-speech",
-		"RSVP",
-		"bionic",
-		"pdf",
-		"epub",
-		"mobi",
-		"docx"
-	],
+	"keywords": ["lector", "reader", "speed-reader", "text-to-speech", "RSVP", "bionic", "pdf", "epub", "mobi", "docx"],
 	"license": "MIT",
 	"publishConfig": {
 		"access": "public",
