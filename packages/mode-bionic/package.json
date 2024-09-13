@@ -1,0 +1,40 @@
+{
+	"name": "@lectorjs/mode-bionic",
+	"version": "0.0.3",
+	"description": "Bionic reading mode for Lector, providing commands for controlling artificial fixation points, eye movement, guidance, and text progression.",
+	"keywords": ["lector", "reader", "speed-reader", "text-to-speech", "RSVP", "bionic", "pdf", "epub", "mobi", "docx"],
+	"homepage": "https://github.com/ju4n97/lector/tree/main/packages/mode-bionic#readme",
+	"bugs": {
+		"url": "https://github.com/ju4n97/lector/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ju4n97/lector",
+		"directory": "packages/mode-bionic"
+	},
+	"license": "MIT",
+	"author": "Juan Mesa <juanmesa2097@proton.me>",
+	"sideEffects": false,
+	"type": "module",
+	"module": "./dist/index.js",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"default": "./src/index.ts"
+		}
+	},
+	"types": "./dist/index.d.ts",
+	"files": ["dist"],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch"
+	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
+	"dependencies": {
+		"@lectorjs/primitives": "workspace:*"
+	}
+}

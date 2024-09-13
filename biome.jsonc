@@ -1,0 +1,60 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"files": {
+		"ignore": []
+	},
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"linter": {
+		"rules": {
+			"style": {
+				"all": true,
+				"noDefaultExport": "off"
+			},
+			"performance": {
+				"all": true,
+				"noBarrelFile": "off",
+				"noReExportAll": "off"
+			},
+			"nursery": {
+				"all": true,
+				"noConsole": "off",
+				"useImportRestrictions": "off",
+				"noUndeclaredDependencies": "off" // TODO: no support for monorepos yet (https://github.com/biomejs/biome/issues/2475)
+			},
+			"correctness": {
+				"all": true,
+				"noNodejsModules": "off"
+			},
+			"suspicious": {
+				"all": true
+			}
+		}
+	},
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false,
+		"indentStyle": "tab",
+		"indentWidth": 4,
+		"lineEnding": "lf",
+		"lineWidth": 120,
+		"attributePosition": "multiline"
+	},
+	"javascript": {
+		"formatter": {
+			"quoteProperties": "asNeeded",
+			"trailingCommas": "all",
+			"semicolons": "always",
+			"arrowParentheses": "always",
+			"bracketSpacing": true,
+			"bracketSameLine": false,
+			"quoteStyle": "single"
+		}
+	},
+	"organizeImports": {
+		"enabled": true
+	}
+}

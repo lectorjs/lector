@@ -1,0 +1,41 @@
+{
+	"name": "@lectorjs/monorepo",
+	"type": "module",
+	"private": true,
+	"workspaces": ["packages/*", "playground"],
+	"scripts": {
+		"dev:play": "bun run --filter @lectorjs/playground dev",
+		"dev:browser": "bun run --filter @lectorjs/browser dev",
+		"build": "bun run build",
+		"build:play": "bun run --filter @lectorjs/playground build",
+		"build:browser": "bun run --filter @lectorjs/browser build",
+		"build:packages": "turbo build --filter \"./packages/*\"",
+		"test": "vitest .",
+		"test:watch": "vitest --watch .",
+		"test:ui": "vitest --ui --watch .",
+		"test:update": "vitest --update .",
+		"test:coverage": "vitest --coverage .",
+		"lint": "biome lint --write .",
+		"format": "biome format --write .",
+		"ci:version": "changeset version",
+		"ci:release": "changeset publish",
+		"taze": "taze -Ir"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.8.3",
+		"@changesets/cli": "^2.27.8",
+		"@types/bun": "latest",
+		"@vitest/ui": "^2.0.5",
+		"happy-dom": "^15.7.4",
+		"lefthook": "^1.7.15",
+		"taze": "^0.16.7",
+		"tsup": "^8.2.4",
+		"turbo": "^2.1.1",
+		"vitest": "^2.0.5"
+	},
+	"peerDependencies": {
+		"typescript": "^5.6.2"
+	},
+	"trustedDependencies": ["@biomejs/biome", "lefthook"],
+	"packageManager": "bun@1.1.27"
+}
