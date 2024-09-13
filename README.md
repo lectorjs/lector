@@ -32,8 +32,7 @@ more information.
 - Install the latest version of [Bun](https://bun.sh/).
 - Install the project dependencies with `bun install`.
 - Run:
-  - `bun run dev:play` to start the development server of the web playground.
-  - `bun run dev:browser` to start the development server of the browser extension.
+  - `bun run play` to start the development server of the playground.  
   - `bun run test` to run the unit tests.
   - `bun run lint` to run the linter.
   - `bun run format` to run the formatter.

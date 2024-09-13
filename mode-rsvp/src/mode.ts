@@ -3,6 +3,7 @@ import {
     type Mode,
     type ModeHookOnParsedFinishContext,
     type ModeHookOnWordParsedContext,
+    createContext,
     getContext,
     updateContext,
 } from '@lectorjs/primitives';
@@ -13,7 +14,7 @@ import prev from './commands/prev.ts';
 import restart from './commands/restart.ts';
 import resume from './commands/resume.ts';
 import toggle from './commands/toggle.ts';
-import { RSVP_CONTEXT_KEY, type RsvpContext } from './context.ts';
+import { RSVP_CONTEXT_KEY, type RsvpContext, defaultContext } from './context.ts';
 
 export type RsvpModeCommands = {
     prev: Command;
@@ -36,6 +37,10 @@ export class RsvpMode implements Mode<RsvpModeCommands> {
             resume: resume(),
             toggle: toggle(),
         };
+    }
+
+    constructor() {
+        createContext(RSVP_CONTEXT_KEY, defaultContext());
     }
 
     render(): string {
