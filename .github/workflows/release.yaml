@@ -1,0 +1,48 @@
+name: release
+
+on:
+  workflow_run:
+    workflows:
+      - ci
+    types:
+      - completed
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write # To publish on JSR
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Create release pull-request
+        uses: changesets/action@v1
+        id: changesets
+        with:
+          version: bun run ci:version
+          publish: bun run ci:release
+          title: 'release: version package 📦'
+          commit: 'release: version package 📦'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # TODO: Workaround for https://github.com/changesets/changesets/issues/1318
+      - name: Publish to JSR
+        if: steps.changesets.outputs.hasChangesets == 'false'
+        run: bunx jsr publish

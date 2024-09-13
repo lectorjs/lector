@@ -1,0 +1,31 @@
+name: 🐛 Bug
+description: Report a bug in the project
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: checkboxes
+    id: search
+    attributes:
+      label: Is there an issue for this?
+      description: Please search in the issues tab to verify if there is already an issue for the bug you are reporting.
+      options:
+        - label: I have searched in the existing issues.
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the problem you are experiencing
+    validations:
+      required: true
+
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Do you want to work on this?
+      options:
+        - 'Yes'
+        - 'No'
+    validations:
+      required: true
+
