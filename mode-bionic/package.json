@@ -1,6 +1,6 @@
 {
     "name": "@lectorjs/mode-bionic",
-    "version": "0.0.1",
+    "version": "0.0.0",
     "description": "Bionic reading mode por Lector, providing commands for controlling artificial fixation points, eye movement, guidance, and text progression.",
     "exports": {
         ".": "./src/mod.ts"

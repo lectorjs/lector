@@ -1,44 +1,44 @@
-# @lectorjs/primitives
+# @lectorjs/parser-text
 
-[![JSR](https://jsr.io/badges/@lectorjs/primitives)](https://jsr.io/@lectorjs/primitives) [![JSR Score](https://jsr.io/badges/@lectorjs/primitives/score)](https://jsr.io/@lectorjs/primitives)
+[![JSR](https://jsr.io/badges/@lectorjs/parser-text)](https://jsr.io/@lectorjs/parser-text) [![JSR Score](https://jsr.io/badges/@lectorjs/parser-text/score)](https://jsr.io/@lectorjs/parser-text)
 
-Primitives for building and extending readers.
+Plain text parser that allows readers to extract and process words from plain text or `.txt` files.
 
 ## Installation
 
 With Deno
 
 ```sh
-deno add @lectorjs/primitives
+deno add @lectorjs/parser-text
 ```
 
 With Bun
 
 ```sh
-bunx jsr add @lectorjs/primitives
+bunx jsr add @lectorjs/parser-text
 ```
 
 With npm
 
 ```sh
-npx jsr add @lectorjs/primitives
+npx jsr add @lectorjs/parser-text
 ```
 
 With Yarn
 
 ```sh
-yarn dlx jsr add @lectorjs/primitives
+yarn dlx jsr add @lectorjs/parser-text
 ```
 
 With pnpm
 
 ```sh
-pnpm dlx jsr add @lectorjs/primitives
+pnpm dlx jsr add @lectorjs/parser-text
 ```
 
 ## Documentation
 
-[Documentation](https://lectorjs.pages.dev/docs/primitives)
+[Documentation](https://lectorjs.pages.dev/docs/parser-text)
 
 ## Changelog
 
