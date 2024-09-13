@@ -108,7 +108,7 @@ class ReaderFactory<T extends Mode> implements Reader<T> {
 
 		if (!options.sanitizer && process.env.NODE_ENV === 'development') {
 			console.warn(
-				'Lector accepts third-party plugins that can render raw HTML. Make sure to provide a sanitizer function to prevent XSS vulnerabilities. Learn more in https://lector.page.dev/docs/primitives/reader#sanitizer',
+				'Lector accepts third-party plugins that can render raw HTML. Make sure to provide a sanitizer function to prevent XSS vulnerabilities.',
 			);
 		}
 

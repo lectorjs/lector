@@ -21,16 +21,16 @@
 			},
 			"nursery": {
 				"all": true,
-				"noConsole": "off",
-				"useImportRestrictions": "off",
-				"noUndeclaredDependencies": "off" // TODO: no support for monorepos yet (https://github.com/biomejs/biome/issues/2475)
+				"useImportRestrictions": "off"
 			},
 			"correctness": {
 				"all": true,
-				"noNodejsModules": "off"
+				"noNodejsModules": "off",
+				"noUndeclaredDependencies": "off" //TODO: no support for monorepos yet (https://github.com/biomejs/biome/issues/2475)
 			},
 			"suspicious": {
-				"all": true
+				"all": true,
+				"noConsole": "off"
 			}
 		}
 	},
