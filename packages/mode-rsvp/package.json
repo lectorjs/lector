@@ -1,8 +1,19 @@
 {
 	"name": "@lectorjs/mode-rsvp",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Rapid serial visual presentation (RSVP) reading mode for Lector, providing commands for controlling text flow, pacing, and navigation.",
-	"keywords": ["lector", "reader", "speed-reader", "text-to-speech", "RSVP", "bionic", "pdf", "epub", "mobi", "docx"],
+	"keywords": [
+		"lector",
+		"reader",
+		"speed-reader",
+		"text-to-speech",
+		"RSVP",
+		"bionic",
+		"pdf",
+		"epub",
+		"mobi",
+		"docx"
+	],
 	"homepage": "https://github.com/ju4n97/lector/tree/main/packages/mode-rsvp#readme",
 	"bugs": {
 		"url": "https://github.com/ju4n97/lector/issues"
@@ -25,7 +36,9 @@
 		}
 	},
 	"types": "./dist/index.d.ts",
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsup",
 		"dev": "tsup --watch"
