@@ -13,8 +13,8 @@ const pause = document.querySelector('#pause') as HTMLButtonElement;
 const toggle = document.querySelector('#toggle') as HTMLButtonElement;
 
 const reader = createReader({
-    parser: parser('This is a dummy text to test the txt parser. 😾'),
     mode: rsvp(),
+    parser: parser('This is a dummy text to test the txt parser. 😾'),
     renderTo: document.querySelector('#display') as HTMLElement,
 });
 
