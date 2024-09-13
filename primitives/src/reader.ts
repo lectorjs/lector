@@ -170,7 +170,7 @@ class ReaderFactory<T extends Mode> implements Reader<T> {
  * @example
  * ```ts
  * import { createReader } from 'lector';
- * import parser from '@lectorjs/parser-txt';
+ * import parser from '@lectorjs/parser-text';
  * import rsvp from '@lectorjs/mode-rsvp';
  *
  * const reader = createReader({

@@ -11,7 +11,7 @@
 | [@lectorjs/primitives](https://jsr.io/@lectorjs/primitives)   | [![JSR](https://jsr.io/badges/@lectorjs/primitives)](https://jsr.io/@lectorjs/primitives)   |
 | [@lectorjs/mode-rsvp](https://jsr.io/@lectorjs/mode-rsvp)     | [![JSR](https://jsr.io/badges/@lectorjs/mode-rsvp)](https://jsr.io/@lectorjs/mode-rsvp)     |
 | [@lectorjs/mode-bionic](https://jsr.io/@lectorjs/mode-bionic) | [![JSR](https://jsr.io/badges/@lectorjs/mode-bionic)](https://jsr.io/@lectorjs/mode-bionic) |
-| [@lectorjs/parser-txt](https://jsr.io/@lectorjs/parser-text)   | [![JSR](https://jsr.io/badges/@lectorjs/parser-text)](https://jsr.io/@lectorjs/parser-text)   |
+| [@lectorjs/parser-text](https://jsr.io/@lectorjs/parser-text)   | [![JSR](https://jsr.io/badges/@lectorjs/parser-text)](https://jsr.io/@lectorjs/parser-text)   |
 
 ## Use Lector
 
