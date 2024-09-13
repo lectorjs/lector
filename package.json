@@ -13,8 +13,8 @@
         "test:coverage": "vitest --coverage .",
         "lint": "biome lint --write .",
         "format": "biome format --write .",
-        "ci:version": "changeset version",
-        "ci:release": "changeset publish",
+        "ci:version": "changeset version && bun run ./scripts/sync-jsr.ts && bun run format && git add -A",
+        "ci:release": "changeset tag",
         "taze": "taze -Ir"
     },
     "devDependencies": {
