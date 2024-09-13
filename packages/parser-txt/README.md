@@ -1,8 +1,8 @@
 # @lectorjs/parser-txt
 
-![NPM Version](https://img.shields.io/npm/v/@lectorjs/parser-txt?style=flat-square&colorA=000000&colorB=F8F0DA)
-![NPM Downloads](https://img.shields.io/npm/dm/@lectorjs/parser-txt?style=flat-square&colorA=000000&colorB=F8F0DA)
-![NPM bundle size](https://img.shields.io/bundlephobia/minzip/@lectorjs/parser-txt?style=flat-square&colorA=000000&colorB=F8F0DA)
+![NPM Version](https://img.shields.io/npm/v/@lectorjs/parser-txt?style=flat-square&colorA=000000&colorB=BC3433)
+![NPM Downloads](https://img.shields.io/npm/dm/@lectorjs/parser-txt?style=flat-square&colorA=000000&colorB=BC3433)
+![NPM bundle size](https://img.shields.io/bundlephobia/minzip/@lectorjs/parser-txt?style=flat-square&colorA=000000&colorB=BC3433)
 
 Plain text parser that allows readers to extract and process words from plain text or `.txt` files.
 

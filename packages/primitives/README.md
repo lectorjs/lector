@@ -1,8 +1,8 @@
 # @lectorjs/primitives
 
-![NPM Version](https://img.shields.io/npm/v/@lectorjs/primitives?style=flat-square&colorA=000000&colorB=F8F0DA)
-![NPM Downloads](https://img.shields.io/npm/dm/@lectorjs/primitives?style=flat-square&colorA=000000&colorB=F8F0DA)
-![NPM bundle size](https://img.shields.io/bundlephobia/minzip/@lectorjs/primitives?style=flat-square&colorA=000000&colorB=F8F0DA)
+![NPM Version](https://img.shields.io/npm/v/@lectorjs/primitives?style=flat-square&colorA=000000&colorB=BC3433)
+![NPM Downloads](https://img.shields.io/npm/dm/@lectorjs/primitives?style=flat-square&colorA=000000&colorB=BC3433)
+![NPM bundle size](https://img.shields.io/bundlephobia/minzip/@lectorjs/primitives?style=flat-square&colorA=000000&colorB=BC3433)
 
 Primitives for building and extending readers, including definitions for context, parsers, modes, commands, plugins, and more.
 
