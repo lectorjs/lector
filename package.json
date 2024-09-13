@@ -9,7 +9,7 @@
 		"build": "bun run build",
 		"build:play": "bun run --filter @lectorjs/playground build",
 		"build:browser": "bun run --filter @lectorjs/browser build",
-		"build:packages": "turbo build --filter \"./packages/*\"",
+		"build:packages": "bun run --filter './packages/*' build",
 		"test": "vitest .",
 		"test:watch": "vitest --watch .",
 		"test:ui": "vitest --ui --watch .",
@@ -30,7 +30,6 @@
 		"lefthook": "^1.7.15",
 		"taze": "^0.16.7",
 		"tsup": "^8.2.4",
-		"turbo": "^2.1.1",
 		"vitest": "^2.0.5"
 	},
 	"peerDependencies": {
