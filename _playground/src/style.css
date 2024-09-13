@@ -1,24 +1,25 @@
 * {
-  box-sizing: border-box;  
+    box-sizing: border-box;
 }
 
-html, body {
-  margin: 0;
-  height: 100%;
+html,
+body {
+    margin: 0;
+    height: 100%;
 }
 
 main {
-  height: 100%;
-  display: grid;
-  place-items: center;
+    height: 100%;
+    display: grid;
+    place-items: center;
 }
 
 #display {
-  display: grid;
-  place-items: center;
-  height: 200px;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
-  border: 1px solid #c3c3c3;
+    display: grid;
+    place-items: center;
+    height: 200px;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    border: 1px solid #c3c3c3;
 }
