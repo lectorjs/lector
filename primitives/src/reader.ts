@@ -125,7 +125,7 @@ class ReaderFactory<T extends Mode> implements Reader<T> {
             throw new Error(`Command '${String(cmd)}' not found. Make sure to execute a valid command.`);
         }
 
-        await cmd.execute({ render: this.render.bind(this) });
+        await cmd({ render: this.render.bind(this) });
     }
 
     /**
