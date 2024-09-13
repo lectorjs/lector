@@ -1,6 +1,6 @@
 {
     "name": "@lectorjs/primitives",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Primitives for building and extending readers.",
     "exports": {
         ".": "./src/mod.ts"
