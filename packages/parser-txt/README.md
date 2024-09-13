@@ -1,10 +1,10 @@
 # @lectorjs/parser-txt
 
-[![npm package](https://nodei.co/npm/@lectorjs/parser-txt.png?downloads=true&downloadRank=true&stars=true&compact=true)](https://www.npmjs.com/package/@lectorjs/parser-txt)
+![NPM Version](https://img.shields.io/npm/v/@lectorjs/parser-txt?style=flat-square&colorA=000000&colorB=F8F0DA)
+![NPM Downloads](https://img.shields.io/npm/dm/@lectorjs/parser-txt?style=flat-square&colorA=000000&colorB=F8F0DA)
+![NPM bundle size](https://img.shields.io/bundlephobia/minzip/@lectorjs/parser-txt?style=flat-square&colorA=000000&colorB=F8F0DA)
 
 Plain text parser that allows readers to extract and process words from plain text or `.txt` files.
-
-![NPM Version](https://img.shields.io/npm/v/@lectorjs/parser-txt?style=flat-square&color=yellow)
 
 ## Installation
 
@@ -36,7 +36,7 @@ pnpm add @lectorjs/parser-txt
 
 ## Documentation
 
-[`Plain text parser`](https://lector.pages.dev/docs/primitives)
+[Documentation](https://lector.pages.dev/docs/parser-txt)
 
 ## Changelog
 

@@ -6,12 +6,12 @@
 
 ## Packages
 
-| Package                                                                            | Changelog                                                                                                                                                      |
-| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [@lectorjs/primitives](https://www.npmjs.com/package/@lectorjs/primitives)   | [![NPM Version](https://img.shields.io/npm/v/@lectorjs/primitives?style=flat-square&color=yellow)](https://www.npmjs.com/package/@lectorjs/primitives)   |
-| [@lectorjs/mode-rsvp](https://www.npmjs.com/package/@lectorjs/mode-rsvp)     | [![NPM Version](https://img.shields.io/npm/v/@lectorjs/mode-rsvp?style=flat-square&color=yellow)](https://www.npmjs.com/package/@lectorjs/mode-rsvp)     |
-| [@lectorjs/mode-bionic](https://www.npmjs.com/package/@lectorjs/mode-bionic) | [![NPM Version](https://img.shields.io/npm/v/@lectorjs/mode-bionic?style=flat-square&color=yellow)](https://www.npmjs.com/package/@lectorjs/mode-bionic) |
-| [@lectorjs/parser-txt](https://www.npmjs.com/package/@lectorjs/parser-txt)   | [![NPM Version](https://img.shields.io/npm/v/@lectorjs/parser-txt?style=flat-square&color=yellow)](https://www.npmjs.com/package/@lectorjs/parser-txt)   |
+| Package                                                                      | Changelog                                                                                                                                                               |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [@lectorjs/primitives](https://www.npmjs.com/package/@lectorjs/primitives)   | [![NPM Version](https://img.shields.io/npm/v/@lectorjs/primitives?style=flat-square&colorA=000000&colorB=F8F0DA)](https://www.npmjs.com/package/@lectorjs/primitives)   |
+| [@lectorjs/mode-rsvp](https://www.npmjs.com/package/@lectorjs/mode-rsvp)     | [![NPM Version](https://img.shields.io/npm/v/@lectorjs/mode-rsvp?style=flat-square&colorA=000000&colorB=F8F0DA)](https://www.npmjs.com/package/@lectorjs/mode-rsvp)     |
+| [@lectorjs/mode-bionic](https://www.npmjs.com/package/@lectorjs/mode-bionic) | [![NPM Version](https://img.shields.io/npm/v/@lectorjs/mode-bionic?style=flat-square&colorA=000000&colorB=F8F0DA)](https://www.npmjs.com/package/@lectorjs/mode-bionic) |
+| [@lectorjs/parser-txt](https://www.npmjs.com/package/@lectorjs/parser-txt)   | [![NPM Version](https://img.shields.io/npm/v/@lectorjs/parser-txt?style=flat-square&colorA=000000&colorB=F8F0DA)](https://www.npmjs.com/package/@lectorjs/parser-txt)   |
 
 ## Use Lector
 

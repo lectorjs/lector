@@ -1,10 +1,10 @@
 # @lectorjs/mode-bionic
 
-[![npm package](https://nodei.co/npm/@lectorjs/mode-bionic.png?downloads=true&downloadRank=true&stars=true&compact=true)](https://www.npmjs.com/package/@lectorjs/mode-bionic)
+![NPM Version](https://img.shields.io/npm/v/@lectorjs/mode-bionic?style=flat-square&colorA=000000&colorB=F8F0DA)
+![NPM Downloads](https://img.shields.io/npm/dm/@lectorjs/mode-bionic?style=flat-square&colorA=000000&colorB=F8F0DA)
+![NPM bundle size](https://img.shields.io/bundlephobia/minzip/@lectorjs/mode-bionic?style=flat-square&colorA=000000&colorB=F8F0DA)
 
 Bionic reading mode for Lector, providing commands for controlling artificial fixation points, eye movement, guidance, and text progression.
-
-![NPM Version](https://img.shields.io/npm/v/@lectorjs/mode-bionic?style=flat-square&color=yellow)
 
 ## Installation
 
@@ -34,7 +34,7 @@ pnpm add @lectorjs/mode-bionic
 
 ## Documentation
 
-[Bionic mode](https://lector.pages.dev/docs/modes/bionic)
+[Documentation](https://lector.pages.dev/docs/modes/bionic)
 
 ## Changelog
 

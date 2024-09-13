@@ -1,10 +1,10 @@
 # @lectorjs/primitives
 
-[![npm package](https://nodei.co/npm/@lectorjs/primitives.png?downloads=true&downloadRank=true&stars=true&compact=true)](https://www.npmjs.com/package/@lectorjs/primitives)
+![NPM Version](https://img.shields.io/npm/v/@lectorjs/primitives?style=flat-square&colorA=000000&colorB=F8F0DA)
+![NPM Downloads](https://img.shields.io/npm/dm/@lectorjs/primitives?style=flat-square&colorA=000000&colorB=F8F0DA)
+![NPM bundle size](https://img.shields.io/bundlephobia/minzip/@lectorjs/primitives?style=flat-square&colorA=000000&colorB=F8F0DA)
 
 Primitives for building and extending readers, including definitions for context, parsers, modes, commands, plugins, and more.
-
-![NPM Version](https://img.shields.io/npm/v/@lectorjs/primitives?style=flat-square&color=yellow)
 
 ## Installation
 
@@ -34,7 +34,7 @@ pnpm add @lectorjs/primitives
 
 ## Documentation
 
-[Primitives](https://lector.pages.dev/docs/primitives)
+[Documentation](https://lector.pages.dev/docs/primitives)
 
 ## Changelog
 
