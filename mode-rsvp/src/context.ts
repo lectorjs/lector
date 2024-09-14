@@ -1,4 +1,4 @@
-import { Context, extendGlobalContextDefaults } from '@lectorjs/primitives';
+import { Context, extendGlobalContext } from '@lectorjs/primitives';
 
 export const RSVP_CONTEXT_KEY = Symbol('rsvp');
 
@@ -8,7 +8,7 @@ export type RsvpContext = {
     isFinished: boolean;
 };
 
-const defaultContext = extendGlobalContextDefaults<RsvpContext>({
+const defaultContext = extendGlobalContext<RsvpContext>({
     checkpoint: 0,
     isPlaying: false,
     isFinished: false,

@@ -30,21 +30,20 @@ export const defaultGlobalContext = (): GlobalContext => ({
 });
 
 /**
- * Extends a new global context object defaults by merging it with the base global context.
+ * Creates a new global context object by merging the base context with additional properties.
  *
- * This function creates a derived context starting from the default global context,
- * and allows appending custom properties to the base context. The base
- * properties are always included.
+ * This function creates a derived context starting from the default global context, and allows
+ * appending custom properties to the base context. The base properties are always included.
  *
  * @template T Additional properties to merge into the global context.
  *
- * @param derivedContext The additional properties to merge into the global context.
+ * @param additionalProperties The additional properties to merge into the global context.
  *
  * @returns A derived global context with both base and custom properties.
  */
-export const extendGlobalContextDefaults = <T>(derivedContext: T): GlobalContext<T> => {
+export const extendGlobalContext = <T>(additionalProperties: T): GlobalContext<T> => {
     const baseContext = defaultGlobalContext();
-    return { ...baseContext, ...derivedContext } satisfies GlobalContext<T>;
+    return { ...baseContext, ...additionalProperties } satisfies GlobalContext<T>;
 };
 
 const mergeContext = createDefu((obj, key, value) => {
