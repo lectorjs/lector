@@ -1,5 +1,11 @@
 # @lectorjs/mode-rsvp
 
+## 0.0.5
+
+### Patch Changes
+
+- 130478d: Improve entire context implementation by making types inferable
+
 ## 0.0.4
 
 ### Patch Changes
