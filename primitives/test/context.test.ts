@@ -1,50 +1,86 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import {
-    createContext,
-    destroyAllContexts,
-    destroyContext,
-    getAllContexts,
-    getContext,
-    hasContext,
-    updateContext,
-} from '../src/runtime/context.ts';
+import { Context } from '../src/runtime/context.ts';
 
 describe('context', () => {
+    let context: Context<number>;
+
     beforeEach(() => {
-        destroyAllContexts();
+        Context.destroyAll();
+
+        context = new Context(Symbol('foo'), 10);
     });
 
-    describe('hasContext', () => {
-        it('returns false if the context does not exist', () => {
-            expect(hasContext(Symbol('nonExistentKey'))).toBe(false);
+    describe('constructor', () => {
+        it.each([
+            [Symbol('context1'), 100],
+            [Symbol('context2'), 200],
+            [Symbol('context3'), 300],
+        ])('creates a new context for %s with value %d', (key, value) => {
+            const ctx = new Context(key, value);
+            expect(ctx.get()).toBe(value);
+        });
+    });
+
+    describe('getAll', () => {
+        beforeEach(() => {
+            Context.destroyAll();
+
+            for (let i = 0; i < 10; i++) {
+                const testKey = Symbol(`foo${i}`);
+                const testValue = i;
+                new Context(testKey, testValue);
+            }
         });
 
+        it('retrieves all contexts', () => {
+            const allContexts = Context.getAll();
+            expect(allContexts).not.toBeFalsy();
+            expect(allContexts.size).toBe(10);
+        });
+    });
+
+    describe('destroyAll', () => {
+        beforeEach(() => {
+            Context.destroyAll();
+        });
+
+        it('destroys all contexts', () => {
+            for (let i = 0; i < 10; i++) {
+                new Context(Symbol(`key${i}`), i);
+            }
+            expect(Context.size).toBe(10);
+            Context.destroyAll();
+            expect(Context.size).toBe(0);
+        });
+    });
+
+    describe('has', () => {
         it('returns true when context exists', () => {
-            const testKey = Symbol('foo');
-            const testValue = 10;
-            createContext(testKey, testValue);
-            expect(hasContext(testKey)).toBe(true);
+            expect(context.has()).toBe(true);
+        });
+
+        it('returns false if the context does not exist', () => {
+            context.destroy();
+            expect(context.has()).toBe(false);
         });
     });
 
-    describe('getContext', () => {
-        it('retrieves a context by key', () => {
-            const testKey = Symbol('foo');
-            const testValue = 10;
-            createContext(testKey, testValue);
-            expect(getContext<number>(testKey)).toBe(testValue);
+    describe('get', () => {
+        it('throws an error when retrieving non-existent context', () => {
+            context.destroy();
+            expect(() => context.get()).toThrowError();
         });
 
-        it('returns undefined for non-existent contexts', () => {
-            expect(getContext(Symbol('nonExistentKey'))).toBeUndefined();
+        it('retrieves the current context', () => {
+            expect(context.get()).toBe(10);
         });
 
         it('ensures immutability of context values for complex objects', () => {
-            const testKey = Symbol('foo');
-            const testValue = { foo: 'bar' };
-            createContext(testKey, testValue);
+            const complexContext = new Context<{ foo: string }>(Symbol('foo'), {
+                foo: 'bar',
+            });
 
-            const ctx = getContext<typeof testValue>(testKey);
+            const ctx = complexContext.get();
 
             expect(() => {
                 // Attempts to modify the readonly context should throw an error
@@ -52,76 +88,25 @@ describe('context', () => {
                 ctx.foo = 'baz';
             }).toThrow(TypeError);
 
-            expect(testValue.foo).toBe('bar');
+            expect(ctx.foo).toBe('bar');
         });
     });
 
-    describe('getAllContexts', () => {
-        beforeEach(() => {
-            for (let i = 0; i < 10; i++) {
-                const testKey = Symbol(`foo${i}`);
-                const testValue = `bar${i}`;
-                createContext(testKey, testValue);
-            }
-        });
-
-        it('retrieves all contexts', () => {
-            const allContexts = getAllContexts();
-            expect(allContexts).not.toBeFalsy();
-            expect(allContexts.size).toBe(10);
-        });
-
-        it('retrieves contexts independently', () => {
-            const testKey = Symbol('foo');
-            createContext(testKey, 'extraValue');
-            expect(getContext<string>(testKey)).toBe('extraValue');
-            expect(getAllContexts().size).toBe(11);
-        });
-    });
-
-    describe('createContext', () => {
-        it.each([
-            [Symbol('context1'), 100],
-            [Symbol('context2'), 200],
-            [Symbol('context3'), 300],
-        ])('creates context for %s with value %d', (key, value) => {
-            createContext(key, value);
-            expect(getContext<number>(key)).toBe(value);
-        });
-
-        it('overwrites an existing context', () => {
-            const testKey = Symbol('foo');
-            const testValue = 10;
-            const newValue = 20;
-
-            createContext(testKey, testValue);
-            createContext(testKey, newValue);
-
-            expect(getContext<number>(testKey)).toBe(newValue);
-        });
-    });
-
-    describe('updateContext', () => {
+    describe('update', () => {
         it('throws an error when updating non-existent context', () => {
-            expect(() => updateContext(Symbol('nonExistent'), () => 20)).toThrowError();
+            context.destroy();
+            expect(() => context.update(() => 20)).toThrowError();
         });
 
         it('updates an existing context', () => {
-            const testKey = Symbol('foo');
-            const testValue = 10;
-            createContext(testKey, testValue);
-
             const newValue = 20;
-            updateContext(testKey, () => newValue);
-            expect(getContext<number>(testKey)).toBe(newValue);
+            context.update(() => newValue);
+            expect(context.get()).toBe(newValue);
         });
 
         it('passes the current context value to the updater function', () => {
-            const testKey = Symbol('foo');
-            const testInitialValue = 10;
-            createContext(testKey, testInitialValue);
-            updateContext(testKey, (ctx) => {
-                expect(ctx).toBe(testInitialValue);
+            context.update((ctx) => {
+                expect(ctx).toBe(10);
                 return 20;
             });
         });
@@ -129,12 +114,11 @@ describe('context', () => {
         it('works with complex objects in the updater function', () => {
             const testKey = Symbol('foo');
             const initialObject = { a: 1, b: 2 };
+            const complexContext = new Context(testKey, initialObject);
 
-            createContext(testKey, initialObject);
+            complexContext.update(() => ({ b: 3 }));
 
-            updateContext<typeof initialObject>(testKey, () => ({ b: 3 }));
-
-            expect(getContext(testKey)).toEqual({ a: 1, b: 3 });
+            expect(complexContext.get()).toEqual({ a: 1, b: 3 });
         });
 
         it('updates nested properties of complex objects', () => {
@@ -158,9 +142,11 @@ describe('context', () => {
                 },
             };
 
-            createContext(testKey, initialObject);
-            updateContext(testKey, () => updateObject);
-            expect(getContext(testKey)).toEqual(updateObject);
+            const complexContext = new Context(testKey, initialObject);
+
+            complexContext.update(() => updateObject);
+
+            expect(complexContext.get()).toEqual(updateObject);
         });
 
         it('replaces arrays in complex objects', () => {
@@ -179,25 +165,26 @@ describe('context', () => {
                 },
             };
 
-            createContext(testKey, initialObject);
-            updateContext(testKey, () => updateObject);
-            expect(getContext(testKey)).toEqual(updateObject);
+            const complexContext = new Context(testKey, initialObject);
+
+            complexContext.update(() => updateObject);
+
+            expect(complexContext.get()).toEqual(updateObject);
         });
 
-        // TODO: https://github.com/unjs/defu/issues/95
-        // biome-ignore lint/suspicious/noSkippedTests: <explanation>
+        // biome-ignore lint/suspicious/noSkippedTests: // TODO: https://github.com/unjs/defu/issues/95
         it.skip('handles updating with undefined values', () => {
             const testKey = Symbol('foo');
             const initialObject = { a: 1, b: 2, c: 3 };
 
-            createContext(testKey, initialObject);
+            const complexContext = new Context(testKey, initialObject);
 
-            updateContext(testKey, () => ({
+            complexContext.update(() => ({
                 b: undefined,
                 d: 4,
             }));
 
-            expect(getContext(testKey)).toEqual({ a: 1, b: undefined, c: 3, d: 4 });
+            expect(complexContext.get()).toEqual({ a: 1, b: undefined, c: 3, d: 4 });
         });
 
         it('preserves functions after update', () => {
@@ -209,96 +196,82 @@ describe('context', () => {
                 },
             };
 
-            createContext(testKey, initialObject);
+            const complexContext = new Context(testKey, initialObject);
 
-            updateContext<typeof initialObject>(testKey, () => ({
+            complexContext.update(() => ({
                 value: 20,
             }));
 
-            const updatedObject = getContext<typeof initialObject>(testKey);
+            const updatedObject = complexContext.get();
             expect(updatedObject.value).toBe(20);
             expect(updatedObject.double()).toBe(40);
         });
 
         it('preserves RegExp instances after update', () => {
             const testKey = Symbol('regexpTest');
-            const initialRegExp = {
+            const initialObject = {
                 foo: /foo/g,
             };
 
-            createContext(testKey, initialRegExp);
+            const complexContext = new Context(testKey, initialObject);
 
-            updateContext<typeof initialRegExp>(testKey, (ctx) => {
+            complexContext.update((ctx) => {
                 ctx.foo.lastIndex = 0;
                 return ctx;
             });
 
-            const updatedRegExp = getContext<typeof initialRegExp>(testKey);
-            expect(updatedRegExp.foo.lastIndex).toBe(0);
+            const updatedObject = complexContext.get();
+            expect(updatedObject.foo.lastIndex).toBe(0);
         });
 
         it('preserves Map instances after update', () => {
             const testKey = Symbol('mapTest');
-            const initialMap = {
+            const initialObject = {
                 foo: new Map([
                     ['key1', 1],
                     ['key2', 2],
                 ]),
             };
 
-            createContext(testKey, initialMap);
+            const complexContext = new Context(testKey, initialObject);
 
-            updateContext<typeof initialMap>(testKey, (ctx) => {
+            complexContext.update((ctx) => {
                 ctx.foo.set('key3', 3);
                 return ctx;
             });
 
-            const updatedMap = getContext<typeof initialMap>(testKey);
-            expect(updatedMap.foo.size).toBe(3);
-            expect(updatedMap.foo.get('key1')).toBe(1);
-            expect(updatedMap.foo.get('key2')).toBe(2);
-            expect(updatedMap.foo.get('key3')).toBe(3);
+            const updatedObject = complexContext.get();
+            expect(updatedObject.foo.size).toBe(3);
+            expect(updatedObject.foo.get('key1')).toBe(1);
+            expect(updatedObject.foo.get('key2')).toBe(2);
+            expect(updatedObject.foo.get('key3')).toBe(3);
         });
 
         it('preserves Set instances after update', () => {
             const testKey = Symbol('setTest');
-            const initialSet = {
+            const initialObject = {
                 foo: new Set([1, 2]),
             };
 
-            createContext(testKey, initialSet);
+            const complexContext = new Context(testKey, initialObject);
 
-            updateContext<typeof initialSet>(testKey, (ctx) => {
+            complexContext.update((ctx) => {
                 ctx.foo.add(3);
                 return ctx;
             });
 
-            const updatedSet = getContext<typeof initialSet>(testKey);
-            expect(updatedSet.foo.size).toBe(3);
-            expect(updatedSet.foo.has(1)).toBe(true);
-            expect(updatedSet.foo.has(2)).toBe(true);
-            expect(updatedSet.foo.has(3)).toBe(true);
+            const updatedObject = complexContext.get();
+            expect(updatedObject.foo.size).toBe(3);
+            expect(updatedObject.foo.has(1)).toBe(true);
+            expect(updatedObject.foo.has(2)).toBe(true);
+            expect(updatedObject.foo.has(3)).toBe(true);
         });
     });
 
-    describe('destroyContext', () => {
+    describe('destroy', () => {
         it('destroys a specific context', () => {
-            const testKey = Symbol('foo');
-            const testValue = 10;
-            createContext(testKey, testValue);
-            destroyContext(testKey);
-            expect(getContext<number>(testKey)).toBeUndefined();
-        });
-    });
-
-    describe('destroyAllContexts', () => {
-        it('destroys all contexts', () => {
-            for (let i = 0; i < 10; i++) {
-                createContext(Symbol(`key${i}`), i);
-            }
-            expect(getAllContexts().size).toBe(10);
-            destroyAllContexts();
-            expect(getAllContexts().size).toBe(0);
+            context.destroy();
+            expect(context.has()).toBe(false);
         });
     });
 });

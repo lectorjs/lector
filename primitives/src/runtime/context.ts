@@ -2,16 +2,14 @@ import { createDefu } from 'defu';
 import type { DeepPartial } from '../internal/types.ts';
 import type { ParsedData, ParsedMetadata } from '../parser.ts';
 
-let __lector: {
-    context: Map<symbol, unknown>;
-};
+const globalContext = new Map<symbol, unknown>();
 
 /**
  * The lector global context object.
  *
  * @template T The type of additional properties to include in the context.
  */
-export type Context<T> = {
+export type GlobalContext<T = unknown> = {
     parser: {
         data: ParsedData;
         metadata: ParsedMetadata;
@@ -20,15 +18,7 @@ export type Context<T> = {
     };
 } & T;
 
-/**
- * Creates a new context object by merging the default context values with the provided additional properties.
- *
- * @template T The type of additional properties to include in the context.
- * @param extraDefaults Additional properties to add to the context.
- *
- * @returns A new `Context` object containing the default context values and the additional properties.
- */
-export const initializeContext = <T>(extraDefaults: T): Context<T> => ({
+export const defaultGlobalContext = (): GlobalContext => ({
     parser: {
         data: new Map(),
         metadata: {
@@ -37,8 +27,25 @@ export const initializeContext = <T>(extraDefaults: T): Context<T> => ({
         isParsing: false,
         isComplete: false,
     },
-    ...extraDefaults,
 });
+
+/**
+ * Extends a new global context object defaults by merging it with the base global context.
+ *
+ * This function creates a derived context starting from the default global context,
+ * and allows appending custom properties to the base context. The base
+ * properties are always included.
+ *
+ * @template T Additional properties to merge into the global context.
+ *
+ * @param derivedContext The additional properties to merge into the global context.
+ *
+ * @returns A derived global context with both base and custom properties.
+ */
+export const extendGlobalContextDefaults = <T>(derivedContext: T): GlobalContext<T> => {
+    const baseContext = defaultGlobalContext();
+    return { ...baseContext, ...derivedContext } satisfies GlobalContext<T>;
+};
 
 const mergeContext = createDefu((obj, key, value) => {
     // Don't merge arrays
@@ -55,92 +62,82 @@ const mergeContext = createDefu((obj, key, value) => {
 });
 
 /**
- * Checks whether a given key exists in the lector context.
- *
- * @param key The context key to check for existence.
- *
- * @returns `true` if the key exists, otherwise `false`.
+ * The lector global context class. Allows storing and retrieving state from the global context object.
  */
-export function hasContext(key: symbol): boolean {
-    return getOrInitContext().has(key);
-}
+export class Context<T> {
+    #key: symbol;
 
-/**
- * Retrieves the value associated with a given context key.
- *
- * @template T The expected type of the context value.
- * @param key The key of the context value to retrieve.
- *
- * @returns A read-only copy of the context value associated with the given key.
- */
-export function getContext<T>(key: symbol): Readonly<T> {
-    return Object.freeze(getOrInitContext().get(key)) as T;
-}
-
-/**
- * Retrieves all context entries.
- *
- * @returns A read-only copy of all context entries.
- */
-export function getAllContexts(): ReadonlyMap<symbol, unknown> {
-    return Object.freeze(getOrInitContext());
-}
-
-/**
- * Creates a new context value associated with the given key. If the key already exists, it will be overwritten.
- *
- * @template T The type of the context value.
- * @param key The key of the context value to store.
- * @param value The context value to store.
- */
-export function createContext<T>(key: symbol, value: T): void {
-    getOrInitContext().set(key, value);
-}
-
-/**
- * Updates an existing context entry with the given updater function.
- *
- * @template T The type of the context value.
- * @param key The key of the context value to update.
- * @param updater A function that updates the context value.
- *
- * @throws Error if the context value is not found.
- */
-export function updateContext<T>(key: symbol, updater: (context: T) => DeepPartial<T>): void {
-    const context = getOrInitContext().get(key) as T | undefined;
-    if (!context) {
-        throw new Error(`Context '${String(key)}' not found. Make sure to call createContext() first.`);
+    /**
+     * Retrieves the number of keys in the global context.
+     */
+    static get size(): number {
+        return globalContext.size;
     }
 
-    const updatedContext = updater(context);
-
-    if (updatedContext && typeof updatedContext === 'object') {
-        getOrInitContext().set(key, mergeContext(updatedContext, context));
-    } else {
-        getOrInitContext().set(key, updatedContext);
+    /**
+     * Retrieves all the context values.
+     */
+    static getAll(): Map<symbol, unknown> {
+        return globalContext;
     }
-}
 
-/**
- * Delete the context entry associated with the given key.
- *
- * @param key The key of the context entry to delete.
- */
-export function destroyContext(key: symbol): void {
-    getOrInitContext().delete(key);
-}
+    /**
+     * Destroys all the context values.
+     */
+    static destroyAll(): void {
+        globalContext.clear();
+    }
 
-/**
- * Clears all context entries.
- */
-export function destroyAllContexts(): void {
-    getOrInitContext().clear();
-}
+    constructor(key: symbol, initialValue: T) {
+        this.#key = key;
 
-/**
- * Returns or initializes the lector global context object.
- */
-function getOrInitContext() {
-    __lector ??= { context: new Map() };
-    return __lector.context;
+        if (!globalContext.has(key)) {
+            globalContext.set(key, initialValue);
+        }
+    }
+
+    /**
+     * Checks whether a given key exists in the global context.
+     */
+    has(): boolean {
+        return globalContext.has(this.#key);
+    }
+
+    /**
+     * Retrieves the value associated with the current context key.
+     */
+    get(): Readonly<T> {
+        if (!globalContext.has(this.#key)) {
+            throw new Error(`Context '${String(this.#key)}' not found. It's possible that the context was destroyed.`);
+        }
+
+        return Object.freeze(globalContext.get(this.#key)) as T;
+    }
+
+    /**
+     * Updates the value associated with the current context key.
+     *
+     * @param updater A function that takes the current context value and returns the updated value.
+     */
+    update(updater: (value: T) => DeepPartial<T>): void {
+        const currentContext = globalContext.get(this.#key) as T;
+        if (!currentContext) {
+            throw new Error(`Context '${String(this.#key)}' not found. It's possible that the context was destroyed.`);
+        }
+
+        const updatedContext = updater(currentContext);
+
+        if (updatedContext && typeof updatedContext === 'object') {
+            globalContext.set(this.#key, mergeContext(updatedContext, currentContext));
+        } else {
+            globalContext.set(this.#key, updatedContext);
+        }
+    }
+
+    /**
+     * Removes the value associated with the current context key.
+     */
+    destroy(): void {
+        globalContext.delete(this.#key);
+    }
 }
