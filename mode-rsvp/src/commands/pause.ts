@@ -1,9 +1,9 @@
-import { type Command, updateContext } from '@lectorjs/primitives';
-import { RSVP_CONTEXT_KEY, type RsvpContext } from '../context.ts';
+import type { Command } from '@lectorjs/primitives';
+import { context } from '../context.ts';
 
 export default function (): Command {
     return ({ render }) => {
-        updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
+        context.update(() => ({
             isPlaying: false,
         }));
 

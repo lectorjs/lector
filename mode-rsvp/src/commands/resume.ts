@@ -1,17 +1,17 @@
-import { type Command, type CommandExecutionContext, getContext, updateContext } from '@lectorjs/primitives';
-import { RSVP_CONTEXT_KEY, type RsvpContext } from '../context.ts';
+import type { Command, CommandExecutionContext } from '@lectorjs/primitives';
+import { context } from '../context.ts';
 import nextCommand from './next.ts';
 
 export default function (): Command {
     const next = nextCommand();
 
     const playNextWord = (execCtx: CommandExecutionContext) => {
-        const ctx = getContext<RsvpContext>(RSVP_CONTEXT_KEY);
+        const ctx = context.get();
         const isPaused = !ctx.isPlaying;
         const isFinished = ctx.checkpoint === ctx.parser.data.size - 1;
 
         if (isFinished) {
-            updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
+            context.update(() => ({
                 isFinished: true,
             }));
         }
@@ -25,15 +25,15 @@ export default function (): Command {
     };
 
     const stopPlayback = () => {
-        updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
-            isPlaying: false,
+        context.update(() => ({
+            isFinished: false,
         }));
 
         interval && clearInterval(interval);
     };
 
     const startPlayback = (execCtx: CommandExecutionContext) => {
-        updateContext<RsvpContext>(RSVP_CONTEXT_KEY, (ctx) => ({
+        context.update((ctx) => ({
             isPlaying: true,
             checkpoint: ctx.checkpoint === ctx.parser.data.size - 1 ? 0 : ctx.checkpoint,
         }));
@@ -46,8 +46,7 @@ export default function (): Command {
     let interval: NodeJS.Timer | null = null;
 
     return (execCtx) => {
-        const ctx = getContext<RsvpContext>(RSVP_CONTEXT_KEY);
-        if (ctx.isPlaying) {
+        if (context.get().isPlaying) {
             return;
         }
 

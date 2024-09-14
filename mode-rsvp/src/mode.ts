@@ -1,12 +1,4 @@
-import {
-    type Command,
-    type Mode,
-    type ModeHookOnParsedFinishContext,
-    type ModeHookOnWordParsedContext,
-    createContext,
-    getContext,
-    updateContext,
-} from '@lectorjs/primitives';
+import type { Command, Mode, ModeHookOnParsedFinishContext, ModeHookOnWordParsedContext } from '@lectorjs/primitives';
 import finish from './commands/finish.ts';
 import next from './commands/next.ts';
 import pause from './commands/pause.ts';
@@ -14,7 +6,7 @@ import prev from './commands/prev.ts';
 import restart from './commands/restart.ts';
 import resume from './commands/resume.ts';
 import toggle from './commands/toggle.ts';
-import { RSVP_CONTEXT_KEY, type RsvpContext, defaultContext } from './context.ts';
+import { context } from './context.ts';
 
 export type RsvpModeCommands = {
     prev: Command;
@@ -39,12 +31,8 @@ export class RsvpMode implements Mode<RsvpModeCommands> {
         };
     }
 
-    constructor() {
-        createContext(RSVP_CONTEXT_KEY, defaultContext());
-    }
-
     render(): string {
-        const ctx = getContext<RsvpContext>(RSVP_CONTEXT_KEY);
+        const ctx = context.get();
         const word = ctx.parser.data.get(ctx.checkpoint);
         if (!word) {
             return '';
@@ -54,7 +42,7 @@ export class RsvpMode implements Mode<RsvpModeCommands> {
     }
 
     onWordParsed({ data, render }: ModeHookOnWordParsedContext): void {
-        updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
+        context.update(() => ({
             parser: { data },
         }));
 
@@ -65,7 +53,7 @@ export class RsvpMode implements Mode<RsvpModeCommands> {
     }
 
     onParsedFinish({ metadata }: ModeHookOnParsedFinishContext): void {
-        updateContext<RsvpContext>(RSVP_CONTEXT_KEY, () => ({
+        context.update(() => ({
             parser: {
                 metadata,
                 isComplete: true,
