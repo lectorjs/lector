@@ -1,5 +1,11 @@
 # @lectorjs/primitives
 
+## 0.0.3
+
+### Patch Changes
+
+- 130478d: Improve entire context implementation by making types inferable
+
 ## 0.0.2
 
 ### Patch Changes
