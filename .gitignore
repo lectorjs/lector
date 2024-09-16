@@ -157,6 +157,7 @@ dist
 
 # VSCode
 .vscode-test
+.vscode/
 
 # yarn v2
 .yarn/cache
