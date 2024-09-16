@@ -1,12 +1,12 @@
-import type { Command, Mode, ModeHookOnParsedFinishContext, ModeHookOnWordParsedContext } from "@lectorjs/primitives";
-import finish from "./commands/finish.ts";
-import next from "./commands/next.ts";
-import pause from "./commands/pause.ts";
-import prev from "./commands/prev.ts";
-import restart from "./commands/restart.ts";
-import resume from "./commands/resume.ts";
-import toggle from "./commands/toggle.ts";
-import { context } from "./context.ts";
+import type { Command, Mode, ModeHookOnParsedFinishContext, ModeHookOnWordParsedContext } from '@lectorjs/primitives';
+import finish from './commands/finish.ts';
+import next from './commands/next.ts';
+import pause from './commands/pause.ts';
+import prev from './commands/prev.ts';
+import restart from './commands/restart.ts';
+import resume from './commands/resume.ts';
+import toggle from './commands/toggle.ts';
+import { context } from './context.ts';
 
 export type RsvpModeCommands = {
     prev: Command;
@@ -35,7 +35,7 @@ export class RsvpMode implements Mode<RsvpModeCommands> {
         const ctx = context.get();
         const word = ctx.parser.data.get(ctx.checkpoint);
         if (!word) {
-            return "";
+            return '';
         }
 
         return `<span>${word?.value}</span>`;

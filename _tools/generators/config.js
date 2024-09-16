@@ -1,4 +1,4 @@
-const isEmpty = (value) => !value || (typeof value === "string" && value.trim().length === 0);
+const isEmpty = (value) => !value || (typeof value === 'string' && value.trim().length === 0);
 
 const isValidName = (value) => value.match(/^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$/g);
 
@@ -8,32 +8,32 @@ export default function (
 ) {
     const cwd = process.cwd();
 
-    plop.setGenerator("package", {
-        description: "Generate a new package",
+    plop.setGenerator('package', {
+        description: 'Generate a new package',
         prompts: [
             {
-                type: "input",
-                name: "name",
-                message: "Enter the name of the package:",
+                type: 'input',
+                name: 'name',
+                message: 'Enter the name of the package:',
                 validate: (value) => {
                     if (isEmpty(value)) {
-                        return "Package name cannot be empty";
+                        return 'Package name cannot be empty';
                     }
 
                     if (!isValidName(value)) {
-                        return "Package name must only contain letters, numbers, and hyphens.";
+                        return 'Package name must only contain letters, numbers, and hyphens.';
                     }
 
                     return true;
                 },
             },
             {
-                type: "input",
-                name: "description",
-                message: "Enter the description of the package:",
+                type: 'input',
+                name: 'description',
+                message: 'Enter the description of the package:',
                 validate: (value) => {
                     if (isEmpty(value)) {
-                        return "Package description cannot be empty";
+                        return 'Package description cannot be empty';
                     }
 
                     return true;
@@ -42,32 +42,32 @@ export default function (
         ],
         actions: [
             {
-                type: "add",
+                type: 'add',
                 path: `${cwd}/{{name}}/package.json`,
-                templateFile: "package/package.json.hbs",
+                templateFile: 'package/package.json.hbs',
             },
             {
-                type: "add",
+                type: 'add',
                 path: `${cwd}/{{name}}/jsr.json`,
-                templateFile: "package/jsr.json.hbs",
+                templateFile: 'package/jsr.json.hbs',
             },
             {
-                type: "add",
+                type: 'add',
                 path: `${cwd}/{{name}}/README.md`,
-                templateFile: "package/README.md.hbs",
+                templateFile: 'package/README.md.hbs',
             },
             {
-                type: "add",
+                type: 'add',
                 path: `${cwd}/{{name}}/src/mod.ts`,
-                templateFile: "package/src/mod.ts.hbs",
+                templateFile: 'package/src/mod.ts.hbs',
             },
             {
-                type: "add",
+                type: 'add',
                 path: `${cwd}/{{name}}/test/mod.test.ts`,
-                templateFile: "package/test/mod.test.ts.hbs",
+                templateFile: 'package/test/mod.test.ts.hbs',
             },
             {
-                type: "modify",
+                type: 'modify',
                 path: `${cwd}/package.json`,
                 transform(fileContent, answers) {
                     const packageJson = JSON.parse(fileContent);

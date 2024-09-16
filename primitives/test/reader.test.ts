@@ -1,24 +1,24 @@
-import { type Mocked, beforeEach, describe, expect, it, vi } from "vitest";
-import type { CommandExecutionContext } from "../src/command.ts";
-import type { Mode } from "../src/mode.ts";
-import type { Parser } from "../src/parser.ts";
-import { createReader } from "../src/reader.ts";
-import { MockMode } from "./__mocks__/mode.mock.ts";
-import { createMockParser } from "./__mocks__/parser.mock.ts";
+import { type Mocked, beforeEach, describe, expect, it, vi } from 'vitest';
+import type { CommandExecutionContext } from '../src/command.ts';
+import type { Mode } from '../src/mode.ts';
+import type { Parser } from '../src/parser.ts';
+import { createReader } from '../src/reader.ts';
+import { MockMode } from './__mocks__/mode.mock.ts';
+import { createMockParser } from './__mocks__/parser.mock.ts';
 
-const MOCK_WORDS = ["word1", "word2", "word3", "word4", "word5"];
+const MOCK_WORDS = ['word1', 'word2', 'word3', 'word4', 'word5'];
 
-describe("reader", () => {
+describe('reader', () => {
     let parser: Mocked<Parser>;
     let renderTo: HTMLElement;
 
     beforeEach(() => {
         parser = createMockParser(MOCK_WORDS);
-        renderTo = document.createElement("div");
+        renderTo = document.createElement('div');
     });
 
-    describe("initialization", () => {
-        it("throws an error when no parser is provided", () => {
+    describe('initialization', () => {
+        it('throws an error when no parser is provided', () => {
             expect(() =>
                 createReader({
                     mode: new MockMode(),
@@ -28,7 +28,7 @@ describe("reader", () => {
             ).toThrow(/valid parser/g);
         });
 
-        it("throws an error when no mode is provided", () => {
+        it('throws an error when no mode is provided', () => {
             expect(() =>
                 createReader({
                     mode: undefined as unknown as Mode,
@@ -38,7 +38,7 @@ describe("reader", () => {
             ).toThrow(/valid reading mode/g);
         });
 
-        it("throws an error when no render target is provided", () => {
+        it('throws an error when no render target is provided', () => {
             expect(() =>
                 createReader({
                     mode: new MockMode(),
@@ -48,9 +48,9 @@ describe("reader", () => {
             ).toThrow(/valid render target/g);
         });
 
-        it("warns about missing sanitizer during development", () => {
-            const consoleSpy = vi.spyOn(console, "warn");
-            process.env.NODE_ENV = "development";
+        it('warns about missing sanitizer during development', () => {
+            const consoleSpy = vi.spyOn(console, 'warn');
+            process.env.NODE_ENV = 'development';
 
             createReader({
                 mode: new MockMode(),
@@ -58,12 +58,12 @@ describe("reader", () => {
                 renderTo,
             });
 
-            expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("provide a sanitizer"));
+            expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('provide a sanitizer'));
         });
 
-        it("does not warn about missing sanitizer during production", () => {
-            const consoleSpy = vi.spyOn(console, "warn");
-            process.env.NODE_ENV = "production";
+        it('does not warn about missing sanitizer during production', () => {
+            const consoleSpy = vi.spyOn(console, 'warn');
+            process.env.NODE_ENV = 'production';
 
             createReader({
                 mode: new MockMode(),
@@ -75,8 +75,8 @@ describe("reader", () => {
         });
     });
 
-    describe("parsing", () => {
-        it("streams parser data and triggers mode hooks", async () => {
+    describe('parsing', () => {
+        it('streams parser data and triggers mode hooks', async () => {
             const mockMode = new MockMode();
 
             createReader({
@@ -96,8 +96,8 @@ describe("reader", () => {
         });
     });
 
-    describe("rendering", () => {
-        it("renders raw HTML if no sanitizer is provided", () => {
+    describe('rendering', () => {
+        it('renders raw HTML if no sanitizer is provided', () => {
             const mockMode = new MockMode();
 
             createReader({
@@ -107,10 +107,10 @@ describe("reader", () => {
             }).render();
 
             expect(mockMode.render).toHaveBeenCalled();
-            expect(renderTo.innerHTML).toBe("<span>foo</span>");
+            expect(renderTo.innerHTML).toBe('<span>foo</span>');
         });
 
-        it("renders sanitized HTML if a sanitizer is provided", () => {
+        it('renders sanitized HTML if a sanitizer is provided', () => {
             const mockMode = {
                 ...new MockMode(),
                 render: vi.fn().mockReturnValue('<script>console.log("I\'m injected evil code")</script>'),
@@ -121,16 +121,16 @@ describe("reader", () => {
                 parser,
                 renderTo,
                 sanitizer: (html) =>
-                    html.replace(/<script[^>]*>/g, "").replace(`console.log("I'm injected evil code")`, "nice try"),
+                    html.replace(/<script[^>]*>/g, '').replace(`console.log("I'm injected evil code")`, 'nice try'),
             }).render();
 
             expect(mockMode.render).toHaveBeenCalled();
-            expect(renderTo.innerHTML).toBe("nice try");
+            expect(renderTo.innerHTML).toBe('nice try');
         });
     });
 
-    describe("commands", () => {
-        it("executes a valid command without interfering with other commands", async () => {
+    describe('commands', () => {
+        it('executes a valid command without interfering with other commands', async () => {
             const mockMode = new MockMode();
 
             const reader = createReader({
@@ -139,40 +139,40 @@ describe("reader", () => {
                 renderTo,
             });
 
-            await reader.executeCommand("foo");
+            await reader.executeCommand('foo');
             expect(mockMode.commands.foo).toHaveBeenCalled();
             expect(mockMode.commands.bar).not.toHaveBeenCalled();
             expect(mockMode.commands.baz).not.toHaveBeenCalled();
             vi.clearAllMocks();
 
-            await reader.executeCommand("bar");
+            await reader.executeCommand('bar');
             expect(mockMode.commands.bar).toHaveBeenCalled();
             expect(mockMode.commands.foo).not.toHaveBeenCalled();
             expect(mockMode.commands.baz).not.toHaveBeenCalled();
             vi.clearAllMocks();
 
-            await reader.executeCommand("baz");
+            await reader.executeCommand('baz');
             expect(mockMode.commands.baz).toHaveBeenCalled();
             expect(mockMode.commands.foo).not.toHaveBeenCalled();
             expect(mockMode.commands.bar).not.toHaveBeenCalled();
             vi.clearAllMocks();
         });
 
-        it("has a valid execution context that can be used to interact with the reader", () => {
+        it('has a valid execution context that can be used to interact with the reader', () => {
             const mockMode = new MockMode();
 
             createReader({
                 parser,
                 mode: mockMode,
                 renderTo,
-            }).executeCommand("foo");
+            }).executeCommand('foo');
 
             expect(mockMode.commands.foo).toHaveBeenCalledWith(
                 expect.objectContaining({ render: expect.any(Function) } satisfies CommandExecutionContext),
             );
         });
 
-        it("throws an error when executing an invalid command", async () => {
+        it('throws an error when executing an invalid command', async () => {
             const reader = createReader({
                 mode: new MockMode(),
                 parser,
@@ -180,7 +180,7 @@ describe("reader", () => {
             });
 
             // @ts-expect-error command does not exist
-            await expect(reader.executeCommand("doSomething")).rejects.toThrowError(/not found/g);
+            await expect(reader.executeCommand('doSomething')).rejects.toThrowError(/not found/g);
         });
     });
 });

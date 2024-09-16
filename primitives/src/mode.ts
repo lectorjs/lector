@@ -1,6 +1,6 @@
-import type { Command } from "./command.ts";
-import type { ParsedData, ParsedMetadata } from "./parser.ts";
-import type { Word } from "./word.ts";
+import type { Command } from './command.ts';
+import type { ParsedData, ParsedMetadata } from './parser.ts';
+import type { Word } from './word.ts';
 
 /**
  * Represents a reading mode in Lector.
