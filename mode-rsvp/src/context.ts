@@ -1,6 +1,6 @@
-import { Context, extendGlobalContext } from "@lectorjs/primitives";
+import { Context, extendGlobalContext } from '@lectorjs/primitives';
 
-export const RSVP_CONTEXT_KEY = Symbol("rsvp");
+export const RSVP_CONTEXT_KEY = Symbol('rsvp');
 
 export type RsvpContext = {
     checkpoint: number;

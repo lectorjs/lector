@@ -34,5 +34,16 @@
     "useEditorconfig": true,
     "lineWidth": 120,
     "attributePosition": "multiline"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "all",
+      "quoteProperties": "asNeeded",
+      "arrowParentheses": "always",
+      "bracketSpacing": true,
+      "bracketSameLine": false
+    }
   }
 }

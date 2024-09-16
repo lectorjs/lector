@@ -1,4 +1,4 @@
-import { type Parser, tokenize } from "@lectorjs/primitives";
+import { type Parser, tokenize } from '@lectorjs/primitives';
 
 function parser(input: string): Parser {
     const words = tokenize(input);
