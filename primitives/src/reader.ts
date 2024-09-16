@@ -1,6 +1,6 @@
-import { isDev } from './internal/flags.ts';
-import type { Mode } from './mode.ts';
-import type { ParsedData, Parser } from './parser.ts';
+import { isDev } from "./internal/flags.ts";
+import type { Mode } from "./mode.ts";
+import type { ParsedData, Parser } from "./parser.ts";
 
 /**
  * Represents a reader instance that acts as a bridge between a text parser and a reading mode.
@@ -30,7 +30,7 @@ export interface Reader<T extends Mode> {
      * reader.executeCommand('nextPage');
      * ```
      */
-    executeCommand(name: keyof T['commands']): Promise<void>;
+    executeCommand(name: keyof T["commands"]): Promise<void>;
 }
 
 export interface ReaderConfig<T extends Mode> {
@@ -80,29 +80,29 @@ export interface ReaderConfig<T extends Mode> {
 }
 
 class ReaderFactory<T extends Mode> implements Reader<T> {
-    #parser: ReaderConfig<T>['parser'];
-    #mode: ReaderConfig<T>['mode'];
-    #renderTo: ReaderConfig<T>['renderTo'];
-    #sanitizer?: ReaderConfig<T>['sanitizer'];
+    #parser: ReaderConfig<T>["parser"];
+    #mode: ReaderConfig<T>["mode"];
+    #renderTo: ReaderConfig<T>["renderTo"];
+    #sanitizer?: ReaderConfig<T>["sanitizer"];
 
     #data: ParsedData = new Map();
 
     constructor(options: ReaderConfig<T>) {
         if (!options.parser) {
-            throw new Error('You must provide a valid parser in order to create a reader.');
+            throw new Error("You must provide a valid parser in order to create a reader.");
         }
 
         if (!options.mode) {
-            throw new Error('You must provide a valid reading mode in order to create a reader.');
+            throw new Error("You must provide a valid reading mode in order to create a reader.");
         }
 
         if (!options.renderTo) {
-            throw new Error('You must provide a valid render target in order to create a reader.');
+            throw new Error("You must provide a valid render target in order to create a reader.");
         }
 
         if (!options.sanitizer && isDev()) {
             console.warn(
-                'Lector accepts third-party plugins that can render raw HTML. Make sure to provide a sanitizer function to prevent XSS vulnerabilities.',
+                "Lector accepts third-party plugins that can render raw HTML. Make sure to provide a sanitizer function to prevent XSS vulnerabilities.",
             );
         }
 
@@ -115,11 +115,11 @@ class ReaderFactory<T extends Mode> implements Reader<T> {
     }
 
     render(): void {
-        const html = this.#mode.render?.() ?? '';
+        const html = this.#mode.render?.() ?? "";
         this.#renderTo.innerHTML = this.#sanitizer ? this.#sanitizer(html) : html;
     }
 
-    async executeCommand(name: keyof T['commands']): Promise<void> {
+    async executeCommand(name: keyof T["commands"]): Promise<void> {
         const cmd = this.#mode.commands?.[name as string];
         if (!cmd) {
             throw new Error(`Command '${String(cmd)}' not found. Make sure to execute a valid command.`);

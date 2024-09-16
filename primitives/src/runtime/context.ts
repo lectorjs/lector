@@ -1,6 +1,6 @@
-import { createDefu } from 'defu';
-import type { DeepPartial } from '../internal/types.ts';
-import type { ParsedData, ParsedMetadata } from '../parser.ts';
+import { createDefu } from "defu";
+import type { DeepPartial } from "../internal/types.ts";
+import type { ParsedData, ParsedMetadata } from "../parser.ts";
 
 const globalContext = new Map<symbol, unknown>();
 
@@ -126,7 +126,7 @@ export class Context<T> {
 
         const updatedContext = updater(currentContext);
 
-        if (updatedContext && typeof updatedContext === 'object') {
+        if (updatedContext && typeof updatedContext === "object") {
             globalContext.set(this.#key, mergeContext(updatedContext, currentContext));
         } else {
             globalContext.set(this.#key, updatedContext);

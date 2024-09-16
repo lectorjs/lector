@@ -1,8 +1,8 @@
 {
-    "name": "@lectorjs/parser-text",
-    "version": "0.0.2",
-    "description": "Plain text parser that allows readers to extract and process words from plain text or `.txt` files.",
-    "exports": {
-        ".": "./src/mod.ts"
-    }
+  "name": "@lectorjs/parser-text",
+  "version": "0.0.2",
+  "description": "Plain text parser that allows readers to extract and process words from plain text or `.txt` files.",
+  "exports": {
+    ".": "./src/mod.ts"
+  }
 }

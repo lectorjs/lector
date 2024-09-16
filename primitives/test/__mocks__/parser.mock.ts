@@ -1,5 +1,5 @@
-import { type Mocked, vi } from 'vitest';
-import type { Parser } from '../../src/parser.ts';
+import { type Mocked, vi } from "vitest";
+import type { Parser } from "../../src/parser.ts";
 
 export function createMockParser(words: string[]): Mocked<Parser> {
     return {
@@ -14,8 +14,8 @@ export function createMockParser(words: string[]): Mocked<Parser> {
             }
         }),
         getMetadata: vi.fn().mockResolvedValue({
-            foo: 'bar',
-            baz: 'qux',
+            foo: "bar",
+            baz: "qux",
         }),
     };
 }

@@ -1,2 +1,2 @@
-export * from './mode.ts';
-export { default } from './mode.ts';
+export * from "./mode.ts";
+export { default } from "./mode.ts";

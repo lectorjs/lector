@@ -1,49 +1,49 @@
-import './style.css';
+import "./style.css";
 
-import rsvp from '@lectorjs/mode-rsvp';
-import parser from '@lectorjs/parser-text';
-import { createReader } from '@lectorjs/primitives';
+import rsvp from "@lectorjs/mode-rsvp";
+import parser from "@lectorjs/parser-text";
+import { createReader } from "@lectorjs/primitives";
 
-const restart = document.querySelector('#restart') as HTMLButtonElement;
-const finish = document.querySelector('#finish') as HTMLButtonElement;
-const prev = document.querySelector('#prev') as HTMLButtonElement;
-const next = document.querySelector('#next') as HTMLButtonElement;
-const resume = document.querySelector('#resume') as HTMLButtonElement;
-const pause = document.querySelector('#pause') as HTMLButtonElement;
-const toggle = document.querySelector('#toggle') as HTMLButtonElement;
+const restart = document.querySelector("#restart") as HTMLButtonElement;
+const finish = document.querySelector("#finish") as HTMLButtonElement;
+const prev = document.querySelector("#prev") as HTMLButtonElement;
+const next = document.querySelector("#next") as HTMLButtonElement;
+const resume = document.querySelector("#resume") as HTMLButtonElement;
+const pause = document.querySelector("#pause") as HTMLButtonElement;
+const toggle = document.querySelector("#toggle") as HTMLButtonElement;
 
 const reader = createReader({
     mode: rsvp(),
-    parser: parser('This is a dummy text to test the txt parser. 😾'),
-    renderTo: document.querySelector('#display') as HTMLElement,
+    parser: parser("This is a dummy text to test the txt parser. 😾"),
+    renderTo: document.querySelector("#display") as HTMLElement,
 });
 
 reader.render();
 
-restart.addEventListener('click', async () => {
-    await reader.executeCommand('restart');
+restart.addEventListener("click", async () => {
+    await reader.executeCommand("restart");
 });
 
-finish.addEventListener('click', async () => {
-    await reader.executeCommand('finish');
+finish.addEventListener("click", async () => {
+    await reader.executeCommand("finish");
 });
 
-prev.addEventListener('click', async () => {
-    await reader.executeCommand('prev');
+prev.addEventListener("click", async () => {
+    await reader.executeCommand("prev");
 });
 
-next.addEventListener('click', async () => {
-    await reader.executeCommand('next');
+next.addEventListener("click", async () => {
+    await reader.executeCommand("next");
 });
 
-resume.addEventListener('click', async () => {
-    await reader.executeCommand('resume');
+resume.addEventListener("click", async () => {
+    await reader.executeCommand("resume");
 });
 
-pause.addEventListener('click', async () => {
-    await reader.executeCommand('pause');
+pause.addEventListener("click", async () => {
+    await reader.executeCommand("pause");
 });
 
-toggle.addEventListener('click', async () => {
-    await reader.executeCommand('toggle');
+toggle.addEventListener("click", async () => {
+    await reader.executeCommand("toggle");
 });

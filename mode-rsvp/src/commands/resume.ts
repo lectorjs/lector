@@ -1,6 +1,6 @@
-import type { Command, CommandExecutionContext } from '@lectorjs/primitives';
-import { context } from '../context.ts';
-import nextCommand from './next.ts';
+import type { Command, CommandExecutionContext } from "@lectorjs/primitives";
+import { context } from "../context.ts";
+import nextCommand from "./next.ts";
 
 export default function (): Command {
     const next = nextCommand();

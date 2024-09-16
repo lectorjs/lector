@@ -1,11 +1,11 @@
 {
-    "name": "@lectorjs/primitives",
-    "version": "0.0.3",
-    "description": "Primitives for building and extending readers.",
-    "exports": {
-        ".": "./src/mod.ts"
-    },
-    "dependencies": {
-        "defu": "^6.1.4"
-    }
+  "name": "@lectorjs/primitives",
+  "version": "0.0.3",
+  "description": "Primitives for building and extending readers.",
+  "exports": {
+    ".": "./src/mod.ts"
+  },
+  "dependencies": {
+    "defu": "^6.1.4"
+  }
 }
