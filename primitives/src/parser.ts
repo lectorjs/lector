@@ -1,4 +1,4 @@
-import type { Word } from './word.ts';
+import type { Word } from "./word.ts";
 
 /**
  * Represents a text parser that can provide words and metadata from a text input.

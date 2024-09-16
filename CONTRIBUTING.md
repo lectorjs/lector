@@ -31,7 +31,10 @@ If you’re new to the codebase, consider starting with issues labeled as [good 
 
 ## Coding style
 
-This project uses [Biome](https://biomejs.dev/) for linting and formatting. You can see the enabled rules in [biome.jsonc](biome.jsonc).
+This project uses the following tools to maintain consistent coding styles:
+
+1. [Biome](https://biomejs.dev/) for linting and formatting. The configuration can be found in [biome.json](biome.json).
+2. [EditorConfig](https://editorconfig.org/) for maintaining consistent coding styles across various editors and IDEs. The configuration can be found in [.editorconfig](.editorconfig).
 
 ## Git workflow
 
