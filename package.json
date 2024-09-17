@@ -4,7 +4,7 @@
   "private": true,
   "workspaces": ["_playground", "mode-bionic", "mode-rsvp", "parser-text", "primitives"],
   "scripts": {
-    "play": "bun run --filter @lectorjs/playground dev",
+    "dev": "bun run --filter @lectorjs/playground dev",
     "test": "vitest .",
     "test:watch": "vitest --watch .",
     "test:ui": "vitest --ui --watch .",

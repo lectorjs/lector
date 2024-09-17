@@ -73,6 +73,16 @@ This project uses [Changesets](https://github.com/changesets/changesets) for str
 > [!NOTE]
 > No need to generate a changeset if you're not working directly on a workspace package.
 
+## Generators
+
+This project uses [Plop](https://plopjs.com/) to streamline the process of generating code and configuration files. Plop is a micro-generator framework that makes it easy to create files with a consistent structure.
+
+Available generators:
+
+- **Package**: To create a new package, run `bun run gen:package` and follow the prompts. This generator will create a new package in the root of the project and will update the root `package.json` `workspaces` field accordingly.
+
+For more information on how to use or extend these generators, refer to the [Plop documentation](https://plopjs.com/documentation/).
+
 ## License
 
 By contributing to this project, you agree to license your contributions under the project’s [license](LICENSE).
