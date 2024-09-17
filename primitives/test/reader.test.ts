@@ -168,7 +168,9 @@ describe('reader', () => {
             }).executeCommand('foo');
 
             expect(mockMode.commands.foo).toHaveBeenCalledWith(
-                expect.objectContaining({ render: expect.any(Function) } satisfies CommandExecutionContext),
+                expect.objectContaining({
+                    render: expect.any(Function),
+                } satisfies CommandExecutionContext),
             );
         });
 
