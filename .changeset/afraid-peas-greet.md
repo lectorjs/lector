@@ -2,4 +2,4 @@
 "@lectorjs/mode-rsvp": patch
 ---
 
-Export context
+feat: make context available
