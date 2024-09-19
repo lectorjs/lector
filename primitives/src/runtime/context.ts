@@ -18,6 +18,9 @@ export type GlobalContext<T = unknown> = {
     };
 } & T;
 
+/**
+ * Returns the default global context values.
+ */
 export const defaultGlobalContext = (): GlobalContext => ({
     parser: {
         data: new Map(),
@@ -28,23 +31,6 @@ export const defaultGlobalContext = (): GlobalContext => ({
         isComplete: false,
     },
 });
-
-/**
- * Creates a new global context object by merging the base context with additional properties.
- *
- * This function creates a derived context starting from the default global context, and allows
- * appending custom properties to the base context. The base properties are always included.
- *
- * @template T Additional properties to merge into the global context.
- *
- * @param additionalProperties The additional properties to merge into the global context.
- *
- * @returns A derived global context with both base and custom properties.
- */
-export const extendGlobalContext = <T>(additionalProperties: T): GlobalContext<T> => {
-    const baseContext = defaultGlobalContext();
-    return { ...baseContext, ...additionalProperties } satisfies GlobalContext<T>;
-};
 
 const mergeContext = createDefu((obj, key, value) => {
     // Don't merge arrays
