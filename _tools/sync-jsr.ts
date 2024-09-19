@@ -4,7 +4,7 @@ import { $, Glob } from 'bun';
 
 const glob = new Glob('**/*/package.json');
 const scannedFiles = (await Array.fromAsync(glob.scan({ cwd: '.' }))).filter(
-    (path) => !(path.startsWith('_') || !path.includes('node_modules')),
+    (path) => !(path.startsWith('_') || path.startsWith('node_modules')),
 );
 
 await Promise.all(
