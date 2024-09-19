@@ -3,4 +3,4 @@
 "@lectorjs/mode-rsvp": patch
 ---
 
-Remove default export
+refactor: remove default export
