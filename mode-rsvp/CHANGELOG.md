@@ -1,5 +1,13 @@
 # @lectorjs/mode-rsvp
 
+## 0.0.6
+
+### Patch Changes
+
+- 3f68dcc: feat: make context available
+- a0ffa90: chore: remove the `extendGlobalContext` method
+- 3f68dcc: refactor: remove default export
+
 ## 0.0.5
 
 ### Patch Changes
