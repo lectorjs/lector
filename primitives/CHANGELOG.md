@@ -1,5 +1,11 @@
 # @lectorjs/primitives
 
+## 0.0.4
+
+### Patch Changes
+
+- a0ffa90: chore: remove the `extendGlobalContext` method
+
 ## 0.0.3
 
 ### Patch Changes

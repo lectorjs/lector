@@ -1,5 +1,11 @@
 # @lectorjs/mode-bionic
 
+## 0.0.4
+
+### Patch Changes
+
+- 3f68dcc: refactor: remove default export
+
 ## 0.0.3
 
 ### Patch Changes
