@@ -17,5 +17,3 @@ export class BionicMode implements Mode {
         return formattedText;
     }
 }
-
-export default () => new BionicMode();

@@ -16,12 +16,12 @@ indent_style = space
 indent_size = 4
 quote_type = single
 
-[*.{yml,yaml,json,jsonc,toml}]
+[*.{html,hbs,svelte,vue}]
 indent_style = space
-indent_size = 2
+indent_size = 4
 quote_type = double
 
-[*.{html,hbs,svelte,vue}]
+[*.{yml,yaml,json,jsonc,toml}]
 indent_style = space
 indent_size = 2
 quote_type = double

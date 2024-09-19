@@ -61,5 +61,3 @@ export class RsvpMode implements Mode<RsvpModeCommands> {
         }));
     }
 }
-
-export default () => new RsvpMode();
