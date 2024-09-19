@@ -1,6 +1,6 @@
 import './style.css';
 
-import rsvp from '@lectorjs/mode-rsvp';
+import { RsvpMode } from '@lectorjs/mode-rsvp';
 import parser from '@lectorjs/parser-text';
 import { createReader } from '@lectorjs/primitives';
 
@@ -13,7 +13,7 @@ const pause = document.querySelector('#pause') as HTMLButtonElement;
 const toggle = document.querySelector('#toggle') as HTMLButtonElement;
 
 const reader = createReader({
-    mode: rsvp(),
+    mode: new RsvpMode(),
     parser: parser('This is a dummy text to test the txt parser. 😾'),
     renderTo: document.querySelector('#display') as HTMLElement,
 });
