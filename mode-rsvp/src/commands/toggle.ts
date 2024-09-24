@@ -1,5 +1,5 @@
 import type { Command } from '@lectorjs/primitives';
-import { context } from '../context.ts';
+import { getContext } from '../context.ts';
 import pauseCommand from './pause.ts';
 import resumeCommand from './resume.ts';
 
@@ -8,6 +8,6 @@ export default function (): Command {
     const resume = resumeCommand();
 
     return (execCtx) => {
-        context.get().isPlaying ? pause(execCtx) : resume(execCtx);
+        getContext().isPlaying ? pause(execCtx) : resume(execCtx);
     };
 }

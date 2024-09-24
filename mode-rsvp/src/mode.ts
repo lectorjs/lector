@@ -6,7 +6,7 @@ import prev from './commands/prev.ts';
 import restart from './commands/restart.ts';
 import resume from './commands/resume.ts';
 import toggle from './commands/toggle.ts';
-import { context } from './context.ts';
+import { getContext, updateContext } from './context.ts';
 
 export type RsvpModeCommands = {
     prev: Command;
@@ -32,7 +32,8 @@ export class RsvpMode implements Mode<RsvpModeCommands> {
     }
 
     render(): string {
-        const ctx = context.get();
+        const ctx = getContext();
+
         const word = ctx.parser.data.get(ctx.checkpoint);
         if (!word) {
             return '';
@@ -42,9 +43,14 @@ export class RsvpMode implements Mode<RsvpModeCommands> {
     }
 
     onWordParsed({ data, render }: ModeHookOnWordParsedContext): void {
-        context.update(() => ({
-            parser: { data },
-        }));
+        updateContext(
+            () => ({
+                parser: { data },
+            }),
+            {
+                shouldNotifySubscribers: false,
+            },
+        );
 
         // Trigger a re-render on first available word.
         if (data.size === 1) {
@@ -53,11 +59,16 @@ export class RsvpMode implements Mode<RsvpModeCommands> {
     }
 
     onParsedFinish({ metadata }: ModeHookOnParsedFinishContext): void {
-        context.update(() => ({
-            parser: {
-                metadata,
-                isComplete: true,
+        updateContext(
+            () => ({
+                parser: {
+                    metadata,
+                    isComplete: true,
+                },
+            }),
+            {
+                shouldNotifySubscribers: false,
             },
-        }));
+        );
     }
 }

@@ -1,18 +1,16 @@
-import { Context, type GlobalContext, defaultGlobalContext } from '@lectorjs/primitives';
+import { defineContext } from '@lectorjs/primitives';
 
-export const RSVP_CONTEXT_KEY = Symbol('rsvp');
-
-export type RsvpContext = GlobalContext<{
+export type RsvpContext = {
     checkpoint: number;
     isPlaying: boolean;
     isFinished: boolean;
-}>;
-
-const defaultContext: RsvpContext = {
-    ...defaultGlobalContext(),
-    checkpoint: 0,
-    isPlaying: false,
-    isFinished: false,
 };
 
-export const context: Context<RsvpContext> = new Context(RSVP_CONTEXT_KEY, defaultContext);
+export const { getContext, updateContext, subscribeContext, destroyContext } = defineContext<RsvpContext>(
+    Symbol('rsvp'),
+    {
+        checkpoint: 0,
+        isPlaying: false,
+        isFinished: false,
+    },
+);
