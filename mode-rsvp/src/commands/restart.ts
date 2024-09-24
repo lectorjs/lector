@@ -1,9 +1,9 @@
 import type { Command } from '@lectorjs/primitives';
-import { context } from '../context.ts';
+import { updateContext } from '../context.ts';
 
 export default function (): Command {
     return ({ render }) => {
-        context.update(() => ({
+        updateContext(() => ({
             checkpoint: 0,
         }));
 
