@@ -104,7 +104,7 @@ export const defaultContext = (): RsvpContext => ({
     isFinished: false,
     options: {
         wordsPerMinute: 300,
-        wordsPerCycle: 2,
+        wordsPerCycle: 1,
     },
 });
 
