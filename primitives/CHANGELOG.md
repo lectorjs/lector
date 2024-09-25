@@ -1,5 +1,12 @@
 # @lectorjs/primitives
 
+## 0.0.5
+
+### Patch Changes
+
+- 2722429: refactor: rework context and rsvp mode
+- 3c37756: feat: implement context reactivity
+
 ## 0.0.4
 
 ### Patch Changes
