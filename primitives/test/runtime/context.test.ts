@@ -1,5 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { defaultLectorContext, defineContext, destroyAllContexts, getAllContexts } from '../src/runtime/context.ts';
+import {
+    type Context,
+    defaultLectorContext,
+    defineContext,
+    destroyAllContexts,
+    getAllContexts,
+} from '../../src/runtime/context.ts';
 
 type MockContextState = {
     foo: number;
@@ -8,31 +14,25 @@ type MockContextState = {
 };
 
 describe('context', () => {
-    let getMockContext: ReturnType<typeof defineContext<MockContextState>>['getContext'];
-    let updateMockContext: ReturnType<typeof defineContext<MockContextState>>['updateContext'];
-    let subscribeMockContext: ReturnType<typeof defineContext<MockContextState>>['subscribeContext'];
-    let destroyMockContext: ReturnType<typeof defineContext<MockContextState>>['destroyContext'];
+    let context: Context<MockContextState>;
 
     beforeEach(() => {
-        const ctx = defineContext<MockContextState>(Symbol('mockContext'), {
+        context = defineContext<MockContextState>(Symbol('mockContext'));
+
+        context.create({
             foo: 10,
             bar: 'hello',
             baz: true,
         });
-
-        getMockContext = ctx.getContext;
-        updateMockContext = ctx.updateContext;
-        subscribeMockContext = ctx.subscribeContext;
-        destroyMockContext = ctx.destroyContext;
     });
 
     afterEach(() => {
-        destroyMockContext();
+        context.destroy();
     });
 
     describe('defineContext', () => {
         it('creates a new lector context with default values', () => {
-            expect(getMockContext()).toEqual({
+            expect(context.get()).toEqual({
                 ...defaultLectorContext(),
                 foo: 10,
                 bar: 'hello',
@@ -45,8 +45,9 @@ describe('context', () => {
             [Symbol('context2'), 200],
             [Symbol('context3'), 300],
         ])('creates a new context for %s with value %d', (key, value) => {
-            const { getContext } = defineContext<{ foo: number }>(key, { foo: value });
-            expect(getContext()).toEqual(expect.objectContaining({ foo: value }));
+            const ctx = defineContext<{ foo: number }>(key);
+            ctx.create({ foo: value });
+            expect(ctx.get()).toEqual(expect.objectContaining({ foo: value }));
         });
     });
 
@@ -57,7 +58,8 @@ describe('context', () => {
             for (let i = 0; i < 10; i++) {
                 const key = Symbol(`foo${i}`);
                 const value = i;
-                defineContext<{ foo: number }>(key, { foo: value });
+                const ctx = defineContext<{ foo: number }>(key);
+                ctx.create({ foo: value });
             }
         });
 
@@ -77,7 +79,8 @@ describe('context', () => {
             for (let i = 0; i < 10; i++) {
                 const key = Symbol(`foo${i}`);
                 const value = i;
-                defineContext<{ foo: number }>(key, { foo: value });
+                const ctx = defineContext<{ foo: number }>(key);
+                ctx.create({ foo: value });
             }
 
             expect(getAllContexts().size).toBe(10);
@@ -86,18 +89,39 @@ describe('context', () => {
         });
     });
 
-    describe('getContext', () => {
+    describe('create', () => {
+        beforeEach(() => {
+            destroyAllContexts();
+        });
+
+        it('creates a new context with default values', () => {
+            context.create({
+                foo: 10,
+                bar: 'hello',
+                baz: true,
+            });
+
+            expect(context.get()).toEqual({
+                ...defaultLectorContext(),
+                foo: 10,
+                bar: 'hello',
+                baz: true,
+            });
+        });
+    });
+
+    describe('get', () => {
         it('throws an error when retrieving non-existent context', () => {
-            destroyMockContext();
-            expect(() => getMockContext()).toThrowError();
+            context.destroy();
+            expect(() => context.get()).toThrowError();
         });
 
         it('retrieves the current context', () => {
-            expect(getMockContext()).toEqual(expect.objectContaining({ foo: 10 }));
+            expect(context.get()).toEqual(expect.objectContaining({ foo: 10 }));
         });
 
         it('ensures immutability of context values', () => {
-            const ctx = getMockContext();
+            const ctx = context.get();
 
             expect(() => {
                 // Attempts to modify the readonly context should throw an error
@@ -109,27 +133,27 @@ describe('context', () => {
         });
 
         it('retrieves the latest context value without having to call getContext every time', () => {
-            const ctx = getMockContext();
+            const ctx = context.get();
 
             expect(ctx).toEqual(expect.objectContaining({ foo: 10 }));
-            updateMockContext(() => ({ foo: 20 }));
+            context.update(() => ({ foo: 20 }));
             expect(ctx).toEqual(expect.objectContaining({ foo: 20 }));
         });
     });
 
-    describe('updateContext', () => {
+    describe('update', () => {
         it('throws an error when updating non-existent context', () => {
-            destroyMockContext();
-            expect(() => updateMockContext(() => ({ foo: 20 }))).toThrowError();
+            context.destroy();
+            expect(() => context.update(() => ({ foo: 20 }))).toThrowError();
         });
 
         it('updates an existing context', () => {
-            updateMockContext(() => ({ foo: 20 }));
-            expect(getMockContext()).toEqual(expect.objectContaining({ foo: 20 }));
+            context.update(() => ({ foo: 20 }));
+            expect(context.get()).toEqual(expect.objectContaining({ foo: 20 }));
         });
 
         it('passes the current context value to the updater function', () => {
-            updateMockContext((ctx) => {
+            context.update((ctx) => {
                 expect(ctx).toEqual(expect.objectContaining({ foo: 10 }));
                 return { foo: 20 };
             });
@@ -156,10 +180,11 @@ describe('context', () => {
                 },
             };
 
-            const { getContext, updateContext } = defineContext(testKey, initialObject);
+            const ctx = defineContext(testKey);
 
-            updateContext(() => updateObject);
-            expect(getContext()).toEqual(expect.objectContaining(updateObject));
+            ctx.create(initialObject);
+            ctx.update(() => updateObject);
+            expect(ctx.get()).toEqual(expect.objectContaining(updateObject));
         });
 
         it('replaces arrays in complex objects', () => {
@@ -178,10 +203,11 @@ describe('context', () => {
                 },
             };
 
-            const { getContext, updateContext } = defineContext(testKey, initialObject);
+            const ctx = defineContext(testKey);
 
-            updateContext(() => updateObject);
-            expect(getContext()).toEqual(expect.objectContaining(updateObject));
+            ctx.create(initialObject);
+            ctx.update(() => updateObject);
+            expect(ctx.get()).toEqual(expect.objectContaining(updateObject));
         });
 
         // biome-ignore lint/suspicious/noSkippedTests: // TODO: https://github.com/unjs/defu/issues/95
@@ -189,13 +215,11 @@ describe('context', () => {
             const testKey = Symbol('foo');
             const initialObject = { a: 1, b: 2, c: 3 };
 
-            const { getContext, updateContext } = defineContext(testKey, initialObject);
+            const ctx = defineContext(testKey);
 
-            updateContext(() => ({
-                b: undefined,
-                d: 4,
-            }));
-            expect(getContext()).toEqual({ a: 1, b: undefined, c: 3, d: 4 });
+            ctx.create(initialObject);
+            ctx.update(() => ({ b: undefined, d: 4 }));
+            expect(ctx.get()).toEqual({ a: 1, b: undefined, c: 3, d: 4 });
         });
 
         it('preserves functions after update', () => {
@@ -207,15 +231,13 @@ describe('context', () => {
                 },
             };
 
-            const { getContext, updateContext } = defineContext(testKey, initialObject);
+            const ctx = defineContext<typeof initialObject>(testKey);
 
-            updateContext(() => ({
-                value: 20,
-            }));
+            ctx.create(initialObject);
+            ctx.update(() => ({ value: 20 }));
 
-            const ctx = getContext();
-            expect(ctx.value).toBe(20);
-            expect(ctx.double()).toBe(40);
+            expect(ctx.get().value).toBe(20);
+            expect(ctx.get().double()).toBe(40);
         });
 
         it('preserves RegExp instances after update', () => {
@@ -224,15 +246,15 @@ describe('context', () => {
                 foo: /foo/g,
             };
 
-            const { getContext, updateContext } = defineContext(testKey, initialObject);
+            const ctx = defineContext<typeof initialObject>(testKey);
 
-            updateContext((ctx) => {
+            ctx.create(initialObject);
+            ctx.update((ctx) => {
                 ctx.foo.lastIndex = 0;
                 return ctx;
             });
 
-            const ctx = getContext();
-            expect(ctx.foo.lastIndex).toBe(0);
+            expect(ctx.get().foo.lastIndex).toBe(0);
         });
 
         it('preserves Map instances after update', () => {
@@ -244,18 +266,18 @@ describe('context', () => {
                 ]),
             };
 
-            const { getContext, updateContext } = defineContext(testKey, initialObject);
+            const ctx = defineContext<typeof initialObject>(testKey);
 
-            updateContext((ctx) => {
+            ctx.create(initialObject);
+            ctx.update((ctx) => {
                 ctx.foo.set('key3', 3);
                 return ctx;
             });
 
-            const ctx = getContext();
-            expect(ctx.foo.size).toBe(3);
-            expect(ctx.foo.get('key1')).toBe(1);
-            expect(ctx.foo.get('key2')).toBe(2);
-            expect(ctx.foo.get('key3')).toBe(3);
+            expect(ctx.get().foo.size).toBe(3);
+            expect(ctx.get().foo.get('key1')).toBe(1);
+            expect(ctx.get().foo.get('key2')).toBe(2);
+            expect(ctx.get().foo.get('key3')).toBe(3);
         });
 
         it('preserves Set instances after update', () => {
@@ -264,65 +286,65 @@ describe('context', () => {
                 foo: new Set([1, 2]),
             };
 
-            const { getContext, updateContext } = defineContext(testKey, initialObject);
+            const ctx = defineContext<typeof initialObject>(testKey);
 
-            updateContext((ctx) => {
+            ctx.create(initialObject);
+            ctx.update((ctx) => {
                 ctx.foo.add(3);
                 return ctx;
             });
 
-            const ctx = getContext();
-            expect(ctx.foo.size).toBe(3);
-            expect(ctx.foo.has(1)).toBe(true);
-            expect(ctx.foo.has(2)).toBe(true);
-            expect(ctx.foo.has(3)).toBe(true);
+            expect(ctx.get().foo.size).toBe(3);
+            expect(ctx.get().foo.has(1)).toBe(true);
+            expect(ctx.get().foo.has(2)).toBe(true);
+            expect(ctx.get().foo.has(3)).toBe(true);
         });
     });
 
-    describe('destroyContext', () => {
+    describe('destroy', () => {
         it('destroys a specific context', () => {
-            destroyMockContext();
-            expect(() => getMockContext()).toThrowError();
+            context.destroy();
+            expect(() => context.get()).toThrowError();
         });
     });
 
     describe('subscribe', () => {
         it('allows subscribing to the context', () => {
             const mockSub = vi.fn();
-            subscribeMockContext(mockSub);
-            updateMockContext(() => ({ foo: 20 }));
+            context.subscribe(mockSub);
+            context.update(() => ({ foo: 20 }));
             expect(mockSub).toHaveBeenCalledTimes(1);
         });
 
         it('allows unsubscribing from the context', () => {
             const mockSub = vi.fn();
-            const unsubscribe = subscribeMockContext(mockSub);
+            const unsubscribe = context.subscribe(mockSub);
             unsubscribe();
-            updateMockContext(() => ({ foo: 20 }));
+            context.update(() => ({ foo: 20 }));
             expect(mockSub).toHaveBeenCalledTimes(0);
         });
 
         it('notifies subscriber with the latest context state', () => {
             const mockSub = vi.fn();
-            subscribeMockContext(mockSub);
-            updateMockContext(() => ({ foo: 20 }));
+            context.subscribe(mockSub);
+            context.update(() => ({ foo: 20 }));
             expect(mockSub).toHaveBeenCalledWith(expect.objectContaining({ foo: 20 }));
         });
 
         it('notifies each subscriber individually', () => {
             const mockSub1 = vi.fn();
             const mockSub2 = vi.fn();
-            subscribeMockContext(mockSub1);
-            subscribeMockContext(mockSub2);
-            updateMockContext(() => ({ foo: 20 }));
+            context.subscribe(mockSub1);
+            context.subscribe(mockSub2);
+            context.update(() => ({ foo: 20 }));
             expect(mockSub1).toHaveBeenCalledTimes(1);
             expect(mockSub2).toHaveBeenCalledTimes(1);
         });
 
         it('does not notify subscribers if the option is disabled', () => {
             const mockSub = vi.fn();
-            subscribeMockContext(mockSub);
-            updateMockContext(() => ({ foo: 20 }), { shouldNotifySubscribers: false });
+            context.subscribe(mockSub);
+            context.update(() => ({ foo: 20 }), { shouldNotifySubscribers: false });
             expect(mockSub).toHaveBeenCalledTimes(0);
         });
     });

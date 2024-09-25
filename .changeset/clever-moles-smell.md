@@ -3,4 +3,4 @@
 "@lectorjs/mode-rsvp": patch
 ---
 
-feat: implement context reactivity
+refactor: rework context and rsvp mode

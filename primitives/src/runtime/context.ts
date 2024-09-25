@@ -54,7 +54,16 @@ export type Context<T extends Record<string, unknown>> = {
      *
      * @returns The latest state of the context as a read-only object.
      */
-    getContext: () => Readonly<LectorContext<T>>;
+    get: () => Readonly<LectorContext<T>>;
+
+    /**
+     * Creates a new context instance.
+     *
+     * @param value The initial value of the context.
+     *
+     * @throws An error if the context is already found in the global context map.
+     */
+    create: (value: T) => void;
 
     /**
      * Updates the current context state with the provided updater.
@@ -64,7 +73,7 @@ export type Context<T extends Record<string, unknown>> = {
      *
      * @throws An error if the context is not found in the global context map.
      */
-    updateContext: (
+    update: (
         updater: (value: LectorContext<T>) => DeepPartial<LectorContext<T>>,
         options?: ContextUpdateOptions,
     ) => void;
@@ -76,12 +85,12 @@ export type Context<T extends Record<string, unknown>> = {
      *
      * @returns A function that unsubscribes from the context state changes.
      */
-    subscribeContext: (subscriber: (ctx: LectorContext<T>) => void) => () => void;
+    subscribe: (subscriber: (ctx: LectorContext<T>) => void) => () => void;
 
     /**
      * Destroys the context.
      */
-    destroyContext: () => void;
+    destroy: () => void;
 };
 
 /**
@@ -94,15 +103,8 @@ export type Context<T extends Record<string, unknown>> = {
  *
  * @returns A new merged context instance with the default lector global context state and the provided initial value.
  */
-export function defineContext<T extends Record<string, unknown>>(key: symbol, initialValue: T): Context<T> {
+export function defineContext<T extends Record<string, unknown>>(key: symbol): Context<T> {
     const subscribers = new Set<(ctx: LectorContext<T>) => void>();
-
-    if (!globalContext.has(key)) {
-        globalContext.set(key, {
-            ...defaultLectorContext(),
-            ...initialValue,
-        });
-    }
 
     const notifySubscribers = () => {
         for (const notifySubscriber of subscribers) {
@@ -125,7 +127,7 @@ export function defineContext<T extends Record<string, unknown>>(key: symbol, in
     });
 
     return {
-        getContext: () => {
+        get: () => {
             if (!globalContext.has(key)) {
                 throw new Error(
                     `Context '${String(key.description ?? key)}' not found. It's possible that the context was destroyed.`,
@@ -133,7 +135,11 @@ export function defineContext<T extends Record<string, unknown>>(key: symbol, in
             }
 
             return new Proxy(globalContext.get(key) as LectorContext<T>, {
-                get: (_target, prop) => {
+                get: (target, prop) => {
+                    if (typeof prop !== 'string') {
+                        return target[prop as keyof T];
+                    }
+
                     const latestCtx = globalContext.get(key) as LectorContext<T>;
                     return latestCtx[prop as keyof T];
                 },
@@ -148,7 +154,18 @@ export function defineContext<T extends Record<string, unknown>>(key: symbol, in
                 },
             });
         },
-        updateContext: (updater, { shouldNotifySubscribers = true } = {}) => {
+
+        create: (value) => {
+            if (globalContext.has(key)) {
+                throw new Error(`Context '${String(key.description ?? key)}' is already defined.`);
+            }
+
+            globalContext.set(key, {
+                ...defaultLectorContext(),
+                ...value,
+            });
+        },
+        update: (updater, { shouldNotifySubscribers = true } = {}) => {
             if (!globalContext.has(key)) {
                 throw new Error(
                     `Context '${String(key.description ?? key)}' not found. It's possible that the context was destroyed.`,
@@ -168,11 +185,11 @@ export function defineContext<T extends Record<string, unknown>>(key: symbol, in
             }
         },
 
-        subscribeContext: (subscriber) => {
+        subscribe: (subscriber) => {
             subscribers.add(subscriber);
             return () => subscribers.delete(subscriber);
         },
-        destroyContext: () => {
+        destroy: () => {
             globalContext.delete(key);
         },
     };

@@ -9,6 +9,11 @@ import type { ParsedData, Parser } from './parser.ts';
  */
 export interface Reader<T extends Mode> {
     /**
+     * The commands available in the current reading mode.
+     */
+    commands: T['commands'];
+
+    /**
      * Renders the parsed data of the reader based on the rendering strategy defined by a specific reading mode.
      *
      * @remarks
@@ -16,21 +21,6 @@ export interface Reader<T extends Mode> {
      * - This function may be used internally by some commands to trigger a re-render.
      */
     render(): void;
-
-    /**
-     * Executes a command from the current reading mode, dynamically invoking the corresponding function.
-     *
-     * @param name The name of the command to execute. This is inferred from the `commands` object of the reading mode.
-     * @param args Arguments to pass to the command function.
-     *
-     * @returns A promise that is resolved when the command has been executed, or rejected if an error occurs.
-     *
-     * @example
-     * ```ts
-     * reader.executeCommand('nextPage');
-     * ```
-     */
-    executeCommand(name: keyof T['commands']): Promise<void>;
 }
 
 export interface ReaderConfig<T extends Mode> {
@@ -87,6 +77,10 @@ class ReaderFactory<T extends Mode> implements Reader<T> {
 
     #data: ParsedData = new Map();
 
+    get commands(): T['commands'] {
+        return this.#mode.commands;
+    }
+
     constructor(options: ReaderConfig<T>) {
         if (!options.parser) {
             throw new Error('You must provide a valid parser in order to create a reader.');
@@ -117,15 +111,6 @@ class ReaderFactory<T extends Mode> implements Reader<T> {
     render(): void {
         const html = this.#mode.render?.() ?? '';
         this.#renderTo.innerHTML = this.#sanitizer ? this.#sanitizer(html) : html;
-    }
-
-    async executeCommand(name: keyof T['commands']): Promise<void> {
-        const cmd = this.#mode.commands?.[name as string];
-        if (!cmd) {
-            throw new Error(`Command '${String(cmd)}' not found. Make sure to execute a valid command.`);
-        }
-
-        await cmd({ render: this.render.bind(this) });
     }
 
     /**
