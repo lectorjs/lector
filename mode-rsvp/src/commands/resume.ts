@@ -1,36 +1,40 @@
 import type { Command } from '@lectorjs/primitives';
-import { getContext, updateContext } from '../context.ts';
-import nextCommand from './next.ts';
+import { context } from '../context.ts';
+import nextCommand from './go-forward.ts';
 
 export default function (): Command {
     const next = nextCommand();
 
-    return async (execCtx) => {
-        const ctx = getContext();
+    return async () => {
+        const ctx = context.get();
 
         if (ctx.isPlaying) {
             return;
         }
 
-        updateContext(() => ({
+        context.update((ctx) => ({
             isPlaying: true,
             isFinished: false,
-            checkpointd: ctx.checkpoint === ctx.parser.data.size - 1 ? 0 : ctx.checkpoint,
+            checkpoint: ctx.isFinished ? 0 : ctx.checkpoint,
         }));
 
         while (ctx.isPlaying && !ctx.isFinished) {
-            await next(execCtx);
+            await next();
 
             await new Promise((resolve) => {
-                setTimeout(resolve, 200);
+                setTimeout(resolve, calculateWaitTimeInMs(ctx.options.wordsPerMinute, ctx.options.wordsPerCycle));
             });
 
             if (ctx.checkpoint === ctx.parser.data.size - 1) {
-                updateContext(() => ({
+                context.update(() => ({
                     isPlaying: false,
                     isFinished: true,
                 }));
             }
         }
     };
+}
+
+function calculateWaitTimeInMs(wordsPerMinute: number, wordsPerCycle: number): number {
+    return (wordsPerCycle / wordsPerMinute) * 60 * 1000;
 }

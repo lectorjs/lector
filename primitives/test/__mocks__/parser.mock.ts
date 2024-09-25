@@ -1,7 +1,10 @@
 import { type Mocked, vi } from 'vitest';
 import type { Parser } from '../../src/parser.ts';
+import { tokenize } from '../../src/tokenizer.ts';
 
-export function createMockParser(words: string[]): Mocked<Parser> {
+export function createMockParser(text: string): Mocked<Parser> {
+    const words = tokenize(text);
+
     return {
         getWord: vi.fn(function* () {
             for (const word of words) {

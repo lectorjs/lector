@@ -1,5 +1,4 @@
 import { type Mocked, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { CommandExecutionContext } from '../src/command.ts';
 import type { Mode } from '../src/mode.ts';
 import type { Parser } from '../src/parser.ts';
 import { createReader } from '../src/reader.ts';
@@ -13,7 +12,7 @@ describe('reader', () => {
     let renderTo: HTMLElement;
 
     beforeEach(() => {
-        parser = createMockParser(MOCK_WORDS);
+        parser = createMockParser(MOCK_WORDS.join(' '));
         renderTo = document.createElement('div');
     });
 
@@ -139,50 +138,23 @@ describe('reader', () => {
                 renderTo,
             });
 
-            await reader.executeCommand('foo');
+            await reader.commands.foo();
             expect(mockMode.commands.foo).toHaveBeenCalled();
             expect(mockMode.commands.bar).not.toHaveBeenCalled();
             expect(mockMode.commands.baz).not.toHaveBeenCalled();
             vi.clearAllMocks();
 
-            await reader.executeCommand('bar');
+            await reader.commands.bar();
             expect(mockMode.commands.bar).toHaveBeenCalled();
             expect(mockMode.commands.foo).not.toHaveBeenCalled();
             expect(mockMode.commands.baz).not.toHaveBeenCalled();
             vi.clearAllMocks();
 
-            await reader.executeCommand('baz');
+            await reader.commands.baz();
             expect(mockMode.commands.baz).toHaveBeenCalled();
             expect(mockMode.commands.foo).not.toHaveBeenCalled();
             expect(mockMode.commands.bar).not.toHaveBeenCalled();
             vi.clearAllMocks();
-        });
-
-        it('has a valid execution context that can be used to interact with the reader', () => {
-            const mockMode = new MockMode();
-
-            createReader({
-                parser,
-                mode: mockMode,
-                renderTo,
-            }).executeCommand('foo');
-
-            expect(mockMode.commands.foo).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    render: expect.any(Function),
-                } satisfies CommandExecutionContext),
-            );
-        });
-
-        it('throws an error when executing an invalid command', async () => {
-            const reader = createReader({
-                mode: new MockMode(),
-                parser,
-                renderTo,
-            });
-
-            // @ts-expect-error command does not exist
-            await expect(reader.executeCommand('doSomething')).rejects.toThrowError(/not found/g);
         });
     });
 });

@@ -1,6 +1,6 @@
 import './style.css';
 
-import { RsvpMode, subscribeContext } from '@lectorjs/mode-rsvp';
+import { RsvpMode, context } from '@lectorjs/mode-rsvp';
 import parser from '@lectorjs/parser-text';
 import { createReader } from '@lectorjs/primitives';
 
@@ -16,7 +16,7 @@ const reader = createReader({
     renderTo: document.querySelector('#display') as HTMLElement,
 });
 
-subscribeContext(({ isFinished, isPlaying }) => {
+context.subscribe(({ isFinished, isPlaying }) => {
     if (isFinished) {
         toggle.textContent = 'Restart';
     } else if (isPlaying) {
@@ -24,26 +24,14 @@ subscribeContext(({ isFinished, isPlaying }) => {
     } else {
         toggle.textContent = 'Resume';
     }
+
+    reader.render();
 });
 
 reader.render();
 
-restart.addEventListener('click', async () => {
-    await reader.executeCommand('restart');
-});
-
-finish.addEventListener('click', async () => {
-    await reader.executeCommand('finish');
-});
-
-prev.addEventListener('click', async () => {
-    await reader.executeCommand('prev');
-});
-
-next.addEventListener('click', async () => {
-    await reader.executeCommand('next');
-});
-
-toggle.addEventListener('click', async () => {
-    await reader.executeCommand('toggle');
-});
+restart.addEventListener('click', reader.commands.goToStart);
+finish.addEventListener('click', reader.commands.goToEnd);
+prev.addEventListener('click', reader.commands.goBackward);
+next.addEventListener('click', reader.commands.goForward);
+toggle.addEventListener('click', reader.commands.toggle);

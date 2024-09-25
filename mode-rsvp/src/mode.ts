@@ -1,18 +1,18 @@
 import type { Command, Mode, ModeHookOnParsedFinishContext, ModeHookOnWordParsedContext } from '@lectorjs/primitives';
-import finish from './commands/finish.ts';
-import next from './commands/next.ts';
+import goBackward from './commands/go-backward.ts';
+import goForward from './commands/go-forward.ts';
+import goToEnd from './commands/go-to-end.ts';
+import goToStart from './commands/go-to-start.ts';
 import pause from './commands/pause.ts';
-import prev from './commands/prev.ts';
-import restart from './commands/restart.ts';
 import resume from './commands/resume.ts';
 import toggle from './commands/toggle.ts';
-import { getContext, updateContext } from './context.ts';
+import { context, defaultContext } from './context.ts';
 
 export type RsvpModeCommands = {
-    prev: Command;
-    next: Command;
-    restart: Command;
-    finish: Command;
+    goToStart: Command;
+    goToEnd: Command;
+    goBackward: Command;
+    goForward: Command;
     pause: Command;
     resume: Command;
     toggle: Command;
@@ -21,29 +21,28 @@ export type RsvpModeCommands = {
 export class RsvpMode implements Mode<RsvpModeCommands> {
     get commands(): RsvpModeCommands {
         return {
-            prev: prev(),
-            next: next(),
-            restart: restart(),
-            finish: finish(),
+            goToStart: goToStart(),
+            goToEnd: goToEnd(),
+            goBackward: goBackward(),
+            goForward: goForward(),
             pause: pause(),
             resume: resume(),
             toggle: toggle(),
         };
     }
 
+    constructor() {
+        context.create(defaultContext());
+    }
+
     render(): string {
-        const ctx = getContext();
+        const ctx = context.get();
 
-        const word = ctx.parser.data.get(ctx.checkpoint);
-        if (!word) {
-            return '';
-        }
-
-        return `<span>${word?.value}</span>`;
+        return `<span>${ctx.currentValue()}</span>`;
     }
 
     onWordParsed({ data, render }: ModeHookOnWordParsedContext): void {
-        updateContext(
+        context.update(
             () => ({
                 parser: { data },
             }),
@@ -52,14 +51,16 @@ export class RsvpMode implements Mode<RsvpModeCommands> {
             },
         );
 
-        // Trigger a re-render on first available word.
-        if (data.size === 1) {
+        const ctx = context.get();
+
+        // Trigger first render based on the `wordsPerCycle` option after the first set of available words are streamed
+        if (data.size % ctx.options.wordsPerCycle === 0) {
             render();
         }
     }
 
     onParsedFinish({ metadata }: ModeHookOnParsedFinishContext): void {
-        updateContext(
+        context.update(
             () => ({
                 parser: {
                     metadata,
