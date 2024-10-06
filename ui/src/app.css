@@ -1,0 +1,20 @@
+@import url("./themes/lector.css");
+
+* {
+  @apply border-border;
+}
+
+html,
+body {
+  @apply h-full;
+}
+
+html {
+  @apply font-sans;
+}
+
+body {
+  @apply bg-background text-foreground;
+  @apply font-size-[100%] font-inherit;
+  @apply m-0 p-0 box-border;
+}

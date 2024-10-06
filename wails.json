@@ -1,0 +1,15 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "lector",
+  "outputfilename": "lector",
+  "assetdir": "ui/dist",
+  "frontend:dir": "ui",
+  "frontend:install": "bun install",
+  "frontend:build": "bun run build",
+  "frontend:dev:watcher": "bun run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "ju4n97",
+    "email": "ju4n97@proton.me"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["@jm/biome"],
+  "files": {
+    "ignore": ["./src/lib/components/ui/**"]
+  },
+  "overrides": [
+    {
+      "include": ["*.svelte"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUndeclaredVariables": "off",
+            "noUnusedVariables": "off",
+            "noUnusedImports": "off"
+          },
+          "style": {
+            "noNamespaceImport": "off",
+            "useImportType": "off",
+            "useConst": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["uno.config.js", "uno.config.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useNamingConvention": "off"
+          }
+        }
+      }
+    }
+  ]
+}
