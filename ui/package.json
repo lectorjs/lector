@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json"
+    "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
+    "lint": "biome lint --write .",
+    "format": "biome format --write . && prettier --write src/*.svelte"
   },
   "dependencies": {
     "bits-ui": "^0.21.16",

@@ -1,0 +1,42 @@
+version: "3"
+
+tasks:
+  default:
+    desc: "Setup development environment"
+    cmds:
+      - task: install
+
+  install:
+    desc: "Install project dependencies and tools required for development"
+    cmds:
+      - go mod tidy
+      - go mod download
+      - go install github.com/wailsapp/wails/v2/cmd/wails@latest
+      - go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+  build:
+    desc: "Build the project"
+    cmds:
+      - wails build      
+
+  dev:
+    desc: "Start the project in development mode"
+    cmds:
+      - wails dev
+
+  test:
+    desc: "Run unit tests"
+    cmds:
+      - go test ./...      
+  
+  lint:
+    desc: "Lint the project"
+    cmds:
+      - golangci-lint run ./... --fix
+      - bun run --cwd ui lint
+
+  format:
+    desc: "Format the project"
+    cmds:
+      - go fmt ./...
+      - bun run --cwd ui format

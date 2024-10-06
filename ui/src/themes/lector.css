@@ -1,4 +1,3 @@
-
 :root {
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
@@ -14,7 +13,7 @@
 
   --border: 240 5.9% 90%;
   --input: 240 5.9% 90%;
-  
+
   --primary-50: 217 91% 95%;
   --primary-100: 217 88% 86%;
   --primary-200: 218 88% 77%;
@@ -57,7 +56,7 @@
 
   --border: 240 3.7% 15.9%;
   --input: 240 3.7% 15.9%;
-  
+
   --primary-foreground: 0 0% 98%;
 
   --secondary: 240 3.7% 15.9%;

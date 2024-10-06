@@ -1,0 +1,72 @@
+[run]
+timeout = "5m"
+
+[linters]
+# https://golangci-lint.run/usage/linters
+disable-all = true
+enable = [
+  "asasalint",
+  "asciicheck",
+  "bidichk",
+  "bodyclose",
+  "dupword",
+  "durationcheck",
+  "errcheck",
+  "errname",
+  "copyloopvar",
+  "fatcontext",
+  "forbidigo",
+  "gocognit",
+  "goconst",
+  "gocritic",
+  "gocyclo",
+  "godot",
+  "godox",
+  "gofmt",
+  "gomodguard",
+  "goprintffuncname",
+  "gosec",
+  "gosimple",
+  "gosmopolitan",
+  "govet",
+  "importas",
+  "importas",
+  "inamedparam",
+  "ineffassign",
+  "interfacebloat",
+  "loggercheck",
+  "maintidx",
+  "mirror",
+  "misspell",
+  "mnd",
+  "nakedret",
+  "nestif",
+  "nilerr",
+  "nilnil",
+  "noctx",
+  "nolintlint",
+  "paralleltest",
+  "perfsprint",
+  "prealloc",
+  "sqlclosecheck",
+  "staticcheck",
+  "tagalign",
+  "typecheck",
+  "unconvert",
+  "unparam",
+  "unused",
+  "usestdlibvars",
+  "wastedassign",
+  "whitespace",
+  "wsl",
+]
+
+[linters-settings.mnd]
+checks = ["argument", "case", "condition", "operation", "return"]
+
+[linters-settings.wsl]
+allow-cuddle-declarations = true
+
+[[issues.exclude-rules]]
+path = "_test\\.go"
+linters = ["gocritic", "gocyclo", "gosec", "govet", "noctx"]
