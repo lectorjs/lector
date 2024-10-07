@@ -9,14 +9,12 @@
     <summary>Local development</summary>
 
 - Clone this repository.
-- Install Go version above 1.20.
-- Install the latest version of [Task](https://taskfile.dev/).
-- Install the latest version of [Bun](https://bun.sh/).
-- Run:
-  - `task dev` to start the application in development mode.  
-  - `task test` to run the unit tests.
-  - `task lint` to run the linter.
-  - `task format` to run the formatter.
+- Install:
+  - [Go](https://go.dev/)
+  - [Task](https://taskfile.dev/)
+  - [Bun](https://bun.sh/)
+- Run `task install` to install the project dependencies.
+- Run `task --list` to list the available commands.
 
 </details>
 

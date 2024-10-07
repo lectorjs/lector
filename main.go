@@ -4,19 +4,21 @@ import (
 	"embed"
 	"log"
 
+	"github.com/lectorjs/lector/pkg/reader/rsvp"
+
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
 )
 
-//go:embed all:ui/dist
+//go:embed all:gui/dist
 var assets embed.FS
 
 func main() {
-	// Create an instance of the app structure
-	app := NewApp()
 
-	// Create application with options
+	app := NewApp()
+	rsvp := rsvp.New()
+
 	err := wails.Run(&options.App{
 		Title:  "lector",
 		Width:  1024,
@@ -28,6 +30,7 @@ func main() {
 		OnStartup:        app.startup,
 		Bind: []interface{}{
 			app,
+			rsvp,
 		},
 	})
 
