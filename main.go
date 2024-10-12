@@ -3,38 +3,30 @@ package main
 import (
 	"embed"
 	"log"
+	"os"
 
-	"github.com/lectorjs/lector/pkg/reader/rsvp"
-
-	"github.com/wailsapp/wails/v2"
-	"github.com/wailsapp/wails/v2/pkg/options"
-	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
+	"github.com/lectorjs/lector/cmd"
+	"github.com/urfave/cli/v2"
 )
 
-//go:embed all:gui/dist
+//go:embed gui/dist
 var assets embed.FS
 
 func main() {
-
-	app := NewApp()
-	rsvp := rsvp.New()
-
-	err := wails.Run(&options.App{
-		Title:  "lector",
-		Width:  1024,
-		Height: 768,
-		AssetServer: &assetserver.Options{
-			Assets: assets,
+	app := &cli.App{
+		Name:                 "Lector",
+		Usage:                "Your friendly reader",
+		Version:              "0.0.0",
+		EnableBashCompletion: true,
+		Commands: []*cli.Command{
+			cmd.NewGuiCommand(cmd.NewGuiOptions{
+				Assets: assets,
+			}),
 		},
-		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
-		OnStartup:        app.startup,
-		Bind: []interface{}{
-			app,
-			rsvp,
-		},
-	})
+	}
 
-	if err != nil {
-		log.Fatalf("Error starting application: %v\n", err)
+	if err := app.Run(os.Args); err != nil {
+		log.Fatalf("Failed to start Lector: %v\n", err)
+		os.Exit(1)
 	}
 }
