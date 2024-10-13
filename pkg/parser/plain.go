@@ -1,4 +1,4 @@
-package plaintext
+package parser
 
 import (
 	"bufio"
@@ -8,14 +8,13 @@ import (
 	"strings"
 
 	"github.com/lectorjs/lector/pkg/primitive/node"
-	"github.com/lectorjs/lector/pkg/runtime/errorx"
 )
 
-type PlaintextParser struct {
+type PlainParser struct {
 	input io.Reader
 }
 
-func NewPlaintextParser(input interface{}) (*PlaintextParser, error) {
+func NewPlainParser(input interface{}) (*PlainParser, error) {
 	var reader io.Reader
 
 	switch v := input.(type) {
@@ -24,17 +23,13 @@ func NewPlaintextParser(input interface{}) (*PlaintextParser, error) {
 	case *os.File:
 		reader = v
 	default:
-		return nil, errorx.NewParserError(errorx.NewFormattedErrorOptions{
-			Type:    errorx.ErrParserUnsupportedType,
-			Message: fmt.Sprintf("type %T is not supported", v),
-			Err:     nil,
-		})
+		return nil, fmt.Errorf("unsupported type %T", v)
 	}
 
-	return &PlaintextParser{input: reader}, nil
+	return &PlainParser{input: reader}, nil
 }
 
-func (p *PlaintextParser) StreamNodes() (<-chan node.Node, <-chan error) {
+func (p *PlainParser) StreamNodes() (<-chan node.Node, <-chan error) {
 	nodeChan := make(chan node.Node)
 	errorChan := make(chan error)
 
@@ -66,11 +61,7 @@ func (p *PlaintextParser) StreamNodes() (<-chan node.Node, <-chan error) {
 		}
 
 		if err := scanner.Err(); err != nil {
-			errorChan <- errorx.NewParserError(errorx.NewFormattedErrorOptions{
-				Type:    errorx.ErrParserScanner,
-				Message: fmt.Sprintf("scanner error at position %d", position),
-				Err:     err,
-			})
+			errorChan <- fmt.Errorf("failed to scan: %w", err)
 		}
 	}()
 

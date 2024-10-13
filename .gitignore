@@ -49,4 +49,3 @@ coverage
 
 # Temporary files
 tmp
-.BULK_RENAME.txt

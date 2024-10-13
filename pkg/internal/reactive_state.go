@@ -7,20 +7,22 @@ import (
 )
 
 type ReactiveState[T any] struct {
-	mu          sync.RWMutex
 	value       T
 	subscribers []ReactiveStateSubscriber[T]
 	timestamp   time.Time
+
+	mu sync.RWMutex
 }
 
 type ReactiveStateSubscriber[T any] func(old, state *T)
 
 func NewReactiveState[T any](initialValue T) *ReactiveState[T] {
 	return &ReactiveState[T]{
-		mu:          sync.RWMutex{},
 		value:       initialValue,
 		subscribers: make([]ReactiveStateSubscriber[T], 0),
 		timestamp:   time.Now(),
+
+		mu: sync.RWMutex{},
 	}
 }
 

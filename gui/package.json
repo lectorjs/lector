@@ -1,5 +1,5 @@
 {
-  "name": "ui",
+  "name": "gui",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -21,6 +21,7 @@
     "vaul-svelte": "^0.3.2"
   },
   "devDependencies": {
+    "@wailsio/runtime": "latest",
     "@biomejs/biome": "^1.9.3",
     "@iconify/json": "^2.2.256",
     "@jm/biome": "npm:@jsr/jm__biome@0.0.4",

@@ -7,7 +7,7 @@ import (
 	"math"
 
 	"github.com/lectorjs/lector/pkg/internal"
-	"github.com/lectorjs/lector/pkg/parser/plaintext"
+	"github.com/lectorjs/lector/pkg/parser"
 	"github.com/lectorjs/lector/pkg/primitive/node"
 )
 
@@ -40,7 +40,7 @@ type RsvpStateSettings struct {
 	NodesPerCycle  uint8
 }
 
-func New() *RsvpService {
+func NewService() *RsvpService {
 	initialState := RsvpState{
 		Nodes:      []node.Node{},
 		Checkpoint: 0,
@@ -63,13 +63,20 @@ func (r *RsvpService) OnStartup(ctx context.Context) {
 	r.ctx = ctx
 
 	r.State.Subscribe(func(old, new *RsvpState) {
-
 		fmt.Printf("State changed from %v to %v\n", old, new)
 	})
 }
 
+func (r *RsvpService) OnDomReady(ctx context.Context) {
+	// Nothing to do here yet
+}
+
+func (r *RsvpService) OnShutdown(ctx context.Context) {
+	// Nothing to do here yet
+}
+
 func (r *RsvpService) StreamNodes(input string) (<-chan node.Node, <-chan error) {
-	parser, err := plaintext.NewPlaintextParser(input)
+	parser, err := parser.NewPlainParser(input)
 	if err != nil {
 		log.Fatalf("Error creating plaintext parser: %v\n", err)
 	}

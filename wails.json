@@ -2,7 +2,7 @@
   "$schema": "https://wails.io/schemas/config.v2.json",
   "name": "lector",
   "outputfilename": "lector",
-  "assetdir": "gui/dist",
+  "assetdir": "gui/dist",  
   "frontend:dir": "gui",
   "frontend:install": "bun install",
   "frontend:build": "bun run build",

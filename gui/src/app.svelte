@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
     import { Button } from "$lib/components/ui/button";
     import { rsvp } from "$wailsjs/go/models";
     import { SkipBackward, SkipFoward, StreamNodes } from "$wailsjs/go/rsvp/Rsvp";
@@ -37,8 +37,6 @@
             >
                 Prev
             </Button>
-            <!-- <Button onclick={handleResume}>Resume</Button>
-            <Button onclick={handlePause}>Pause</Button> -->
             <Button
                 variant="secondary"
                 onclick={handleSkipForward}
@@ -47,4 +45,6 @@
             </Button>
         </div>
     </div>
-</main>
+</main> -->
+
+<h1 class="text-6xl">Rendered ✅</h1>

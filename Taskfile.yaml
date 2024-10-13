@@ -2,36 +2,36 @@ version: "3"
 
 tasks:
   install:
-    desc: "Install project dependencies and tools required for development"
+    desc: "Installs the project dependencies and tools required for development"
     cmds:
       - go mod tidy
       - go mod download
       - go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-      - go install -v github.com/wailsapp/wails/v3/cmd/wails3@latest
+      - go install github.com/wailsapp/wails/v2/cmd/wails@latest
 
   build:
-    desc: "Build the project"
+    desc: "Builds the project"
     cmds:
-      - task: "{{OS}}:build"
+      - task: wails build
 
   dev:
-    desc: "Start the project in development mode"
+    desc: "Starts the project in development mode"
     cmds:
-      - task: "{{OS}}:run"
+      - task: wails dev
 
   test:
-    desc: "Run unit tests"
+    desc: "Runs unit tests"
     cmds:
       - go test ./...      
   
   lint:
-    desc: "Lint the project"
+    desc: "Lints the project"
     cmds:
       - golangci-lint run ./... --fix
       - bun run --cwd ui lint
 
   format:
-    desc: "Format the project"
+    desc: "Formats the project"
     cmds:
       - go fmt ./...
       - bun run --cwd ui format
