@@ -76,7 +76,6 @@ func NewAnalyzeCommand() *cli.Command {
 			},
 		},
 		Action: func(ctx *cli.Context) error {
-
 			filePath := ctx.Args().Get(0)
 			if filePath == "" {
 				return lectorerror.NewCliError(ctx).GetNoArgError()

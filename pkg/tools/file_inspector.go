@@ -57,6 +57,7 @@ func (f *FileInspector) IsExist() bool {
 	if _, err := os.Stat(f.path); errors.Is(err, os.ErrNotExist) {
 		return false
 	}
+
 	return true
 }
 
