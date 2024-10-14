@@ -78,7 +78,6 @@ func (r *Rsvp) StreamNodes(input string) (<-chan node.Node, <-chan error) {
 			}
 		}
 	}
-
 }
 
 func (r *Rsvp) JumpToStart() {
