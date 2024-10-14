@@ -15,7 +15,7 @@ func TestNewFileInspector(t *testing.T) {
 }
 
 func TestGetMimeType(t *testing.T) {
-	testCases := []struct {
+	tests := []struct {
 		name              string
 		path              string
 		content           string
@@ -53,33 +53,35 @@ func TestGetMimeType(t *testing.T) {
 		},
 	}
 
-	for _, c := range testCases {
-		inspector := tools.NewFileInspector(c.path)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			inspector := tools.NewFileInspector(tt.path)
 
-		if c.shouldCreate {
-			_, err := os.Create(c.path)
-			assert.NoError(t, err)
-			defer os.Remove(c.path)
-
-			if c.content != "" {
-				f, err := os.OpenFile(c.path, os.O_APPEND|os.O_WRONLY, 0644)
+			if tt.shouldCreate {
+				_, err := os.Create(tt.path)
 				assert.NoError(t, err)
-				defer f.Close()
+				defer os.Remove(tt.path)
 
-				_, err = f.WriteString(c.content)
+				if tt.content != "" {
+					f, err := os.OpenFile(tt.path, os.O_APPEND|os.O_WRONLY, 0644)
+					assert.NoError(t, err)
+					defer f.Close()
+
+					_, err = f.WriteString(tt.content)
+					assert.NoError(t, err)
+				}
+			}
+
+			mtype, err := inspector.GetMimeType()
+
+			if tt.shouldExpectError {
+				assert.Error(t, err)
+			} else {
 				assert.NoError(t, err)
 			}
-		}
 
-		mtype, err := inspector.GetMimeType()
-
-		if c.shouldExpectError {
-			assert.Error(t, err)
-		} else {
-			assert.NoError(t, err)
-		}
-
-		assert.Equal(t, c.expected, mtype)
+			assert.Equal(t, tt.expected, mtype)
+		})
 	}
 }
 

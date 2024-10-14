@@ -6,7 +6,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
     resolve: {
         alias: {
-            $wailsjs: '/wailsjs',
+            $bindings: '/bindings',
             $lib: '/src/lib',
         },
     },
