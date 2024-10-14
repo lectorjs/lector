@@ -1,6 +1,6 @@
 # Contributor's guide
 
-Before you start, consider taking a look at the [documentation](https://lector.pages.dev/docs). It will give you a good understanding of the project and can help you understand the context of your contributions.
+This page contains information about reporting issues, as well as some tips and guidelines useful for open source contributors. Before you start, consider taking a look at the Lector's [documentation](https://lector.pages.dev/docs); it will provide a good understanding of the project and can help you understand the context of your contributions.
 
 ## How to contribute
 
@@ -33,9 +33,22 @@ If you’re new to the codebase, consider starting with issues labeled as [good 
 
 This project uses the following tools to maintain consistent coding styles:
 
-1. [golangci](https://github.com/golangci/golangci-lint) for linting of Go code.
-2. [Biome](https://biomejs.dev/) for linting and formatting of the UI project. The configuration can be found in [biome.json](ui/biome.json).
-3. [EditorConfig](https://editorconfig.org/) for maintaining consistent coding styles across various editors and IDEs. The configuration can be found in [.editorconfig](.editorconfig).
+- [golangci-lint](https://github.com/golangci/golangci-lint) ([config](.golangci.toml)) for linting of Go code and [gofmt](https://pkg.go.dev/cmd/gofmt) for formatting.
+- [Biome](https://biomejs.dev/) ([config](gui/biome.json)) for linting and formatting of JS code.
+- [EditorConfig](https://editorconfig.org/) ([config](.editorconfig)) for maintaining consistent coding styles across various editors and IDEs.
+
+### Project structure
+
+- `cmd`: Main application commands.
+- `exmfile`: Example files for testing and demos.
+- `internal`: Internal packages for reusable internal logic.
+- `pkg`: Publicly accessible packages; use for public-facing functionality.
+- `runtime`: Logic related to application runtime and state management; use for dynamic behavior code.
+- `services`: [Wails v3 services](https://v3alpha.wails.io/learn/services/)
+- `tools`: Utility scripts for tasks and automation.
+- **Root files:**
+  - `main.go`: Main entry point of the application.
+  - `Taskfile.yaml`: Task automation configuration by [Task](https://taskfile.dev/).
 
 ## Git workflow
 

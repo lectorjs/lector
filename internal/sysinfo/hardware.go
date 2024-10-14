@@ -1,9 +1,9 @@
-package flags
+package sysinfo
 
 import (
 	"strings"
 
-	"github.com/lectorjs/lector/pkg/internal/types"
+	"github.com/lectorjs/lector/internal/types"
 )
 
 // HasNvidiaGPU checks if an NVIDIA GPU is present on the system.

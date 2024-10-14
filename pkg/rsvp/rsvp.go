@@ -1,14 +1,12 @@
 package rsvp
 
 import (
-	"context"
-	"fmt"
 	"log"
 	"math"
 
-	"github.com/lectorjs/lector/pkg/internal"
+	"github.com/lectorjs/lector/pkg/node"
 	"github.com/lectorjs/lector/pkg/parser"
-	"github.com/lectorjs/lector/pkg/primitive/node"
+	reactive "github.com/lectorjs/lector/runtime/state"
 )
 
 const (
@@ -22,10 +20,9 @@ const (
 	EventStateChanged RsvpEvent = "rsvp::stateChanged"
 )
 
-type RsvpService struct {
-	ctx      context.Context
+type Rsvp struct {
 	Settings RsvpStateSettings
-	State    *internal.ReactiveState[RsvpState]
+	State    *reactive.State[RsvpState]
 }
 
 type RsvpState struct {
@@ -40,7 +37,7 @@ type RsvpStateSettings struct {
 	NodesPerCycle  uint8
 }
 
-func NewService() *RsvpService {
+func New() *Rsvp {
 	initialState := RsvpState{
 		Nodes:      []node.Node{},
 		Checkpoint: 0,
@@ -48,34 +45,18 @@ func NewService() *RsvpService {
 		IsFinished: false,
 	}
 
-	reactiveState := internal.NewReactiveState(initialState)
+	state := reactive.NewState(initialState)
 
-	return &RsvpService{
+	return &Rsvp{
 		Settings: RsvpStateSettings{
 			NodesPerMinute: DefaultNodesPerMinute,
 			NodesPerCycle:  DefaultNodesPerCycle,
 		},
-		State: reactiveState,
+		State: state,
 	}
 }
 
-func (r *RsvpService) OnStartup(ctx context.Context) {
-	r.ctx = ctx
-
-	r.State.Subscribe(func(old, new *RsvpState) {
-		fmt.Printf("State changed from %v to %v\n", old, new)
-	})
-}
-
-func (r *RsvpService) OnDomReady(ctx context.Context) {
-	// Nothing to do here yet
-}
-
-func (r *RsvpService) OnShutdown(ctx context.Context) {
-	// Nothing to do here yet
-}
-
-func (r *RsvpService) StreamNodes(input string) (<-chan node.Node, <-chan error) {
+func (r *Rsvp) StreamNodes(input string) (<-chan node.Node, <-chan error) {
 	parser, err := parser.NewPlainParser(input)
 	if err != nil {
 		log.Fatalf("Error creating plaintext parser: %v\n", err)
@@ -100,25 +81,25 @@ func (r *RsvpService) StreamNodes(input string) (<-chan node.Node, <-chan error)
 
 }
 
-func (r *RsvpService) JumpToStart() {
+func (r *Rsvp) JumpToStart() {
 	r.State.Update(RsvpState{
 		Checkpoint: 0,
 	})
 }
 
-func (r *RsvpService) JumpToEnd() {
+func (r *Rsvp) JumpToEnd() {
 	r.State.Update(RsvpState{
 		Checkpoint: uint32(len(r.State.Get().Nodes)),
 	})
 }
 
-func (r *RsvpService) JumpToCheckpoint(checkpoint uint32) {
+func (r *Rsvp) JumpToCheckpoint(checkpoint uint32) {
 	r.State.Update(RsvpState{
 		Checkpoint: checkpoint,
 	})
 }
 
-func (r *RsvpService) SkipBackward() {
+func (r *Rsvp) SkipBackward() {
 	checkpoint := float64(r.State.Get().Checkpoint)
 	npc := float64(r.Settings.NodesPerCycle)
 
@@ -127,7 +108,7 @@ func (r *RsvpService) SkipBackward() {
 	})
 }
 
-func (r *RsvpService) SkipFoward() {
+func (r *Rsvp) SkipFoward() {
 	checkpoint := float64(r.State.Get().Checkpoint)
 	npc := float64(r.Settings.NodesPerCycle)
 
@@ -136,7 +117,7 @@ func (r *RsvpService) SkipFoward() {
 	})
 }
 
-// func (r *RsvpService) Pause(ctx context.Context) {
+// func (r *Rsvp) Pause(ctx context.Context) {
 // 	r.mu.Lock()
 // 	defer r.mu.Unlock()
 
@@ -146,7 +127,7 @@ func (r *RsvpService) SkipFoward() {
 // 	}
 // }
 
-// func (r *RsvpService) Resume(ctx context.Context) {
+// func (r *Rsvp) Resume(ctx context.Context) {
 // 	r.mu.Lock()
 // 	defer r.mu.Unlock()
 
@@ -156,11 +137,11 @@ func (r *RsvpService) SkipFoward() {
 // 	}
 // }
 
-// func (r *RsvpService) traverseInterval() time.Duration {
+// func (r *Rsvp) traverseInterval() time.Duration {
 // 	return time.Minute / time.Duration(r.State.Settings.NodesPerMinute)
 // }
 
-// func (r *RsvpService) traverseCycle(ctx context.Context) {
+// func (r *Rsvp) traverseCycle(ctx context.Context) {
 // 	checkpoint := r.SkipFoward(ctx)
 
 // 	if checkpoint == uint32(len(r.State.Nodes)) {

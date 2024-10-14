@@ -1,4 +1,4 @@
-package internal
+package reactive
 
 import (
 	"reflect"
@@ -6,34 +6,34 @@ import (
 	"time"
 )
 
-type ReactiveState[T any] struct {
+type State[T any] struct {
 	value       T
-	subscribers []ReactiveStateSubscriber[T]
+	subscribers []StateSubscriber[T]
 	timestamp   time.Time
 
 	mu sync.RWMutex
 }
 
-type ReactiveStateSubscriber[T any] func(old, state *T)
+type StateSubscriber[T any] func(old, state *T)
 
-func NewReactiveState[T any](initialValue T) *ReactiveState[T] {
-	return &ReactiveState[T]{
+func NewState[T any](initialValue T) *State[T] {
+	return &State[T]{
 		value:       initialValue,
-		subscribers: make([]ReactiveStateSubscriber[T], 0),
+		subscribers: make([]StateSubscriber[T], 0),
 		timestamp:   time.Now(),
 
 		mu: sync.RWMutex{},
 	}
 }
 
-func (rs *ReactiveState[T]) Get() T {
+func (rs *State[T]) Get() T {
 	rs.mu.RLock()
 	defer rs.mu.RUnlock()
 
 	return rs.value
 }
 
-func (rs *ReactiveState[T]) Update(value T) {
+func (rs *State[T]) Update(value T) {
 	rs.mu.Lock()
 	oldValue := rs.value
 	rs.value = value
@@ -47,13 +47,13 @@ func (rs *ReactiveState[T]) Update(value T) {
 	}
 }
 
-func (rs *ReactiveState[T]) Subscribe(subscriber ReactiveStateSubscriber[T]) {
+func (rs *State[T]) Subscribe(subscriber StateSubscriber[T]) {
 	rs.mu.Lock()
 	defer rs.mu.Unlock()
 
 	rs.subscribers = append(rs.subscribers, subscriber)
 }
 
-func (rs *ReactiveState[T]) GetTimestamp() time.Time {
+func (rs *State[T]) GetTimestamp() time.Time {
 	return rs.timestamp
 }

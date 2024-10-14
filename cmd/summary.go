@@ -1,11 +1,11 @@
-package cli
+package cmd
 
 import (
 	"fmt"
 	"log"
 
-	lectorerror "github.com/lectorjs/lector/pkg/runtime/lector_error"
-	"github.com/lectorjs/lector/pkg/tools/inspector"
+	"github.com/lectorjs/lector/internal/errx"
+	"github.com/lectorjs/lector/pkg/inspector"
 	"github.com/urfave/cli/v2"
 )
 
@@ -16,9 +16,9 @@ func NewSummaryCommand() *cli.Command {
 	var flagLanguage string
 
 	return &cli.Command{
-		Name:      "analyze",
+		Name:      "summary",
 		Usage:     "Generates an an AI-powered summary of a file or website content",
-		UsageText: "lector analyze [OPTIONS] [INPUT_SOURCE]",
+		UsageText: "lector summary [OPTIONS] [INPUT_SOURCE]",
 		Flags: []cli.Flag{
 			&cli.BoolFlag{
 				Name:        "gui",
@@ -36,7 +36,7 @@ func NewSummaryCommand() *cli.Command {
 				Destination: &flagLength,
 				Action: func(ctx *cli.Context, v uint) error {
 					if v < 10 || v > 1000 {
-						return lectorerror.NewCliError(ctx).GetCustomError("'--length' requires a value between 10 and 1000")
+						return errx.NewCliError(ctx).GetCustomError("'--length' requires a value between 10 and 1000")
 					}
 					return nil
 				},
@@ -53,12 +53,12 @@ func NewSummaryCommand() *cli.Command {
 		Action: func(cCtx *cli.Context) error {
 			filePath := cCtx.Args().Get(0)
 			if filePath == "" {
-				return lectorerror.NewCliError(cCtx).GetNoArgError()
+				return errx.NewCliError(cCtx).GetNoArgError()
 			}
 
 			fileInspector := inspector.NewFileInspector(filePath)
 			if !fileInspector.IsValid() {
-				return lectorerror.NewCliError(cCtx).GetCustomError(
+				return errx.NewCliError(cCtx).GetCustomError(
 					fmt.Sprintf("requires a valid file path. %q was not found", filePath),
 				)
 			}

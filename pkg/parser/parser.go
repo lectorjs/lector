@@ -1,6 +1,6 @@
 package parser
 
-import "github.com/lectorjs/lector/pkg/primitive/node"
+import "github.com/lectorjs/lector/pkg/node"
 
 type Parser interface {
 	StreamNodes() (<-chan node.Node, <-chan error)

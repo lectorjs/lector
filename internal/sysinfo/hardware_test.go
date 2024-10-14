@@ -1,11 +1,11 @@
-package flags_test
+package sysinfo_test
 
 import (
 	"os/exec"
 	"testing"
 
-	"github.com/lectorjs/lector/pkg/flags"
-	"github.com/lectorjs/lector/pkg/internal/types"
+	"github.com/lectorjs/lector/internal/sysinfo"
+	"github.com/lectorjs/lector/internal/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -40,7 +40,7 @@ func TestHasNvidiaGPU(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := flags.HasNvidiaGPU(tt.command)
+			result := sysinfo.HasNvidiaGPU(tt.command)
 			assert.Equal(t, tt.expected, result)
 		})
 	}

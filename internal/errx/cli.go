@@ -1,4 +1,4 @@
-package lectorerror
+package errx
 
 import (
 	"fmt"

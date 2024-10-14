@@ -1,12 +1,12 @@
-package cli
+package cmd
 
 import (
 	"fmt"
 	"log"
 	"slices"
 
-	lectorerror "github.com/lectorjs/lector/pkg/runtime/lector_error"
-	"github.com/lectorjs/lector/pkg/tools/inspector"
+	"github.com/lectorjs/lector/internal/errx"
+	"github.com/lectorjs/lector/pkg/inspector"
 	"github.com/urfave/cli/v2"
 )
 
@@ -30,7 +30,7 @@ func NewAnalyzeCommand() *cli.Command {
 				Destination: &flagOutput,
 				Action: func(ctx *cli.Context, v string) error {
 					if !slices.Contains(supportedOutputFormats, v) {
-						return lectorerror.NewCliError(ctx).GetCustomError(fmt.Sprintf("'--output' must be one of the following: %s", supportedOutputFormats))
+						return errx.NewCliError(ctx).GetCustomError(fmt.Sprintf("'--output' must be one of the following: %s", supportedOutputFormats))
 					}
 					return nil
 				},
@@ -39,12 +39,12 @@ func NewAnalyzeCommand() *cli.Command {
 		Action: func(cCtx *cli.Context) error {
 			filePath := cCtx.Args().Get(0)
 			if filePath == "" {
-				return lectorerror.NewCliError(cCtx).GetNoArgError()
+				return errx.NewCliError(cCtx).GetNoArgError()
 			}
 
 			fileInspector := inspector.NewFileInspector(filePath)
 			if !fileInspector.IsValid() {
-				return lectorerror.NewCliError(cCtx).GetCustomError(
+				return errx.NewCliError(cCtx).GetCustomError(
 					fmt.Sprintf("requires a valid file path. %q was not found", filePath),
 				)
 			}

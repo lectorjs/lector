@@ -4,8 +4,8 @@ package rsvp_test
 // 	"context"
 // 	"testing"
 
-// 	"github.com/lectorjs/lector/pkg/primitive/node"
-// 	"github.com/lectorjs/lector/pkg/reader/rsvp"
+// 	"github.com/lectorjs/lector/primitive/node"
+// 	"github.com/lectorjs/lector/reader/rsvp"
 // 	"github.com/stretchr/testify/assert"
 // )
 

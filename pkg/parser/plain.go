@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/lectorjs/lector/pkg/primitive/node"
+	"github.com/lectorjs/lector/pkg/node"
 )
 
 type PlainParser struct {
@@ -45,13 +45,13 @@ func (p *PlainParser) StreamNodes() (<-chan node.Node, <-chan error) {
 			word := scanner.Text()
 
 			if strings.HasPrefix(word, "http://") || strings.HasPrefix(word, "https://") {
-				nodeChan <- node.NewNodeLink(node.NodeLinkOptions{
+				nodeChan <- node.NewLinkNode(node.LinkNodeOptions{
 					Text:     word,
 					Url:      word,
 					Position: position,
 				})
 			} else {
-				nodeChan <- node.NewNodeWord(node.NodeWordOptions{
+				nodeChan <- node.NewWordNode(node.WordNodeOptions{
 					Text:     word,
 					Position: position,
 				})

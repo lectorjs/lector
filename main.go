@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	lectorCLI "github.com/lectorjs/lector/cli"
-	"github.com/lectorjs/lector/pkg/services/rsvp"
+	"github.com/lectorjs/lector/cmd"
+	"github.com/lectorjs/lector/services"
 	"github.com/urfave/cli/v2"
 	"github.com/wailsapp/wails/v3/pkg/application"
 )
@@ -15,7 +15,7 @@ import (
 var assets embed.FS
 
 func main() {
-	rsvpService := rsvp.NewService()
+	readerService := services.NewReaderService()
 
 	app := application.New(application.Options{
 		Name:        "Lector",
@@ -27,20 +27,21 @@ func main() {
 			ApplicationShouldTerminateAfterLastWindowClosed: true,
 		},
 		Services: []application.Service{
-			application.NewService(rsvpService),
+			application.NewService(readerService),
 		},
 	})
 
 	cliApp := &cli.App{
 		Name:                   "lector",
-		DefaultCommand:         "open",
+		Usage:                  "A highly modular and accessible reading tool",
 		Version:                "0.0.0",
 		Args:                   true,
 		EnableBashCompletion:   true,
 		UseShortOptionHandling: true,
 		Commands: []*cli.Command{
-			lectorCLI.NewOpenCommand(lectorCLI.OpenCommandOptions{App: app}),
-			lectorCLI.NewAnalyzeCommand(),
+			cmd.NewOpenCommand(cmd.OpenCommandOptions{App: app}),
+			cmd.NewAnalyzeCommand(),
+			cmd.NewSummaryCommand(),
 		},
 	}
 

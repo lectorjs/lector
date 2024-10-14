@@ -1,10 +1,10 @@
-package internal_test
+package reactive_test
 
 // import (
 // 	"testing"
 // 	"time"
 
-// 	"github.com/lectorjs/lector/pkg/internal"
+// 	"github.com/lectorjs/lector/internal"
 // 	"github.com/stretchr/testify/assert"
 // )
 

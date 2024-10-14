@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/lectorjs/lector/pkg/tools/inspector"
+	"github.com/lectorjs/lector/pkg/inspector"
 	"github.com/stretchr/testify/assert"
 )
 
