@@ -2,6 +2,10 @@
 
 This page contains information about reporting issues, as well as some tips and guidelines useful for open source contributors. Before you start, consider taking a look at the Lector's [documentation](https://lector.pages.dev/docs); it will provide a good understanding of the project and can help you understand the context of your contributions.
 
+## License
+
+By contributing to this project, you agree to license your contributions under the project's applicable licenses. For more details, see the [License section](README.md#license) in the README.
+
 ## How to contribute
 
 This project encourages contributions from the community. You can contribute in the following areas:
@@ -71,7 +75,3 @@ gitGraph
     commit
     commit
 ```
-
-## License
-
-By contributing to this project, you agree to license your contributions under the project’s [license](LICENSE).
