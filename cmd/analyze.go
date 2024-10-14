@@ -5,8 +5,8 @@ import (
 	"log"
 	"slices"
 
-	"github.com/lectorjs/lector/internal/errx"
-	"github.com/lectorjs/lector/pkg/inspector"
+	"github.com/lector-org/lector/internal/errx"
+	"github.com/lector-org/lector/pkg/inspector"
 	"github.com/urfave/cli/v2"
 )
 

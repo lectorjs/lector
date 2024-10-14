@@ -1,6 +1,6 @@
 package services
 
-import "github.com/lectorjs/lector/pkg/rsvp"
+import "github.com/lector-org/lector/pkg/rsvp"
 
 type ReaderService struct {
 	Modes *ReaderServiceModes

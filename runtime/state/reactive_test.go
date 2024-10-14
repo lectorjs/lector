@@ -4,7 +4,7 @@ package reactive_test
 // 	"testing"
 // 	"time"
 
-// 	"github.com/lectorjs/lector/internal"
+// 	"github.com/lector-org/lector/internal"
 // 	"github.com/stretchr/testify/assert"
 // )
 

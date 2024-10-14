@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/lectorjs/lector/pkg/node"
+	"github.com/lector-org/lector/pkg/node"
 )
 
 type PlainParser struct {

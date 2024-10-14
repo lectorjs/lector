@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/lectorjs/lector/cmd"
-	"github.com/lectorjs/lector/services"
+	"github.com/lector-org/lector/cmd"
+	"github.com/lector-org/lector/services"
 	"github.com/urfave/cli/v2"
 	"github.com/wailsapp/wails/v3/pkg/application"
 )

@@ -1,4 +1,4 @@
-module github.com/lectorjs/lector
+module github.com/lector-org/lector
 
 go 1.22.4
 
@@ -45,7 +45,6 @@ require (
 	github.com/samber/lo v1.38.1 // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/skeema/knownhosts v1.2.1 // indirect
-	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/wailsapp/go-webview2 v1.0.16 // indirect
 	github.com/wailsapp/mimetype v1.4.1 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect

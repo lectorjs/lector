@@ -4,9 +4,9 @@ import (
 	"log"
 	"math"
 
-	"github.com/lectorjs/lector/pkg/node"
-	"github.com/lectorjs/lector/pkg/parser"
-	reactive "github.com/lectorjs/lector/runtime/state"
+	"github.com/lector-org/lector/pkg/node"
+	"github.com/lector-org/lector/pkg/parser"
+	reactive "github.com/lector-org/lector/runtime/state"
 )
 
 const (

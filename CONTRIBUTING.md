@@ -6,9 +6,9 @@ This page contains information about reporting issues, as well as some tips and 
 
 This project encourages contributions from the community. You can contribute in the following areas:
 
-- **Feedback**: Help make the project better by sharing your ideas. Start a conversation by opening a [feedback discussion](https://github.com/lectorjs/lector/discussions). Once discussed and accepted, an issue will be created, allowing you to work on it or leave it for others to work on.
-- **Documentation**: Help improve the project’s documentation. Small changes like fixing typos or broken links can be submitted directly as a PR. For bigger changes, start a conversation by opening a [feedback discussion](https://github.com/lectorjs/lector/discussions).
-- **Bug discovery**: Help improve the project’s stability by identifying and reporting bugs. Before flagging an issue, [ensure it hasn't already been addressed](https://github.com/lectorjs/lector/issues). If no one else has reported it, you can either fix it yourself or leave it for others to fix.
+- **Feedback**: Help make the project better by sharing your ideas. Start a conversation by opening a [feedback discussion](https://github.com/lector-org/lector/discussions). Once discussed and accepted, an issue will be created, allowing you to work on it or leave it for others to work on.
+- **Documentation**: Help improve the project’s documentation. Small changes like fixing typos or broken links can be submitted directly as a PR. For bigger changes, start a conversation by opening a [feedback discussion](https://github.com/lector-org/lector/discussions).
+- **Bug discovery**: Help improve the project’s stability by identifying and reporting bugs. Before flagging an issue, [ensure it hasn't already been addressed](https://github.com/lector-org/lector/issues). If no one else has reported it, you can either fix it yourself or leave it for others to fix.
 
 ## Contribution workflow
 
@@ -27,7 +27,7 @@ This project encourages contributions from the community. You can contribute in 
 
 ## Good first issues
 
-If you’re new to the codebase, consider starting with issues labeled as [good first issue](https://github.com/lectorjs/lector/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+-label%3A%22blocked+by+upstream%22). These issues are relatively straightforward to work on. Before you start, make sure there’s no existing PR for the issue and that it hasn’t been assigned to anyone yet. Once you’ve found an issue you’d like to work on, notify the maintainers by commenting on the issue. This ensures proper coordination and prevents overlapping.
+If you’re new to the codebase, consider starting with issues labeled as [good first issue](https://github.com/lector-org/lector/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+-label%3A%22blocked+by+upstream%22). These issues are relatively straightforward to work on. Before you start, make sure there’s no existing PR for the issue and that it hasn’t been assigned to anyone yet. Once you’ve found an issue you’d like to work on, notify the maintainers by commenting on the issue. This ensures proper coordination and prevents overlapping.
 
 ## Coding style
 

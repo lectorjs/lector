@@ -4,8 +4,8 @@ import (
 	"os/exec"
 	"testing"
 
-	"github.com/lectorjs/lector/internal/sysinfo"
-	"github.com/lectorjs/lector/internal/types"
+	"github.com/lector-org/lector/internal/sysinfo"
+	"github.com/lector-org/lector/internal/types"
 	"github.com/stretchr/testify/assert"
 )
 

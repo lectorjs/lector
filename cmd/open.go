@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os/exec"
 
-	"github.com/lectorjs/lector/internal/errx"
-	"github.com/lectorjs/lector/internal/sysinfo"
-	"github.com/lectorjs/lector/pkg/inspector"
+	"github.com/lector-org/lector/internal/errx"
+	"github.com/lector-org/lector/internal/sysinfo"
+	"github.com/lector-org/lector/pkg/inspector"
 	"github.com/urfave/cli/v2"
 	"github.com/wailsapp/wails/v3/pkg/application"
 )
