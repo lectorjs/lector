@@ -6,7 +6,7 @@ import (
 
 	"github.com/lectorjs/lector/pkg/flags"
 	lectorerror "github.com/lectorjs/lector/pkg/runtime/lector_error"
-	"github.com/lectorjs/lector/pkg/tools"
+	"github.com/lectorjs/lector/pkg/tools/inspector"
 	"github.com/urfave/cli/v2"
 	"github.com/wailsapp/wails/v3/pkg/application"
 )
@@ -15,11 +15,12 @@ type OpenCommandOptions struct {
 	App *application.App
 }
 
+// NewOpenCommand is a CLI command that opens the specified file or website in a new graphical user interface (GUI) lector window.
 func NewOpenCommand(opts OpenCommandOptions) *cli.Command {
 	return &cli.Command{
 		Name:      "open",
-		Usage:     "Opens the specified file in a new graphical user interface (GUI) window",
-		UsageText: "lector open [OPTIONS] [FILE_PATH]",
+		Usage:     "Opens the specified file in a new graphical user interface (GUI) lector window",
+		UsageText: "lector open [OPTIONS] [INPUT_SOURCE]",
 		Flags:     []cli.Flag{},
 		Action: func(cCtx *cli.Context) error {
 			filePath := cCtx.Args().Get(0)
@@ -27,8 +28,8 @@ func NewOpenCommand(opts OpenCommandOptions) *cli.Command {
 				return lectorerror.NewCliError(cCtx).GetNoArgError()
 			}
 
-			inspector := tools.NewFileInspector(filePath)
-			if !inspector.IsExist() {
+			fileInspector := inspector.NewFileInspector(filePath)
+			if !fileInspector.IsValid() {
 				return lectorerror.NewCliError(cCtx).GetCustomError(
 					fmt.Sprintf("requires a valid file path. %q was not found", filePath),
 				)

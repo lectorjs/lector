@@ -1,4 +1,4 @@
-package tools
+package inspector
 
 import (
 	"errors"
@@ -52,8 +52,8 @@ func (f *FileInspector) GetExtension() string {
 	return filepath.Ext(f.path)
 }
 
-// IsExist checks if the file path exists.
-func (f *FileInspector) IsExist() bool {
+// IsValid checks if the file/directory path exists.
+func (f *FileInspector) IsValid() bool {
 	if _, err := os.Stat(f.path); errors.Is(err, os.ErrNotExist) {
 		return false
 	}
